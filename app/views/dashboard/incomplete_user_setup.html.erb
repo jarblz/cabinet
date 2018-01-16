@@ -1,0 +1,6 @@
+<h3>Your profile is incomplete</h3>
+<%if current_user.recruiter? %>
+  <%=render partial: "recruiter_progress"%>
+<%else%>
+  <%=render partial: "candidate_progress"%>
+<%end%>
