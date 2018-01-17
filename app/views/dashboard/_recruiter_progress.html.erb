@@ -1,1 +1,15 @@
-Your recruiter profile is incomplete!
+Almost done!
+
+<% if current_user.company %>
+  <h3>Your company: </h3> <%= image_tag current_user.company.logo.url(:thumb) %>
+<% else %>
+  <h3>In order to begin looking for candidates, you must connect with your company</h3>
+  <%= link_to "Connect with my company", link_company_path, class: 'btn btn-primary' %>
+<% end %>
+
+<% if current_user.profile_complete? %>
+  <h3>Your profile is complete: </h3>
+<% else %>
+  <h3>Your recruiter profile is incomplete</h3>
+  <%#= link_to "Connect with my company", link_company_path, class: 'btn btn-primary' %>
+<% end %>

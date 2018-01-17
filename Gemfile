@@ -14,11 +14,17 @@ gem 'bootstrap-sass'
 gem 'high_voltage'
 gem 'dotenv'
 gem 'friendly_id'
+# profile/company image processing
+gem "paperclip", "~> 5.0.0"
+gem "aws-sdk"
 
-# authentication
+# authentication/authorization
 gem 'devise'
 gem 'cancancan'
 gem 'rolify'
+# administration
+# gem "administrate" # not customizeable enough
+
 
 # other gems I should be using
 # Kaminari - pagination

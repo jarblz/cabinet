@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @trait.name %>
+</p>
+
+<p>
+  <strong>Is recruiter:</strong>
+  <%= @trait.is_recruiter %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @trait.description %>
+</p>
+
+<%= link_to 'Edit', edit_admin_trait_path(@trait) %> |
+<%= link_to 'Back', admin_traits_path %>

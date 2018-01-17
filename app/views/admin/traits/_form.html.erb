@@ -1,0 +1,31 @@
+<%= form_for([:admin, trait]) do |f| %>
+  <% if trait.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trait.errors.count, "error") %> prohibited this trait from being saved:</h2>
+
+      <ul>
+      <% trait.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+      <%= f.label :name, for: 'trait_name'%>
+      <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+      <%= f.check_box :is_recruiter, class: "form-check-input" %>
+      <%= f.label :is_recruiter, for: 'trait_is_recruiter', class: "form-check-input"  %>
+  </div>
+
+  <div class="form-group">
+      <%= f.label :description, for: 'trait_description' %>
+      <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>

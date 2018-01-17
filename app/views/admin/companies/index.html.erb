@@ -1,0 +1,41 @@
+<div class="container admin-container">
+  <p id="notice"><%= notice %></p>
+  <div class="header-bar">
+    <h1 style="display:inline;">Companies</h1>
+    <%= link_to 'New Company', new_admin_company_path, class: 'btn btn-info inline' %>&nbsp;
+    <%= link_to 'Back', root_path, class: 'btn btn-info inline' %>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Status?</th>
+        <th scope="col">Bio</th>
+        <th scope="col">Code</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Account count</th>
+
+        <!-- traits -->
+        <th scope="col" colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @companies.each do |company| %>
+        <tr>
+          <td><%= company.name %></td>
+          <td><%= company.status %></td>
+          <td><%= company.bio %></td>
+          <td><%= company.code %></td>
+          <td><%= company.contact_email %></td>
+          <td><%= company.phone %></td>
+          <td><%= company.recruiters.count %></td>
+          <td><%= link_to 'Show', admin_company_path(company), class: 'btn btn-info btn-xs' %></td>
+          <td><%= link_to 'Edit', edit_admin_company_path(company), class: 'btn btn-info btn-xs'  %></td>
+          <td><%= link_to 'Destroy', admin_company_path(company), method: :delete, class: 'btn btn-info btn-xs' , data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

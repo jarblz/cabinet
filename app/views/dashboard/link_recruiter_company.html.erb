@@ -1,0 +1,7 @@
+<%= form_tag link_company_post_url, method: 'post' do %>
+    <div class="form-group">
+      <%= label_tag 'Company Code'%>
+      <%= text_field_tag "company_code", nil, class: 'form-control' %>
+    </div>
+    <div><%= submit_tag 'Save' %></div>
+<% end -%>

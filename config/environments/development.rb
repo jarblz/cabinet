@@ -42,6 +42,17 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_host_name: "s3-#{ENV['AWS_REGION']}.amazonaws.com",
+    s3_credentials: {
+      bucket: ENV.fetch('S3_BUCKET_NAME'),
+      access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+      s3_region: ENV.fetch('AWS_REGION'),
+    }
+  }
+
   config.action_mailer.smtp_settings = {
        :address => "smtp.gmail.com",
        :port => 587,

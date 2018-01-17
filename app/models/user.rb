@@ -2,6 +2,7 @@ class User < ApplicationRecord
   rolify
   attr_accessor :role # allows us to set role in registration form
   NON_ADMIN_ROLES = {recruiter: 'Recruiter', candidate: 'Job Seeker'}
+  belongs_to :company
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -16,7 +17,7 @@ class User < ApplicationRecord
 
   def active?
     if recruiter?
-      ( has_company_code? && profile_complete? )
+      ( company && profile_complete? )
     else
       ( profile_complete? && assessment_complete? )
     end
@@ -31,20 +32,24 @@ class User < ApplicationRecord
     has_role?(:recruiter)
   end
 
+  def company_recruiter?
+    company && recruiter?
+  end
+
   def candidate?
     has_role?(:candidate)
   end
 
-  def has_company_code?
-    true
-  end
-
   def profile_complete?
-    true
+    false
   end
 
   def assessment_complete?
     false
+  end
+
+  def link_company(company_code)
+    update(company: Company.find_by_code(company_code))
   end
 
 end

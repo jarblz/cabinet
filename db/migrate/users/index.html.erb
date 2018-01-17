@@ -1,0 +1,44 @@
+<h1><%= t('.user_list') %></h1>
+<div class="table-responsive">
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= t('.name') %></th>
+        <th><%= t('.username') %></th>
+        <th><%= t('.email') %></th>
+        <th><%= t('.organization') %></th>
+        <th><%= t('.admin') %></th>
+        <th class="last_col"></th>
+        <% if current_user.admin? %>
+          <th class="last_col"></th>
+        <% end %>
+        <th class="last_col"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td><%= user.organization %></td>
+          <td><%= user.admin? ? t('.yes') : t('.no') %></td>
+          <td><%= link_to t('.show'), [:admin, user],
+            class: 'btn btn-default btn-xs' %></td>
+          <td><%= link_to t('.edit'), edit_admin_user_path(user),
+            class: 'btn btn-default btn-xs' %></td>
+          <% if current_user.admin? %>
+            <td><%= button_to t('.delete'), [:admin, user],
+              method: :delete, data: { confirm: t('.confirm') },
+              class: 'btn btn-warning btn-xs' %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
+<br>
+<%= link_to t('.invite_user'), new_user_invitation_path, class: 'btn btn-primary' %>
