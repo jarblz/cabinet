@@ -70,7 +70,7 @@ module Admin
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def company_params
-        params.require(:company).permit(:name, :bio, :status, :phone, :contact_email, :logo, trait_ids: [])
+        params.require(:company).permit(:name, :bio, :status, :phone, :contact_email, :logo, :account_limit, trait_ids: [])
       end
   end
 end

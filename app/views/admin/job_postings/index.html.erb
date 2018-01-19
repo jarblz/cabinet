@@ -1,0 +1,33 @@
+<div class="container admin-container">
+  <div class="header-bar">
+    <h1 style="display:inline;">Job Postings</h1>
+    <%= link_to 'Create a Job for a Company', admin_companies_path, class: 'btn btn-info inline' %>&nbsp;
+    <%= link_to 'Back', root_path, class: 'btn btn-info inline' %>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Company</th>
+        <th scope="col">User Count</th>
+
+        <th scope="col" colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @job_postings.each do |job_posting| %>
+        <tr>
+          <td><%= job_posting.title %></td>
+          <td><%= job_posting.description %></td>
+          <td><%= job_posting.company.name %></td>
+          <td><%= job_posting.recruiters.count %></td>
+          <td><%= link_to 'Show', admin_job_posting_path(job_posting), class: 'btn btn-info btn-xs' %></td>
+          <td><%= link_to 'Edit', edit_admin_job_posting_path(job_posting), class: 'btn btn-info btn-xs'  %></td>
+          <td><%= link_to 'Destroy', admin_job_posting_path(job_posting), method: :delete, class: 'btn btn-info btn-xs' , data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

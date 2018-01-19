@@ -1,0 +1,56 @@
+<%= form_for(user, url: update_core_info_path) do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+      <%= f.label :name, for: 'user_name'%>
+      <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+      <%= f.label :email, for: 'user_email'%>
+      <%= f.text_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone, for: 'user_phone'%>
+    <%= f.text_field :phone, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+      <%= f.label :country, for: 'user_country'%>
+      <%= f.country_select :country, :include_blank => true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+      <%= f.label :zip_code, for: 'user_zip_code'%>
+      <%= f.text_field :zip_code, class: 'form-control' %>
+  </div>
+  <% if current_user.candidate? %>
+    <div class="form-group">
+      <%= f.label :felony, for: 'user_felony'%>
+      <%= f.select :felony, User.felonies.keys.map { |w| [w.humanize, w] }, :include_blank => true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :us_lawfully_authorized, for: 'user_us_lawfully_authorized'%>
+      <%= f.select :us_lawfully_authorized, [['Yes', true], ['No', false]], selected: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :require_sponsorship, for: 'user_require_sponsorship'%>
+      <%= f.select :require_sponsorship, [['Yes', true], ['No', false]], selected: false %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Finished" %>
+  </div>
+<% end %>

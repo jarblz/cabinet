@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116225407) do
+ActiveRecord::Schema.define(version: 20180118185520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,40 @@ ActiveRecord::Schema.define(version: 20180116225407) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "account_limit",     default: 5
+    t.string   "slug"
+    t.index ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
   end
 
   create_table "company_traits", force: :cascade do |t|
     t.integer "company_id", null: false
     t.integer "trait_id",   null: false
+  end
+
+  create_table "competencies", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "job_posting_competencies", force: :cascade do |t|
+    t.integer "job_posting_id", null: false
+    t.integer "competency_id",  null: false
+  end
+
+  create_table "job_posting_traits", force: :cascade do |t|
+    t.integer "job_posting_id", null: false
+    t.integer "trait_id",       null: false
+  end
+
+  create_table "job_posting_users", force: :cascade do |t|
+    t.integer "job_posting_id", null: false
+    t.integer "user_id",        null: false
+  end
+
+  create_table "job_postings", force: :cascade do |t|
+    t.integer "creator_id",  null: false
+    t.integer "company_id",  null: false
+    t.string  "title",       null: false
+    t.text    "description", null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -52,13 +81,13 @@ ActiveRecord::Schema.define(version: 20180116225407) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
+    t.string   "email",                       default: "", null: false
     t.string   "name"
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",          default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",               default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -67,9 +96,40 @@ ActiveRecord::Schema.define(version: 20180116225407) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "company_id"
+    t.string   "phone"
+    t.string   "country"
+    t.string   "zip_code"
+    t.boolean  "us_lawfully_authorized"
+    t.boolean  "require_sponsorship"
+    t.integer  "felony"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "resume_file_name"
+    t.string   "resume_content_type"
+    t.integer  "resume_file_size"
+    t.datetime "resume_updated_at"
+    t.string   "writing_sample_file_name"
+    t.string   "writing_sample_content_type"
+    t.integer  "writing_sample_file_size"
+    t.datetime "writing_sample_updated_at"
+    t.string   "transcript_file_name"
+    t.string   "transcript_content_type"
+    t.integer  "transcript_file_size"
+    t.datetime "transcript_updated_at"
+    t.integer  "race"
+    t.integer  "gender"
+    t.integer  "student_professional"
+    t.string   "current_employer"
+    t.string   "current_position"
+    t.string   "website_url"
+    t.string   "github_url"
+    t.string   "linkedin_url"
+    t.string   "facebook_url"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

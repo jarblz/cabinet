@@ -25,6 +25,7 @@ gem 'rolify'
 # administration
 # gem "administrate" # not customizeable enough
 
+gem 'country_select'
 
 # other gems I should be using
 # Kaminari - pagination

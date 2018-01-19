@@ -1,0 +1,21 @@
+<%= form_for([:admin, competency]) do |f| %>
+  <% if competency.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(competency.errors.count, "error") %> prohibited this competency from being saved:</h2>
+
+      <ul>
+      <% competency.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+      <%= f.label :name, for: 'competency_name'%>
+      <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>

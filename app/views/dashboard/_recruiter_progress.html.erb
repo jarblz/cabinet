@@ -1,10 +1,16 @@
 Almost done!
 
-<% if current_user.company %>
+<% if !current_user.company %>
   <h3>Your company: </h3> <%= image_tag current_user.company.logo.url(:thumb) %>
 <% else %>
   <h3>In order to begin looking for candidates, you must connect with your company</h3>
-  <%= link_to "Connect with my company", link_company_path, class: 'btn btn-primary' %>
+  <%= form_tag link_company_post_url, method: 'post' do %>
+      <div class="form-group">
+        <%= label_tag 'Company Code'%>
+        <%= text_field_tag "company_code", nil, class: 'form-control' %>
+      </div>
+      <div><%= submit_tag 'Save' %></div>
+  <% end -%>
 <% end %>
 
 <% if current_user.profile_complete? %>
