@@ -1,0 +1,15 @@
+
+<% content_for :stylesheets do %>
+  #navbar {display: none}
+  body {
+    background: linear-gradient(137deg, #351c75, #7A005F);
+    background-size: 500% 500%;
+
+    -webkit-animation: splashGradient 10s ease infinite;
+    -moz-animation: splashGradient 10s ease infinite;
+    animation: splashGradient 10s ease infinite;
+
+  }
+
+<% end %>
+<%= render template: "layouts/application" %>

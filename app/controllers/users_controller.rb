@@ -11,6 +11,9 @@ class UsersController < ApplicationController
   end
 
   def edit_recruiter_code
+  end
+
+  def assessment
 
   end
 
@@ -24,17 +27,23 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
-  def update_core_info
+  def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to root_path, notice: 'Thanks for giving us your basic information!' }
+        format.html { redirect_to root_path, notice: 'Your information has been updated!' }
         # format.json { render :, status: :ok, location: @user }
       else
-        format.html { render :core_info }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        if params[:name]
+          format.html { render :core_info }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        elsif params[:industry_ids]
+          format.html { render :assessment }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

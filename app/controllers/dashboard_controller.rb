@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_action :check_admin
-  before_action :check_account_completeness
+  before_action :check_account_completeness, except: [:incomplete_user]
 
   def check_admin
     redirect_to admin_root_path if current_user.try(:has_role?,:admin)
@@ -9,13 +9,12 @@ class DashboardController < ApplicationController
   def home
   end
 
+  def incomplete_user
+  end
+
   def check_account_completeness
-    if !current_user.valid?
-      redirect_to core_info_path
-    elsif current_user.no_recruiter_company?
-      redirect_to edit_recruiter_code_path
-    elsif current_user.no_candidate_assessment?
-      redirect_to complete_assessment_path
+    if !current_user.active?
+      redirect_to incomplete_user_path
     end
   end
 

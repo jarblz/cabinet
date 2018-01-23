@@ -3,14 +3,14 @@ ruby '2.3.1'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'sass-rails', '>= 3.2'
 gem 'high_voltage'
 gem 'dotenv'
 gem 'friendly_id'
@@ -26,6 +26,7 @@ gem 'rolify'
 # gem "administrate" # not customizeable enough
 
 gem 'country_select'
+gem "select2-rails"
 
 # other gems I should be using
 # Kaminari - pagination
@@ -37,6 +38,7 @@ gem 'country_select'
 # Brakeman - static code security/vulnerability analysis
 
 group :development do
+  gem 'binding_of_caller'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'

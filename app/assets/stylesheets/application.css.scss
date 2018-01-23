@@ -10,6 +10,358 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
+ *= require select2-bootstrap
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// Primary Colors
+$purple: #351c75;
+$dark-purple: #3a0071;
+$light-purple: #492F8D;
+// Complimentary colors (tetrad):
+$fuscia: #7A005F;
+$light-fuscia: #A72A8B;
+$green-yellow: #A89E00;
+$light-green: #7AA000;
+// Text colors:
+$dark_grey: #333;
+$light_grey: #666;
+
+@font-face {
+  font-family: "Aller std reg";
+  src: font-url("Aller_Std_Rg.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller std bold";
+  src: font-url("Aller_Std_Bd.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller std thin";
+  src: font-url("Aller_Std_Lt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller light reg";
+  src: font-url("Aller_Std_lt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller light thin";
+  src: font-url("Aller_Std_Ltlt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller light bold";
+  src: font-url("Aller_Std_BdIt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller display";
+  src: font-url("AllerDisplay_Std_Rg.ttf") format("truetype");
+}
+
+
+body {
+  font-family: 'Aller std reg';
+  color: $purple;
+  background: #f4f6f7;
+
+  a, .button {
+    -webkit-transition-duration: .7s;
+    transition-duration: .7s;
+    -webkit-transition-property: background, border, box-shadow, color;
+    transition-property: background, border, box-shadow, color;
+  }
+
+  @-webkit-keyframes splashGradient {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  }
+  @-moz-keyframes splashGradient {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  }
+  @keyframes splashGradient {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  }
+  a {
+    color: $purple;
+    &:hover {
+      text-decoration: none !important;
+      color: $fuscia;
+    }
+  }
+  label {
+    font-size: 1.2em;
+  }
+  h1, h2, h3 {
+    display: table;
+    margin: auto;
+  }
+}
+
+.button {
+  border-radius: 5px;
+  padding: 5px 25px;
+  font-size: 18px;
+  text-decoration: none !important;
+  border: none;
+  font-family: "Aller light reg";
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+.btn-standard {
+  background: white;
+  color: $purple;
+  opacity: 1;
+  border: 3px solid $purple;
+  &:hover {
+    background: $purple;
+    color: white;
+  }
+}
+
+
+.btn-alternate {
+  background: white;
+  border: 3px solid $fuscia;
+  color: $fuscia;
+  text-decoration: none;
+  &:hover {
+    color: white;
+    background: $fuscia;
+  }
+}
+
+.inverse-button {
+  background: black;
+  font-family: "Aller std bold";
+  &:hover {
+    font-family: "Aller std reg";
+  }
+
+}
+.button-small {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 9px;
+}
+
+// devise
+.devise-container {
+  background: black !important;
+  padding: 40px 30px;
+  width: 75%;
+  display: table;
+  margin: auto;
+  margin-top: 40px;
+  opacity: .66;
+  color: $light-purple;
+  max-width: 550px;
+  -webkit-box-shadow: 0px 0px 1px 2px black;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0px 0px 1px 2px black;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         0px 0px 1px 2px black;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  h2 {
+    display: table;
+    margin: auto;
+    margin-bottom: 30px;
+    font-family: "Aller std bold";
+  }
+  .right-block {
+    display: block;
+    float: right;
+    @media(max-width: 525px) {
+      width: 100%;
+      display: table;
+      margin: auto;
+    }
+  }
+  .left-block {
+    display: block;
+    float: left;
+    @media(max-width: 525px) {
+      width: 100%;
+      display: table;
+      margin: auto;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// Bootstrap overrides
+.home-nav {
+  background: $purple;
+  color: white;
+  border-radius: 0px;
+  border: none;
+
+  .nav-link {
+    cursor: pointer;
+  }
+  // TODO-Designer: change colors to make this really pop
+  // .nav.nav-tabs > li.dropdown.active.open > a,
+  // .nav.nav-tabs > li.dropdown.active.open > ul.dropdown-menu a:hover,
+  // .nav.nav-tabs > li.dropdown.open > a,
+  // .nav.nav-tabs > li.dropdown.open > ul.dropdown-menu a:hover
+  // {
+  //   color: #fff;
+  //   background-color: #b91773;
+  //   border-color: #fff;
+  // } // <----- something like this
+}
+.alert {
+  border-radius: 0px;
+  opacity: .7;
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  top: 50px;
+  white-space: nowrap;
+  font-family: "Aller std bold";
+  border: none;
+  .close {
+    opacity: 1;
+    text-shadow: none;
+  }
+  .animateOpen{
+  	-webkit-animation:moveOpen 4s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-fill-mode: forwards;
+  }
+  /* Safari and Chrome */
+  @-webkit-keyframes moveOpen
+  	{
+    from {-webkit-transform: translate(0,-100px);}
+    10% {-webkit-transform: translate(0,20px);}
+    12% {-webkit-transform: translate(0,22px);}
+    16% {-webkit-transform: translate(0,20px);}
+    80% {-webkit-transform: translate(0,20px);}
+    85% {-webkit-transform: translate(0,25px);}
+    to {-webkit-transform: translate(0,-100px);}
+  }
+}
+
+
+.alert-success {
+  color: white !important;
+  background: #624B9F !important;
+  .close {
+    color: white !important;
+  }
+}
+.alert-danger {
+  background: #7A005F;
+  color: black;
+  .close {
+    color: black !important;
+  }
+}
+
+.container-card {
+  background: white;
+  border-radius: 1px;
+  -webkit-box-shadow: 0px 0px 1px 2px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0px 0px 1px 2px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         0px 0px 1px 2px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  padding: 30px 7%;
+  margin: 20px;
+  .header-section {
+    display: table;
+    margin: auto;
+    font-size: 18px;
+  }
+  h1, h2, h3 {
+    display: table;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+}
+.unboxed-header {
+  padding-bottom: 30px;
+}
+.split-cards {
+  display: inline-block;
+  float: right;
+  width: 46%;
+  margin-right: 2%;
+  margin-left: 2%;
+  padding: 20px;
+  @media(max-width: 612px){
+    display: table;
+    margin: auto;
+    width: 80%;
+    max-width: 400px;
+    margin-bottom: 50px;
+    float: none;
+  }
+  .upper-check {
+    font-size: 36px;
+    display: table;
+    margin: auto;
+    position: relative;
+    top: -46px;
+    color: #2F9100;
+    &.uh-oh {
+      color: $green-yellow;
+    }
+  }
+  &.complete {
+    background: #f4f6f7;
+  }
+  .company-logo {
+    display: table;
+    margin: auto;
+    font-size: 150px;
+    img {
+      width: 150px;
+    }
+  }
+  .card-icon-large {
+    display: table;
+    margin: auto;
+    font-size: 150px;
+    margin-bottom: -33px;
+  }
+
+  .logo-caption {
+    display: table;
+    margin: auto;
+    font-size: 18px;
+    text-align: center;
+  }
+  &.incomplete {
+    cursor: pointer;
+  }
+}
+
+
+// form overrides
+.remember-me {
+  text-align: right;
+}
+.actions {
+  display: table;
+  margin: auto;
+  width: 90%;
+  margin-top: 40px;
+  text-align: center;
+}
+.form-control {
+  border-radius: 3px;
+  height: 44px;
+  font-size: 16px;
+}
+
+.form-control .inverse {
+  border: none;
+}
+
+input, textarea{
+  background-color:#666;
+  color: #FFF;
+}

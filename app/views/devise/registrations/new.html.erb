@@ -1,39 +1,43 @@
-<h2>Sign up</h2>
+<div class="devise-container">
+  <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control inverse" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control inverse"  %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label "Role" %>&nbsp;
-    <%= f.collection_select :role, User::NON_ADMIN_ROLES, :first, :last, {:include_blank => 'Choose your adventure'} %>
+    <%= f.collection_select :role, User::NON_ADMIN_ROLES, :first, :last, {:include_blank => 'Choose your adventure'}, class:"form-control inverse"  %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", class:"form-control inverse"  %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control inverse"  %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: 'button btn-standard inverse-button left-block' %>
+    <%= link_to "Log in", new_session_path(resource_name), class: 'button btn-alternate inverse-button right-block' %>
   </div>
-<% end %>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+
+</div>

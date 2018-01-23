@@ -1,1 +1,11 @@
-Your candidate profile is incomplete!
+<% if current_user.personality %>
+  <%= render partial: 'assessment_complete' %>
+<% else %>
+  <%= render partial: 'no_assessment' %>
+<% end %>
+
+<% if current_user.valid? %>
+  <%= render partial: 'valid_profile' %>
+<% else %>
+  <%= render partial: 'invalid_profile' %>
+<% end %>

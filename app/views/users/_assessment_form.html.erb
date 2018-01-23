@@ -1,0 +1,35 @@
+<%= form_for(user, url: update_assessment_path) do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :require_sponsorship, for: 'user_require_sponsorship'%>
+    <%= f.select :require_sponsorship, [['Yes', true], ['No', false]], selected: false %>
+  </div>
+
+  <!-- <div class="form-group">
+    <%#= f.label :industry, for: 'user_industry_ids'%>
+    <%#= f.select :industry_ids, Industry.all, :id, :name %>
+  </div> -->
+
+  <div class="actions">
+    <%= f.submit class: 'button btn-standard' %>
+  </div>
+<% end %>
+
+
+<script>
+  // $(function(){
+  //   $("#user[industry_ids]").select2();
+  // })
+
+</script>

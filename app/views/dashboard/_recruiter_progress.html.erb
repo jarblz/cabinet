@@ -1,21 +1,11 @@
-Almost done!
-
-<% if !current_user.company %>
-  <h3>Your company: </h3> <%= image_tag current_user.company.logo.url(:thumb) %>
+<% if current_user.company %>
+  <%= render partial: 'valid_recruiter' %>
 <% else %>
-  <h3>In order to begin looking for candidates, you must connect with your company</h3>
-  <%= form_tag link_company_post_url, method: 'post' do %>
-      <div class="form-group">
-        <%= label_tag 'Company Code'%>
-        <%= text_field_tag "company_code", nil, class: 'form-control' %>
-      </div>
-      <div><%= submit_tag 'Save' %></div>
-  <% end -%>
+  <%= render partial: 'unlinked_recruiter' %>
 <% end %>
 
-<% if current_user.profile_complete? %>
-  <h3>Your profile is complete: </h3>
+<% if current_user.valid? %>
+  <%= render partial: 'valid_profile' %>
 <% else %>
-  <h3>Your recruiter profile is incomplete</h3>
-  <%#= link_to "Connect with my company", link_company_path, class: 'btn btn-primary' %>
+  <%= render partial: 'invalid_profile' %>
 <% end %>

@@ -10,13 +10,17 @@ class User < ApplicationRecord
   has_many :job_posting_users
   has_many :job_postings, through: :job_posting_users
   has_many :created_jobs, foreign_key: "creator_id", class_name: "JobPosting"
+  has_many :candidate_industries
+  has_many :industries, through: :candidate_industries
+
   # TODO: traits relation (company and personal?)
   # TODO: competencies relation
+
   belongs_to :company # if candidate, this will always be nil
 
   enum felony: [ :yes, :no, :prefer_not_to_answer ]
 
-  before_validation :join_company, :if => "company_code.present? && recruiter?"
+  before_validation :join_company, :if => :company_code
 
   validates_presence_of :role, :on => :create
   validates_presence_of :name, :on => :update
@@ -33,11 +37,7 @@ class User < ApplicationRecord
   end
 
   def active?
-    if recruiter?
-      ( company && profile_complete? )
-    else
-      ( profile_complete? && assessment_complete? )
-    end
+    valid? && !no_candidate_assessment? && !no_recruiter_company?
   end
 
   def admin?
@@ -58,6 +58,10 @@ class User < ApplicationRecord
 
   def no_recruiter_company?
     recruiter? && !company
+  end
+
+  def personality
+    false
   end
 
   private

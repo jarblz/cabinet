@@ -1,0 +1,25 @@
+<div class="container-card split-cards">
+  <div class="upper-check uh-oh"><span class="glyphicon glyphicon-question-sign"></span></div>
+  <div class="header-section" id='header'>
+    Connect with your company
+  </div>
+  <div class="card-icon-large"><span class='glyphicon glyphicon-briefcase'></span></div>
+  <div class="button btn-standard" id="linkCompany">Enter Company Code</div>
+
+  <div class="link_company" hidden>
+    <%= form_tag link_company_post_url, method: 'patch', html: {class:'form-horizontal'} do %>
+      <div class="form-group">
+        <%= text_field_tag "company_code", nil, class: 'form-control', placeholder: 'Company Code' %>
+      </div>
+      <div class="actions"><%= submit_tag 'Connect', class: 'button btn-standard' %></div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#linkCompany').click(function(){
+    $('#header').fadeOut();
+    $('#linkCompany').fadeOut();
+    $('.link_company').fadeIn();
+  });
+</script>
