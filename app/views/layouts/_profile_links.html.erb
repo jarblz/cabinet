@@ -6,12 +6,12 @@
   <li class="sub"><%= link_to 'Manage Industries', admin_industries_path%></li>
   <div class="divider"></div>
 <% elsif current_user.try(:active?) %>
-<%# TODO: other links %>
-<div class="divider"></div>
+  <% if current_user.candidate? %>
+    <li class="sub"><%= link_to 'Edit Assessment', assessment_complete_path %></li>
+  <% end %>
+  <%# TODO: other links %>
+  <div class="divider"></div>
 <% end %>
 <li class="sub"><%= link_to 'Edit Profile', core_info_path %></li>
-<% if current_user.candidate? && current_user.active? %>
-  <li class="sub"><%= link_to 'Edit Assessment', assessment_complete_path %></li>
-<% end %>
 <div class="divider"></div>
 <li class="sub"><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
