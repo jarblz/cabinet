@@ -20,7 +20,8 @@ class AssessmentsController < ApplicationController
 
   def restart
     current_user.assessment.destroy
-    current_user.update(personality_id: nil)
+    current_user.attributes = { personality_id: nil }
+    current_user.save(validate: false)
     redirect_to edit_assessment_path
   end
 

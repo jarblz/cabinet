@@ -53,18 +53,28 @@ Rails.application.configure do
     }
   }
 
-  config.action_mailer.smtp_settings = {
-       :address => "smtp.gmail.com",
-       :port => 587,
-       :user_name => ENV["EMAILER_USERNAME"],
-       :password => ENV["EMAILER_PASSWORD"],
-       :authentication => :plain,
-       :enable_starttls_auto => true
-  }
+  # config.action_mailer.smtp_settings = {
+  #      :address => "smtp.gmail.com",
+  #      :port => 587,
+  #      :user_name => ENV["EMAILER_USERNAME"],
+  #      :password => ENV["EMAILER_PASSWORD"],
+  #      :authentication => :plain,
+  #      :enable_starttls_auto => true
+  # }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   # config.action_mailer.delivery_method = :smtp
   config.action_mailer.delivery_method = :letter_opener
+  # ActionMailer::Base.smtp_settings = {
+  #   :user_name => ENV['SENDGRID_USERNAME'],
+  #   :password => ENV['SENDGRID_PASSWORD'],
+  #   :domain => 'mycabinet-staging.herokuapp.com',
+  #   :address => 'smtp.sendgrid.net',
+  #   :port => 587,
+  #   :authentication => :plain,
+  #   :enable_starttls_auto => true
+  # }
+  # ActionMailer Config
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
   config.action_mailer.perform_deliveries = true

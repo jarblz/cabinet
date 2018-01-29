@@ -21,7 +21,8 @@ class Assessment < ApplicationRecord
     end
     if Assessment.statuses[self.status] == Assessment.pages.count
       new_status = 0
-      self.user.update(personality: Personality.find_by_scores(self))
+      self.user.attributes = { personality_id: Personality.find_by_scores(self).id }
+      self.user.save(validate: false)
     else
       new_status = Assessment.statuses[self.status]+1
     end
