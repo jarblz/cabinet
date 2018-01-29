@@ -1,12 +1,17 @@
 <% if current_user.try(:admin?) %>
-  <li><%= link_to 'Manage Traits', admin_traits_path%></li>
-  <li><%= link_to 'Manage Competencies', admin_competencies_path%></li>
-  <li><%= link_to 'Manage Companies', admin_companies_path%></li>
-  <li><%= link_to 'Manage Job Postings', admin_job_postings_path%></li>
-  <li><%= link_to 'Manage Industries', admin_industries_path%></li>
-  <li role="separator" class="divider"></li>
+  <li class="sub"><%= link_to 'Manage Traits', admin_traits_path%></li>
+  <li class="sub"><%= link_to 'Manage Competencies', admin_competencies_path%></li>
+  <li class="sub"><%= link_to 'Manage Companies', admin_companies_path%></li>
+  <li class="sub"><%= link_to 'Manage Job Postings', admin_job_postings_path%></li>
+  <li class="sub"><%= link_to 'Manage Industries', admin_industries_path%></li>
+  <div class="divider"></div>
 <% elsif current_user.try(:active?) %>
-<%# TODO: profile links %>
-<li role="separator" class="divider"></li>
+<%# TODO: other links %>
+<div class="divider"></div>
 <% end %>
-<li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
+<li class="sub"><%= link_to 'Edit Profile', core_info_path %></li>
+<% if current_user.candidate? && current_user.active? %>
+  <li class="sub"><%= link_to 'Edit Assessment', assessment_complete_path %></li>
+<% end %>
+<div class="divider"></div>
+<li class="sub"><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>

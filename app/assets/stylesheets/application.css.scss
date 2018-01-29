@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require select2-bootstrap
+ //= require_tree .
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -203,7 +204,7 @@ body {
   .nav-link {
     cursor: pointer;
   }
-  // TODO-Designer: change colors to make this really pop
+  // TODO-designer: change colors to make this really pop
   // .nav.nav-tabs > li.dropdown.active.open > a,
   // .nav.nav-tabs > li.dropdown.active.open > ul.dropdown-menu a:hover,
   // .nav.nav-tabs > li.dropdown.open > a,
@@ -265,11 +266,17 @@ body {
 .container-card {
   background: white;
   border-radius: 1px;
+  &.no-overflow {
+    overflow: hidden;
+  }
   -webkit-box-shadow: 0px 0px 1px 2px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    0px 0px 1px 2px #ccc;  /* Firefox 3.5 - 3.6 */
   box-shadow:         0px 0px 1px 2px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
   padding: 30px 7%;
-  margin: 20px;
+  @media(max-width: 600px){ padding: 30px 10px; }
+  &.tight-vertical { padding: 30px inherit; }
+  &.no-padding { padding: 0px; }
+  margin: auto;
   .header-section {
     display: table;
     margin: auto;

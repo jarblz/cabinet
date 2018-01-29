@@ -68,7 +68,7 @@ module Admin
 
       # Use callbacks to share common setup or constraints between actions.
       def set_job_posting
-        @job_posting = JobPosting.find(params[:id])
+        @job_posting = JobPosting.friendly.find(params[:id])
       end
 
       def set_company

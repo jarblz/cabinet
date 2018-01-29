@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180119164818) do
+ActiveRecord::Schema.define(version: 20180126225205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assessment_questions", force: :cascade do |t|
+    t.string  "category",                null: false
+    t.string  "question",                null: false
+    t.string  "page_number",             null: false
+    t.integer "format",      default: 0, null: false
+  end
+
+  create_table "assessments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "status"
+    t.integer "ie"
+    t.integer "vn"
+    t.integer "oa"
+    t.integer "sm"
+    t.integer "pt"
+  end
 
   create_table "candidate_industries", force: :cascade do |t|
     t.integer "user_id"
@@ -70,6 +87,14 @@ ActiveRecord::Schema.define(version: 20180119164818) do
     t.integer "company_id",  null: false
     t.string  "title",       null: false
     t.text    "description", null: false
+    t.string  "slug"
+    t.index ["slug"], name: "index_job_postings_on_slug", unique: true, using: :btree
+  end
+
+  create_table "personalities", force: :cascade do |t|
+    t.string "name",        null: false
+    t.string "code",        null: false
+    t.string "description", null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -140,6 +165,7 @@ ActiveRecord::Schema.define(version: 20180119164818) do
     t.string   "github_url"
     t.string   "linkedin_url"
     t.string   "facebook_url"
+    t.integer  "personality_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

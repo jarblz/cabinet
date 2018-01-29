@@ -1,0 +1,212 @@
+
+.progress-holder {
+  padding: 10px 30%;
+  background-color: white;
+  border-top: solid 1px #333;
+  opacity: .8;
+  background-image:
+    -webkit-linear-gradient(top,
+      rgba(255, 255, 255, .25),
+      rgba(0, 0, 0, .25)),
+    -webkit-linear-gradient(left, #09c, #f44);
+  .progress {
+    // border: solid rgba(0, 0, 0, 0.25) 1px;
+    height: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    @media(max-width: 439px){
+      margin-bottom: 0px !important;
+    }
+
+  }
+  .progress-bar {
+    background-color: #09c;
+    &:progress-bar-striped {
+      // TODO edit these to make stripe look kewler
+      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+      background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    }
+  }
+
+  .page-indicator {
+    display: table;
+    margin: auto;
+    color: white;
+    font-size: 22px;
+    position: relative;
+    top: -8px;
+    @media(max-width: 439px){
+      font-size: 19px;
+    }
+  }
+}
+
+.card-closeable {
+  background: lightyellow;
+  margin-bottom: 20px !important;
+  .close {
+    position: relative;
+    right: -3%;
+    top: -20px;
+    @media(max-width: 600px) {
+      right: 2%;
+    }
+  }
+}
+.question{
+  padding: 20px;
+  padding-bottom: 70px;
+  text-align: center;
+  @media(max-width: 600px){ padding: inherit 10px; }
+  &.missed-question  {
+    background-color: rgba(170, 57, 57, 0.25);
+  }
+
+  .question-text {
+    font-size: 20px;
+    margin-bottom: 30px;
+    @media(max-width: 439px){
+      position: relative;
+      float: right;
+      width: 60%;
+      top: 42%;
+      margin-right: 10px;
+      vertical-align: middle;
+      margin-top: 13%;
+    }
+  }
+}
+.divider {
+  border-bottom: dashed 2px #ccc;
+  position: relative;
+  width: 300%;
+  left: -20%;
+}
+.circles {
+  text-align: center;
+  .check-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    @media(max-width: 439px){
+      display: block;
+    }
+    .label {
+      color: transparent;
+    }
+  }
+
+  /* Hide the browser's default radio button */
+  .check-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .middle-divider {
+    border-right: dashed 2px #ccc;
+    position: absolute;
+    right: 10px;
+    top: -28px;
+    height: 117px;
+    @media(max-width: 439px){
+      border: none;
+      border-bottom: dashed 2px #ccc;
+      position: absolute;
+      right: unset;
+      left: -6px;
+      top: 7px;
+      height: 3px;
+      width: 125px;
+    }
+
+  }
+
+  .agree {
+    position: absolute;
+    right: 42px;
+    top: 55px;
+    font-size: 16px;
+    color: green;
+    @media(max-width: 439px){
+      left: 65px;
+      right: unset;
+      top: unset;
+      bottom: 10px;
+    }
+
+  }
+  .disagree {
+    position: absolute;
+    left: 30px;
+    top: 55px;
+    font-size: 16px;
+    color: red;
+    @media(max-width: 439px){
+      left: 56px;
+      top: 20px;
+    }
+  }
+
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 38px;
+    width: 38px;
+    background-color: #eee;
+    border-radius: 50%;
+    border: solid 4px;
+    &.small {
+      top: 11px;
+      @media(max-width: 439px){ left: 10px; }
+    }
+    &.big {
+      height: 48px;
+      width: 48px;
+      top: 6px;
+      @media(max-width: 439px){ left: 6px; }
+    }
+    &.bigger {
+      height: 60px;
+      width: 60px;
+    }
+    &.red {
+      border-color: red;
+    }
+    &.green {
+      border-color: green;
+    }
+
+  }
+
+  /* On mouse-over, add a grey background color */
+  .check-container:hover input ~ .checkmark {
+    background-color: #ccc;
+    &.green {
+      border-color: springgreen;
+    }
+    &.red {
+      border-color: darkorange;
+    }
+  }
+
+  /* When the radio button is checked, add a blue background */
+  .check-container input:checked ~ .checkmark {
+    background-image:
+      -webkit-linear-gradient(top,
+        rgba(255, 255, 255, .25),
+        rgba(0, 0, 0, .25)),
+      -webkit-linear-gradient(left, #09c, #f44);
+    border: none;
+  }
+
+
+}

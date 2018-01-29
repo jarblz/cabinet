@@ -1,4 +1,4 @@
-<%= form_for([:admin, job_posting]) do |f| %>
+<%= form_for(job_posting) do |f| %>
   <% if job_posting.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(job_posting.errors.count, "error") %> prohibited this job_posting from being saved:</h2>
@@ -21,8 +21,8 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :traits, for: 'company_status'%>
-    <%= f.collection_check_boxes :trait_ids, Trait.all, :id, :name do |b| %>
+    <%= f.label :traits, for: 'job_posting_traits'%>
+    <%=  f.collection_check_boxes :trait_ids, Trait.all, :id, :name do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-1">

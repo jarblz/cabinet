@@ -33,13 +33,8 @@ class UsersController < ApplicationController
         format.html { redirect_to root_path, notice: 'Your information has been updated!' }
         # format.json { render :, status: :ok, location: @user }
       else
-        if params[:name]
-          format.html { render :core_info }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        elsif params[:industry_ids]
-          format.html { render :assessment }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        end
+        format.html { render :core_info }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,6 +48,8 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :phone, :country, :zip_code, :felony, :us_lawfully_authorized, :require_sponsorship)
+      params.require(:user).permit(
+        :name, :email, :phone, :country, :zip_code, :felony, :us_lawfully_authorized,
+        :require_sponsorship, :photo, :resume, :writing_sample, :transcript)
     end
 end

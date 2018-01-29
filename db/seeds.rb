@@ -315,3 +315,426 @@
 ].each do |industry|
   Industry.create(name: industry)
 end
+
+Personality.create([
+  {
+    name: "Engineer",
+    code: "INSO",
+    description: ""
+  },
+  {
+    name: "Philosopher",
+    code: "INSA",
+    description: ""
+  },
+  {
+    name: "Chief",
+    code: "ENSO",
+    description: ""
+  },
+  {
+    name: "Raconteur",
+    code: "ENSA",
+    description: ""
+  },
+  {
+    name: "Crusader",
+    code: "INMO",
+    description: ""
+  },
+  {
+    name: "Peacemaker",
+    code: "INMA",
+    description: ""
+  },
+  {
+    name: "Principal",
+    code: "ENMO",
+    description: ""
+  },
+  {
+    name: "Activist",
+    code: "ENMA",
+    description: ""
+  },
+  {
+    name: "Referee",
+    code: "IVSO",
+    description: ""
+  },
+  {
+    name: "Protector",
+    code: "IVMO",
+    description: ""
+  },
+  {
+    name: "CEO",
+    code: "EVSO",
+    description: ""
+  },
+  {
+    name: "Diplomat",
+    code: "EVMO",
+    description: ""
+  },
+  {
+    name: "Prodigy",
+    code: "IVSA",
+    description: ""
+  },
+  {
+    name: "Daredevil",
+    code: "IVMA",
+    description: ""
+  },
+  {
+    name: "Mogul",
+    code: "EVSA",
+    description: ""
+  },
+  {
+    name: "Artiste",
+    code: "EVMA",
+    description: ""
+  }
+])
+
+AssessmentQuestion.create([
+  {
+    category: "IE",
+    question: "You find it challenging to introduce yourself to other people.",
+    page_number: 1
+  },
+  {
+    category: "VN",
+    question: "You often get so consumed in your thoughts that you ignore or forget your surroundings.",
+    page_number: 1,
+    format: 1
+  },
+  {
+    category: "OA",
+    question: "You try to respond to your e-mails as soon as possible and cannot stand a messy inbox.",
+    page_number: 1
+  },
+  {
+    category: "PT",
+    question: "You find it easy to keep relaxed even when there is pressure.",
+    page_number: 1
+  },
+  {
+    category: "IE",
+    question: "You do not typically initiate conversations.",
+    page_number: 1
+  },
+  {
+    category: "VN",
+    question: "You rarely do something just out of sheer curiosity.",
+    page_number: 1,
+    format: 1
+  },
+  {
+    category: "PT",
+    question: "You feel superior to other people.",
+    page_number: 1
+  },
+  {
+    category: "OA",
+    question: "Being organized is more important to you than being adaptable.",
+    page_number: 1
+  },
+
+  {
+    category: "IE",
+    question: "You are usually highly motivated and energetic.",
+    page_number: 1,
+    format: 1
+  },
+  {
+    category: "SM",
+    question: "Winning a debate matters less to you than ensuring  no one gets upset.",
+    page_number: 1,
+    format: 1
+  },
+  {
+    category: "PT",
+    question: "You often feel as if you have to justify yourself to other people.",
+    page_number: 1,
+    format: 1
+  },
+  {
+    category: "OA",
+    question: "You keep your home and work environment quite tidy.",
+    page_number: 1
+  },
+  # Page 2
+  {
+    category: "IE",
+    question: "You do not mind being at the center of attention.",
+    page_number: 2,
+    format: 1
+  },
+  {
+    category: "VN",
+    question: "You consider yourself more practical than creative.",
+    page_number: 2
+  },
+  {
+    category: "PT",
+    question: "People can rarely upset you.",
+    page_number: 2
+  },
+  {
+    category: "OA",
+    question: "Your road trips are usually well thought out.",
+    page_number: 2
+  },
+  {
+    category: "SM",
+    question: "It is difficult to relate to other people’s feelings.",
+    page_number: 2
+  },
+  {
+    category: "SM",
+    question: "Your mood can change very quickly.",
+    page_number: 2,
+    format: 1
+  },
+  {
+    category: "SM",
+    question: "In a discussion, truth should be more important than people’s sensitivities.",
+    page_number: 2
+  },
+  {
+    category: "SM",
+    question: "You rarely worry about how your actions affect other people.",
+    page_number: 2
+  },
+  {
+    category: "OA",
+    question: "Your work style is more sporadic than an organized and methodical approach.",
+    page_number: 2,
+    format: 1
+  },
+  {
+    category: "PT",
+    question: "You are often envious of others.",
+    page_number: 2,
+    format: 1
+  },
+  {
+    category: "IE",
+    question: "An interesting book or video game is often better than a social event.",
+    page_number: 2
+  },
+  {
+    category: "OA",
+    question: "The ability to develop a plan and follow it is the most important part of every project.",
+    page_number: 2
+  },
+  # Page 3
+  {
+    category: "VN",
+    question: "You rarely get carried away by fantasies and ideas.",
+    page_number: 3
+  },
+  {
+    category: "VN",
+    question: "You often find yourself lost in thought when you are walking in nature.",
+    page_number: 3,
+    format: 1
+  },
+  {
+    category: "PT",
+    question: "If someone does not respond to your e-mail within a reasonable time, you start worrying if you said something wrong.",
+    page_number: 3,
+    format: 1
+  },
+  {
+    category: "SM",
+    question: "As a parent, you would rather see your child grow up kind than smart.",
+    page_number: 3,
+    format: 1
+  },
+  {
+    category: "PT",
+    question: "You do not let other people influence your actions.",
+    page_number: 3
+  },
+  {
+    category: "VN",
+    question: "When you sleep, your dreams tend to focus on the real world and its events.",
+    page_number: 3
+  },
+  {
+    category: "IE",
+    question: "You find ways to get involved socially quickly in a new organization.",
+    page_number: 3,
+    format: 1
+  },
+  {
+    category: "OA",
+    question: "You are more of a natural improviser than a careful planner.",
+    page_number: 3,
+    format: 1
+  },
+  {
+    category: "SM",
+    question: "Your emotions control you more than you control them.",
+    page_number: 3,
+    format: 1
+  },
+  {
+    category: "IE",
+    question: "You enjoy going to social events that involve dress-up or role-play activities.",
+    page_number: 3,
+    format: 1
+  },
+  {
+    category: "VN",
+    question: "You often spend time exploring unrealistic and impractical yet appealing ideas.",
+    page_number: 3,
+    format: 1
+  },
+  {
+    category: "OA",
+    question: "You would rather improvise than spend time coming up with a detailed plan.",
+    page_number: 3,
+    format: 1
+  },
+  # Page 4
+  {
+    category: "IE",
+    question: "Most times you are reserved and a quiet person.",
+    page_number: 4
+  },
+  {
+    category: "PT",
+    question: "If you had a business, you would find it very difficult to fire loyal but underperforming employees.",
+    page_number: 4,
+    format: 1
+  },
+  {
+    category: "VN",
+    question: "You often ponder the reasons for human existence.",
+    page_number: 4,
+    format: 1
+  },
+  {
+    category: "SM",
+    question: "Logic is usually more important than heart when making important decisions.",
+    page_number: 4
+  },
+  {
+    category: "OA",
+    question: "It is more important to keep your options open than having a to-do list.",
+    page_number: 4,
+    format: 1
+  },
+  {
+    category: "SM",
+    question: "If your friend is sad about something, you are more likely to offer emotional support than offer ways to deal with the problem.",
+    page_number: 4,
+    format: 1
+  },
+  {
+    category: "PT",
+    question: "You rarely feel insecure.",
+    page_number: 4
+  },
+  {
+    category: "OA",
+    question: "You do not have difficulties coming up with a personal schedule and sticking to it.",
+    page_number: 4
+  },
+  {
+    category: "SM",
+    question: "During teamwork, being right is more important than being cooperative.",
+    page_number: 4
+  },
+  {
+    category: "SM",
+    question: "You think that everyone’s views should be respected even if they are not supported by facts.",
+    page_number: 4,
+    format: 1
+  },
+  {
+    category: "IE",
+    question: "You feel more energetic after going out with a group of people.",
+    page_number: 4,
+    format: 1
+  },
+  {
+    category: "OA",
+    question: "You frequently misplace your things.",
+    page_number: 4,
+    format: 1
+  },
+  # Page 5
+  {
+    category: "SM",
+    question: "You believe you are very emotionally stable.",
+    page_number: 5
+  },
+  {
+    category: "VN",
+    question: "Your mind is always wondering with unexplored ideas and plans.",
+    page_number: 5,
+    format: 1
+  },
+  {
+    category: "VN",
+    question: "You would not call yourself a dreamer.",
+    page_number: 5
+  },
+  {
+    category: "IE",
+    question: "You usually find it difficult to relax when talking in front of many people.",
+    page_number: 5
+  },
+  {
+    category: "VN",
+    question: "You rely more on your personal experience than your imagination.",
+    page_number: 5
+  },
+  {
+    category: "PT",
+    question: "You worry constantly about what other people think.",
+    page_number: 5,
+    format: 1
+  },
+  {
+    category: "IE",
+    question: "When in a full room, you are sure to stay closer to the walls, avoiding the center.",
+    page_number: 5
+  },
+  {
+    category: "OA",
+    question: "You have a habit to procrastinate until there is not enough time to do everything.",
+    page_number: 5,
+    format: 1
+  },
+  {
+    category: "PT",
+    question: "You have anxiety in stressful situations.",
+    page_number: 5,
+    format: 1
+  },
+  {
+    category: "PT",
+    question: "You believe that it is more rewarding to be liked by others than to be powerful.",
+    page_number: 5,
+    format: 1
+  },
+  {
+    category: "VN",
+    question: "You have always been interested in unconventional and imaginative things, e.g. in books, art, or movies.",
+    page_number: 5,
+    format: 1
+  },
+  {
+    category: "IE",
+    question: "You often take lead in social situations.",
+    page_number: 5,
+    format: 1
+  }
+])

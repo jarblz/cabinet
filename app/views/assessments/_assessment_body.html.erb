@@ -1,0 +1,37 @@
+<div class="container" style="margin-bottom: 115px;">
+  <% if @assessment.status == "1" %>
+    <%= render partial: 'first_page_card' %>
+  <% end %>
+  <div class="container-card no-padding no-overflow">
+    <%= form_tag update_assessment_url, method: 'put', class:'form-horizontal', id:'assessment' do %>
+      <% @questions.each do |question| %>
+        <%= render partial: 'question', locals: {question: question} %>
+      <% end %>
+      <div class="actions"><%= submit_tag assessment_submit_text(@assessment), class: 'button btn-standard' %></div>
+    <% end %>
+  </div>
+</div>
+<%= render partial: 'fixed_footer' %>
+
+<script type="text/javascript">
+  $('#assessment').submit(function() {
+    var result = true
+    var firstItem = ""
+    $('.question').each(function(){
+      if($(this).find("input:radio:checked").val() === undefined){
+        $(this).addClass('missed-question');
+        result = false
+        if(firstItem === ""){firstItem = $(this).prop('id')}
+      } else {
+        $(this).removeClass('missed-question');
+      }
+    })
+    if(!result){
+      alert('Please answer all the questions! We like to be thorough!')
+      $('html,body').animate({
+        scrollTop: $("#"+firstItem).offset().top},
+        'slow');
+      return result;
+    }
+  });
+</script>

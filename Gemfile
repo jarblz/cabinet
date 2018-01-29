@@ -20,7 +20,6 @@ gem "aws-sdk"
 
 # authentication/authorization
 gem 'devise'
-gem 'cancancan'
 gem 'rolify'
 # administration
 # gem "administrate" # not customizeable enough
