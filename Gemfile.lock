@@ -684,6 +684,7 @@ GEM
     money (6.10.1)
       i18n (>= 0.6.4, < 1.0)
     multi_json (1.13.1)
+    mustermann (1.0.1)
     nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
@@ -703,6 +704,8 @@ GEM
     public_suffix (3.0.1)
     puma (3.11.2)
     rack (2.0.3)
+    rack-protection (2.0.0)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.6)
@@ -754,6 +757,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.0)
+    ruby_http_client (3.3.0)
     rubyzip (1.2.1)
     sass (3.5.5)
       sass-listen (~> 4.0.0)
@@ -771,6 +775,14 @@ GEM
     selenium-webdriver (3.8.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    sendgrid-ruby (5.2.0)
+      ruby_http_client (~> 3.2)
+      sinatra (>= 1.4.7, < 3)
+    sinatra (2.0.0)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.0)
+      tilt (~> 2.0)
     sixarm_ruby_unaccent (1.2.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
@@ -848,6 +860,7 @@ DEPENDENCIES
   sass-rails (>= 3.2)
   select2-rails
   selenium-webdriver
+  sendgrid-ruby
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
