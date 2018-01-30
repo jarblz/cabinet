@@ -1,9 +1,31 @@
 <% if current_user.try(:recruiter?) %>
-  <li> <%= link_to "Jobs", job_postings_path %></li>
-  <li> <%= link_to "Connections", "#" %></li>
-  <li> <%= link_to "Messages", "#" %></li>
+  <li class='full-width right-most'> <%= link_to "Jobs", job_postings_path %></li>
+  <li class='full-width'> <%= link_to "Connections", "#" %></li>
+  <li class='full-width active'> <%= link_to "Messages", "#" %></li>
 <% else %>
-  <li> <%= link_to "Jobs", job_postings_path %></li>
-  <li> <%= link_to "Connections", "#" %></li>
-  <li> <%= link_to "Messages", "#" %></li>
+  <li class='full-width right-most'> <%= link_to "Jobs", job_postings_path %></li>
+  <li class='full-width'> <%= link_to "Connections", "#" %></li>
+  <li class='full-width active'> <%= link_to "Messages", "#" %></li>
 <% end %>
+<li class='mobile-width-links dropper-parent'>
+  <a href="#" class="dropper">
+    <div class="dropdown-trigger">
+      <i class="sidebar icon dropdown-trigger"></i>
+    </div>
+  </a>
+  <ul class='left-menu bottom-shadow'>
+    <% if current_user.try(:recruiter?) %>
+    <li class='sub'> <%= link_to "Jobs", job_postings_path %></li>
+    <div class="divider"></div>
+    <li class='sub'> <%= link_to "Connections", "#" %></li>
+    <div class="divider"></div>
+    <li class='sub'> <%= link_to "Messages", "#" %></li>
+    <% else %>
+    <li class='sub'> <%= link_to "Jobs", job_postings_path %></li>
+    <div class="divider"></div>
+    <li class='sub'> <%= link_to "Connections", "#" %></li>
+    <div class="divider"></div>
+    <li class='sub'> <%= link_to "Messages", "#" %></li>
+    <% end %>
+  </ul>
+</li>

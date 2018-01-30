@@ -15,6 +15,11 @@ class User < ApplicationRecord
   belongs_to :personality
   has_one :assessment
 
+  has_many :user_traits
+  has_many :traits, through: :user_traits
+  has_many :user_competencies
+  has_many :competencies, through: :user_competencies
+
   has_attached_file :resume
   has_attached_file :writing_sample
   has_attached_file :transcript

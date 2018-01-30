@@ -1,11 +1,21 @@
 <nav id="primary_nav_wrap">
   <ul>
-    <li class="brand"> <%= link_to "unBoxt", root_path %></li>
-    <li class="right-avatar"><a href="">
-      <%= current_user.try(:name) %>
-      <!-- TODO-designer: see this card:  -->
-    </a>
-      <ul>
+    <li class="brand">
+      <a href="/"><%= image_tag 'brand-text' %></a>
+    </li>
+    <li class="brand-mobile">
+      <a href="/"><%= image_tag 'brand-icon' %></a>
+    </li>
+    <li class="right-avatar dropper-parent">
+      <a href="#" class="dropper">
+        <div class="avatar-text dropdown-trigger">
+          <%= current_user.try(:name) %>
+        </div>
+        <div class="avatar-image dropdown-trigger">
+          <%= raw avatar_contents %>
+        </div>
+      </a>
+      <ul class="bottom-shadow">
         <%= render 'layouts/profile_links' %>
       </ul>
     </li>
@@ -16,3 +26,34 @@
     <li><a href="#">Contact Us</a></li> -->
   </ul>
 </nav>
+
+<script type="text/javascript">
+  $('body').click(function(e) {
+    var target = $(e.target), article;
+    if(target.hasClass('dropper')) {
+      e.preventDefault();
+      if($(target).parent().children('ul').hasClass('on')){
+        $(target).parent().children('ul').removeClass('on')
+      } else {
+        hideAllDropdowns();
+        $(target).parent().children('ul').addClass('on')
+      }
+    } else if(target.hasClass('dropdown-trigger')) {
+      e.preventDefault();
+      target.closest('.dropper').click()
+      // TODO: catch any other elements that might be clicked inside the a tag
+    } else if(target.hasClass('dropper-parent')) {
+      e.preventDefault();
+      target.children('.dropper').click()
+    } else {
+      hideAllDropdowns();
+    }
+  });
+
+  function hideAllDropdowns(){
+    $('#primary_nav_wrap ul').children('li').each(function(){
+      $(this).children('ul').removeClass('on')
+    })
+  }
+
+</script>

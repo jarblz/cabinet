@@ -26,6 +26,7 @@ gem 'rolify'
 
 gem 'country_select'
 gem "select2-rails"
+gem 'semantic-ui-sass'
 
 # other gems I should be using
 # Kaminari - pagination

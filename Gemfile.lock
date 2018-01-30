@@ -775,6 +775,8 @@ GEM
     selenium-webdriver (3.8.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    semantic-ui-sass (2.2.12.1)
+      sass (>= 3.2)
     sendgrid-ruby (5.2.0)
       ruby_http_client (~> 3.2)
       sinatra (>= 1.4.7, < 3)
@@ -860,6 +862,7 @@ DEPENDENCIES
   sass-rails (>= 3.2)
   select2-rails
   selenium-webdriver
+  semantic-ui-sass
   sendgrid-ruby
   spring
   spring-commands-rspec
