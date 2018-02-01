@@ -10,7 +10,7 @@ $(function(){
 
   function validateField(field){
     if(field.prev('input:checked').length === 0 && tooManySelects(field)) {
-      alert(`Oops! You are only allowed up to ${field.data('amount')} ${field.data('thing')}`);
+      alert('Oops! You are only allowed up to '+field.data('amount') + ' ' + field.data('thing'));
       field.click();
     }
   }

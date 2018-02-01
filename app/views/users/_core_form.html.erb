@@ -1,15 +1,5 @@
 <%= form_for(user, url: update_core_info_path) do |f| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'layouts/forms/error_notification', locals: { resource: user} %>
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group">
@@ -57,6 +47,10 @@
           <%= f.label :zip_code, for: 'user_zip_code', class:"label-required"%>
           <%= f.text_field :zip_code, class: 'form-control location-info' %>
         </div>
+        <div class="form-group address-holder">
+          <i class="marker icon"></i>
+          <div class="address-bar"></div>
+        </div>
         <div class="form-group">
           <%= f.label 'Are you open to fully remote opportunities?', for: 'user_zip_code', class:"label-required"%>
           <div class="switch-field">
@@ -65,10 +59,6 @@
             <%= f.radio_button :remote, false %>
             <label for="user_remote_false">No</label>
           </div>
-        </div>
-        <div class="form-group address-holder">
-          <i class="marker icon"></i>
-          <div class="address-bar"></div>
         </div>
 
       </div>
@@ -225,5 +215,5 @@
   </div>
 <% end %>
 
-<%= render 'layouts/forms/address_finder_js'
+<%= render 'layouts/forms/address_finder_js' %>
 <%= javascript_include_tag "packages/select-validator.js" %>
