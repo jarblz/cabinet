@@ -1,0 +1,24 @@
+<script>
+  function initMap() {
+    var geocoder = new google.maps.Geocoder();
+    $('.location-info').blur(function() {
+      geocodeAddress(geocoder, $(this).val())
+    });
+  }
+
+  function geocodeAddress(geocoder, address) {
+    var resultAddress = "Not Found"
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+         $('.address-bar').html(results[0].formatted_address);
+         $('.address-holder').fadeIn(1000)
+      } else {
+        alert('We could not find your location for the following reason: ' + status);
+      }
+    });
+
+  }
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_API_KEY']%>&callback=initMap">
+</script>

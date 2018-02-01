@@ -1,0 +1,61 @@
+// primary colors
+$red:        #D00020;
+$grey:       #9D9D9D;
+$blue:       #0D4594;
+$green:      #5EB319;
+$yellow:     #FEB710;
+$logo-black: black;
+
+// blues
+$dark-blue:     #052A5C;
+$darkish-blue:  #093878;
+$blue:          #0D4594; //primary
+$lightish-blue: #275DA7;
+$light-blue:    #4774B3;
+
+//reds
+$dark-red:  #A9001B;
+$red:       #D00020; // primary
+$light-red: #EF2343;
+
+//gray
+$dark-grey:       #707070;
+$grey:            #9D9D9D; // primary
+$light-grey:      #C8C8C8;
+$background-grey: #ececec;
+
+
+//yellow
+$dark-yellow:  #CC8F00;
+$yellow:       #FEB710;
+$light-yellow: #FFD36B;
+
+
+@font-face {
+  font-family: "Aller std reg";
+  src: font-url("Aller_Std_Rg.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller std bold";
+  src: font-url("Aller_Std_Bd.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller std thin";
+  src: font-url("Aller_Std_Lt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller light reg";
+  src: font-url("Aller_Std_lt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller light thin";
+  src: font-url("Aller_Std_Ltlt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller light bold";
+  src: font-url("Aller_Std_BdIt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Aller display";
+  src: font-url("AllerDisplay_Std_Rg.ttf") format("truetype");
+}

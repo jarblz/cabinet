@@ -83,6 +83,20 @@ class User < ApplicationRecord
     created_jobs + job_postings
   end
 
+  def no_image_text
+    if current_user.name
+      if current_user.name.split(" ").count > 1
+        "#{current_user.name.split(" ").first[0].upcase}#{current_user.name.split(" ").second[0].downcase}"
+      elsif current_user.name.split('').count > 1
+        "#{current_user.name.split('').first.upcase}#{current_user.name.split('').second.downcase}"
+      else
+        "#{current_user.name.split('').first.upcase}"
+      end
+    else
+      "Me"
+    end
+  end
+
   private
 
   def join_company

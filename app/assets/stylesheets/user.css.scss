@@ -1,0 +1,23 @@
+.circular-photo-large {
+  display:  table;
+  margin:  auto;
+  color: $light-blue;
+  i {
+    position: relative;
+    top: -40px;
+    font-size: 10em;
+  }
+
+}
+
+.address-holder {
+  display: none;
+  background: lightblue;
+  border-radius: 2px;
+  height: padding;
+  padding: 15px;
+  font-size: 16px;
+  .address-bar {
+    display: inline-block;
+  }
+}

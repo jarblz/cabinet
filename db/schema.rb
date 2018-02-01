@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129192319) do
+ActiveRecord::Schema.define(version: 20180131220400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 20180129192319) do
     t.string  "title",       null: false
     t.text    "description", null: false
     t.string  "slug"
+    t.boolean "remote"
+    t.string  "zip_code"
     t.index ["slug"], name: "index_job_postings_on_slug", unique: true, using: :btree
   end
 
@@ -176,6 +178,7 @@ ActiveRecord::Schema.define(version: 20180129192319) do
     t.string   "linkedin_url"
     t.string   "facebook_url"
     t.integer  "personality_id"
+    t.boolean  "remote"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

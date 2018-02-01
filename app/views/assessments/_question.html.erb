@@ -1,22 +1,23 @@
 <div class="question" id="<%=question.id%>">
+  <div class="mobile-divider"></div>
   <div class="question-text">
     <%= question.question %>
   </div>
   <div class="circles">
     <label class="check-container" style="padding-left: 40px;">
       <span class="label">a</span>
-      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[0]%>">
-      <span class="checkmark bigger green"></span>
+      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[5]%>">
+      <span class="checkmark bigger red"></span>
     </label>
     <label class="check-container" style="padding-left: 27px;">
       <span class="label">c</span>
-      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[1]%>">
-      <span class="checkmark big green"></span>
+      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[4]%>">
+      <span class="checkmark big red"></span>
     </label>
     <label class="check-container" style="padding-left: 15px;">
       <span class="label">d</span>
-      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[2]%>">
-      <span class="checkmark small green"></span>
+      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[3]%>">
+      <span class="checkmark small red"></span>
     </label>
     <label class="check-container" style="padding-left: 13px;">
       <div class="agree">Agree</div>
@@ -25,16 +26,16 @@
     </label>
     <label class="check-container" style="padding-left: 18px;">
       <span class="label">e</span>
-      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[3]%>">
-      <span class="checkmark small red"></span>
+      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[2]%>">
+      <span class="checkmark small green"></span>
     </label>
     <label class="check-container" style="padding-left: 31px;"><span class="label">f</span>
-      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[4]%>">
-      <span class="checkmark big red"></span>
+      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[1]%>">
+      <span class="checkmark big green"></span>
     </label>
     <label class="check-container"><span class="label">g</span>
-      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[5]%>">
-      <span class="checkmark bigger red"></span>
+      <input type="radio" name="question[<%=question.id%>]" value="<%=question.scores[0]%>">
+      <span class="checkmark bigger green"></span>
     </label>
   </div>
 

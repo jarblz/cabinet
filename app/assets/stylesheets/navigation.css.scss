@@ -1,13 +1,14 @@
-// Text colors:
-$dark_grey: #333;
-$light_grey: #666;
 
 #primary_nav_wrap {
   height: 50px;
-  background: #ffffff;
+  background: white;
   border-bottom: solid rgba(0,0,0,.35) 1px;
   color: #333;
-  margin-bottom: 20px;
+  position: fixed;
+  width: 100%;
+  height: 75px;
+  top: -20px;
+  z-index: 2;
   .dropdown-trigger, .right-avatar {
     cursor: pointer;
   }
@@ -18,6 +19,7 @@ $light_grey: #666;
 	margin:0;
 	padding:0;
   width: 100%;
+  top: 25px;
 }
 
 #primary_nav_wrap ul a {
@@ -36,7 +38,7 @@ $light_grey: #666;
 	margin:0;
 	padding:0;
   &.active {
-    border-bottom: solid blue;
+    border-bottom: solid $blue;
     position: relative;
     top: -4px;
     padding-bottom: 0px;
@@ -87,17 +89,23 @@ $light_grey: #666;
       top: -2px;
       height: 28px;
       width: 28px;
-      background: blue;
+      background: $light-blue;
       position: relative;
       display: inline-block;
       float: right;
       border-radius: 14px;
       color: white;
       overflow: hidden;
+      border: solid 1px $logo-black;
       .text {
         position: relative;
         left: 9px;
         top: 1px;
+      }
+      img {
+        position: relative;
+        top: -2px;
+        left: -2px;
       }
     }
   }
@@ -130,7 +138,7 @@ $light_grey: #666;
 }
 
 #primary_nav_wrap ul li .sub a {
-  color: gray;
+  color: $gray;
   font-size: 18px;
 }
 
@@ -148,7 +156,7 @@ $light_grey: #666;
   overflow: hidden;
   font-weight: bold;
   .divider {
-    border-top: solid 2px gray;
+    border-top: solid 2px $gray;
     width: 100%;
   }
   &.left-menu {

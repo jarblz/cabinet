@@ -8,12 +8,11 @@
     -webkit-linear-gradient(top,
       rgba(255, 255, 255, .25),
       rgba(0, 0, 0, .25)),
-    -webkit-linear-gradient(left, #09c, #f44);
+    -webkit-linear-gradient(left, $blue, $red);
   .progress {
-    // border: solid rgba(0, 0, 0, 0.25) 1px;
     height: 25px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
-    @media(max-width: 439px){
+    @media(max-width: 454px){
       margin-bottom: 0px !important;
     }
 
@@ -35,14 +34,14 @@
     font-size: 22px;
     position: relative;
     top: -8px;
-    @media(max-width: 439px){
+    @media(max-width: 454px){
       font-size: 19px;
     }
   }
 }
 
 .card-closeable {
-  background: lightyellow;
+  background: $light-yellow;
   margin-bottom: 20px !important;
   .close {
     position: relative;
@@ -58,21 +57,31 @@
   padding-bottom: 70px;
   text-align: center;
   @media(max-width: 600px){ padding: inherit 10px; }
+  .mobile-divider {
+    display: none;
+    border-right: dashed 2px #ccc;
+    position: absolute;
+    height: 308px;
+    left: 165px;
+    @media(max-width: 454px){
+      display: block;
+    }
+  }
   &.missed-question  {
-    background-color: rgba(170, 57, 57, 0.25);
+    background-color: $light-red;
   }
 
   .question-text {
     font-size: 20px;
     margin-bottom: 30px;
-    @media(max-width: 439px){
+    @media(max-width: 454px){
       position: relative;
       float: right;
       width: 60%;
       top: 42%;
-      margin-right: 10px;
+      margin-right: -10px;
       vertical-align: middle;
-      margin-top: 13%;
+      margin-top: 25%;
     }
   }
 }
@@ -89,7 +98,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    @media(max-width: 439px){
+    @media(max-width: 454px){
       display: block;
     }
     .label {
@@ -109,7 +118,7 @@
     right: 10px;
     top: -28px;
     height: 117px;
-    @media(max-width: 439px){
+    @media(max-width: 454px){
       border: none;
       border-bottom: dashed 2px #ccc;
       position: absolute;
@@ -122,28 +131,28 @@
 
   }
 
-  .agree {
+  .disagree {
     position: absolute;
     right: 42px;
     top: 55px;
     font-size: 16px;
-    color: green;
-    @media(max-width: 439px){
-      left: 65px;
+    color: $red;
+
+    @media(max-width: 454px){
+      left: 56px;
       right: unset;
       top: unset;
-      bottom: 10px;
+      bottom: 0px;
     }
-
   }
-  .disagree {
+  .agree {
     position: absolute;
     left: 30px;
     top: 55px;
     font-size: 16px;
-    color: red;
-    @media(max-width: 439px){
-      left: 56px;
+    color: $green;
+    @media(max-width: 454px){
+      left: 58px;
       top: 20px;
     }
   }
@@ -160,23 +169,23 @@
     border: solid 4px;
     &.small {
       top: 11px;
-      @media(max-width: 439px){ left: 10px; }
+      @media(max-width: 454px){ left: 10px; }
     }
     &.big {
       height: 48px;
       width: 48px;
       top: 6px;
-      @media(max-width: 439px){ left: 6px; }
+      @media(max-width: 454px){ left: 6px; }
     }
     &.bigger {
       height: 60px;
       width: 60px;
     }
     &.red {
-      border-color: red;
+      border-color: $red;
     }
     &.green {
-      border-color: green;
+      border-color: $green;
     }
 
   }
@@ -185,10 +194,10 @@
   .check-container:hover input ~ .checkmark {
     background-color: #ccc;
     &.green {
-      border-color: springgreen;
+      border-color: $green;
     }
     &.red {
-      border-color: darkorange;
+      border-color: $red;
     }
   }
 
@@ -198,7 +207,7 @@
       -webkit-linear-gradient(top,
         rgba(255, 255, 255, .25),
         rgba(0, 0, 0, .25)),
-      -webkit-linear-gradient(left, #09c, #f44);
+      -webkit-linear-gradient(left, $green, $blue);
     border: none;
   }
 

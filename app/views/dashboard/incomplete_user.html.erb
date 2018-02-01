@@ -1,8 +1,10 @@
-<div class="unboxed-header">
+<div class="sub-menu">
   <h3>So Close! Would you give us a little more?</h3>
 </div>
-<%if current_user.recruiter? %>
+<div class="container">
+  <%if current_user.recruiter? %>
   <%=render partial: "recruiter_progress"%>
-<%else%>
+  <%else%>
   <%=render partial: "candidate_progress"%>
-<%end%>
+  <%end%>
+</div>

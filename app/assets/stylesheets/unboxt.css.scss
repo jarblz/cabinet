@@ -1,0 +1,242 @@
+body {
+  font-family: 'Aller std reg';
+  color: $dark-blue;
+  background: $background-grey;
+
+  a, .button {
+    -webkit-transition-duration: .7s;
+    transition-duration: .7s;
+    -webkit-transition-property: background, border, box-shadow, color;
+    transition-property: background, border, box-shadow, color;
+  }
+  a {
+    color: $blue;
+    &:hover {
+      text-decoration: none !important;
+      color: $yellow;
+    }
+  }
+  label {
+    font-size: 1.2em;
+  }
+  h1, h2, h3 {
+    display: table;
+    margin: auto;
+  }
+  .main {
+    margin-top: 75px;
+    margin-bottom: 75px;
+  }
+}
+
+.button {
+  border-radius: 2px;
+  padding: 5px 25px;
+  font-size: 18px;
+  text-decoration: none !important;
+  border: none;
+  font-family: "Aller light reg";
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+.btn-standard {
+  background: $blue;
+  color: white;
+  opacity: 1;
+  border: 2px solid $blue;
+  &:hover {
+    background: $light-blue;
+    color: white;
+  }
+}
+
+
+.btn-alternate {
+  background: $grey;
+  border: none;
+  color: white;
+  text-decoration: none;
+  &.inverse-button {
+    text-decoration: underline !important;
+  }
+
+  &:hover {
+    background: white;
+    color: $blue;
+  }
+}
+
+.inverse-button {
+  background: black;
+  font-family: "Aller std bold";
+  &:hover {
+    font-family: "Aller std reg";
+    text-decoration: none !important;
+  }
+
+}
+.button-small {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 9px;
+}
+
+.big-shadow{
+  box-shadow: 3px 5px 10px 0px;
+  -webkit-box-shadow: 3px 5px 10px 0px $light-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 5px 10px 0px $light-grey;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 5px 10px 0px $light-grey;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.big-shadow{
+  -webkit-box-shadow: 0px 0px 1px 2px $light-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0px 0px 1px 2px $light-grey;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         0px 0px 1px 2px $light-grey;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+.bottom-shadow {
+  box-shadow: 0px 3px 2px 0px $light-grey;
+  -webkit-box-shadow: 0px 3px 2px 0px $light-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0px 3px 2px 0px $light-grey;  /* Firefox 3.5 - 3.6 */
+
+}
+
+//body
+.sub-menu {
+  height: 80px;
+  background: white;
+  margin-bottom: 30px;
+  padding-top: 25px;
+  position: relative;
+  top: -20px;
+  border-bottom: solid 1px $light-grey;
+  h1, h2, h3 {
+    border-bottom: solid 2px $blue;
+    padding-bottom: 4px;
+    color: $logo-black;
+    font-family: aller std thin;
+    @media(max-width: 578px){
+      font-size: 18px;
+    }
+  }
+
+}
+.container-card {
+  background: white;
+  border-radius: 1px;
+  &.no-overflow {
+    overflow: hidden;
+  }
+  -webkit-box-shadow: 0px 1px 2px 2px $dark-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0px 1px 2px 2px $dark-grey;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         0px 1px 2px 2px $dark-grey;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  padding: 30px 7%;
+  @media(max-width: 600px){ padding: 30px 10px; }
+  &.tight-vertical { padding: 30px inherit; }
+  &.no-padding { padding: 0px; }
+  margin: auto;
+  .header-section {
+    display: table;
+    margin: auto;
+    font-size: 18px;
+  }
+  h1, h2, h3 {
+    display: table;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .divider {
+    border-bottom: dashed 2px $light-grey;
+    position: relative;
+    width: 300%;
+    left: -20%;
+    &.vert-margin {
+      margin: 30px 0px;
+    }
+  }
+
+}
+.unboxed-header {
+  padding-bottom: 30px;
+}
+.split-cards {
+  display: inline-block;
+  float: right;
+  width: 46%;
+  margin-right: 2%;
+  margin-left: 2%;
+  padding: 20px;
+  &.three {
+    width: 31%;
+  }
+  @media(max-width: 612px){
+    display: table;
+    margin: auto;
+    width: 80%;
+    max-width: 400px;
+    margin-bottom: 50px;
+    float: none;
+  }
+  .upper-check {
+    font-size: 36px;
+    display: table;
+    margin: auto;
+    position: relative;
+    top: -46px;
+    color: $green;
+    &.uh-oh {
+      color: $yellow;
+    }
+  }
+  &.complete {
+    background: #f4f6f7;
+  }
+  .company-logo {
+    display: table;
+    margin: auto;
+    font-size: 150px;
+    img {
+      width: 150px;
+    }
+  }
+  .card-icon-large {
+    display: table;
+    margin: auto;
+    font-size: 150px;
+    margin-bottom: -33px;
+  }
+
+  .logo-caption {
+    display: table;
+    margin: auto;
+    font-size: 18px;
+    text-align: center;
+  }
+  &.incomplete {
+    cursor: pointer;
+  }
+}
+
+.nested-card {
+  padding: 20px;
+  border: solid 1px $blue;
+  width: 30%;
+  margin: 0 1% 20px 1%;
+  @media(max-width: 767px){
+    width: auto;
+  }
+  &.incomplete {
+    border: dashed 2px #ccc;
+    color: $light-blue
+  }
+
+  .nested-link {
+    display: table;
+    background: #ccc;
+    border: solid 1px;
+    padding: 10px;
+  }
+}

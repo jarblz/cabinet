@@ -1,6 +1,8 @@
-<h1>Editing Job Posting</h1>
 
+<div class="sub-menu">
+  <h3>Edit Job Posting</h3>
+</div>
 <%= render 'form', job_posting: @job_posting %>
 
-<%= link_to 'Show', admin_job_posting_path(@job_posting) %> |
-<%= link_to 'Back', admin_job_postings_path %>
+<%= link_to 'Show', job_posting_path(@job_posting) %> |
+<%= link_to 'Back', job_postings_path %>

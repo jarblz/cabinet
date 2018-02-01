@@ -10,95 +10,220 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :photo, for: 'user_photo'%>
+        <% if user.photo.exists? %>
+          <%= image_tag user.photo.url %><br/>
+          <%= f.label "Upload a different Photo", for: 'user_photo'%>
+          <%= f.file_field :photo %>
 
-    <% if user.photo.exists? %>
-      <%= image_tag user.photo.url(:thumb) %><br/>
-      <%= f.label "Upload a different Resume", for: 'user_photo'%>
-      <%= f.file_field :photo %>
+        <% else %>
+          <div class="circular-photo-large default">
+            <i class="user circle icon"></i>
+          </div>
+          <%= f.file_field :photo %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :name, for: 'user_name', class:"label-required"%>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, for: 'user_email', class:"label-required"%>
+        <%= f.text_field :email, class: 'form-control' %>
+      </div>
 
-    <% else %>
-      <%= f.label :photo, for: 'user_photo'%>
-      <%= f.file_field :photo %>
-    <% end %>
-  </div>
-  <div class="form-group">
-      <%= f.label :name, for: 'user_name'%>
-      <%= f.text_field :name, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-      <%= f.label :email, for: 'user_email'%>
-      <%= f.text_field :email, class: 'form-control' %>
-  </div>
+      <div class="form-group">
+        <%= f.label :phone, for: 'user_phone', class:"label-required"%>
+        <%= f.text_field :phone, class: 'form-control' %>
+      </div>
+      <%# TODO: link to change password %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :phone, for: 'user_phone'%>
-    <%= f.text_field :phone, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-      <%= f.label :country, for: 'user_country'%>
-      <%= f.country_select :country, :include_blank => true, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-      <%= f.label :zip_code, for: 'user_zip_code'%>
-      <%= f.text_field :zip_code, class: 'form-control' %>
   </div>
   <% if current_user.candidate? %>
-    <div class="form-group">
-      <%= f.label :felony, for: 'user_felony'%>
-      <%= f.select :felony, User.felonies.keys.map { |w| [w.humanize, w] }, :include_blank => true %>
+    <div class="divider vert-margin"></div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-section-heading">
+          Location Information
+          <p>where are you seeking a job? (hit tab to search based on postal)</p>
+        </div>
+        <div class="form-group">
+          <%= f.label :zip_code, for: 'user_zip_code', class:"label-required"%>
+          <%= f.text_field :zip_code, class: 'form-control location-info' %>
+        </div>
+        <div class="form-group">
+          <%= f.label 'Are you open to fully remote opportunities?', for: 'user_zip_code', class:"label-required"%>
+          <div class="switch-field">
+            <%= f.radio_button :remote, true %>
+            <label for="user_remote_true">Yes</label>
+            <%= f.radio_button :remote, false %>
+            <label for="user_remote_false">No</label>
+          </div>
+        </div>
+        <div class="form-group address-holder">
+          <i class="marker icon"></i>
+          <div class="address-bar"></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="divider vert-margin"></div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-section-heading">
+          Other Required Info
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Have you ever been convicted of a felony?", for: 'user_felony', class:"label-required"%>
+          <div class="switch-field">
+          <% User.felonies.keys.each do |val| %>
+            <%= f.radio_button :felony, val %>
+            <label for="user_felony_<%=val%>"><%= val.humanize %></label>
+          <% end %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Are you legally authorized to work in the US?", for: 'user_us_lawfully_authorized', class:"label-required"%>
+          <div class="switch-field">
+            <%= f.radio_button :us_lawfully_authorized, true %>
+            <label for="user_us_lawfully_authorized_true">Yes</label>
+            <%= f.radio_button :us_lawfully_authorized, false %>
+            <label for="user_us_lawfully_authorized_false">No</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Do require sponsorship through a visa program?", class:"label-required"%>
+          <div class="switch-field">
+            <%= f.radio_button :require_sponsorship, true %>
+            <label for="user_require_sponsorship_true">Yes</label>
+            <%= f.radio_button :require_sponsorship, false %>
+            <label for="user_require_sponsorship_false">No</label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="divider vert-margin"></div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-section-heading">
+          Tell us about your skills (choose 5)
+          <p>This will help us match you up with jobs</p>
+        </div>
+        <div class="form-group">
+          <div class="switch-field">
+            <%= f.collection_check_boxes :competency_ids, Competency.all, :id, :name do |b| %>
+              <%= b.check_box %>
+              <label for="user_competency_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Skills"><%=b.object.name%></label>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider vert-margin"></div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-section-heading">
+          Tell us about your desired company (choose 5)
+          <p>You know what you want in company culture, tell us!</p>
+        </div>
+        <div class="form-group">
+          <div class="switch-field">
+            <%= f.collection_check_boxes :trait_ids, Trait.recruiter_traits, :id, :name do |b| %>
+              <%= b.check_box %>
+              <label for="user_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Company Traits"><%=b.object.name%></label>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider vert-margin"></div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-section-heading">
+          Tell us about you (choose 5)
+          <p>Lets get into your personality. Be honest!</p>
+        </div>
+        <div class="form-group">
+          <div class="switch-field">
+            <%= f.collection_check_boxes :trait_ids, Trait.candidate_traits, :id, :name do |b| %>
+              <%= b.check_box %>
+              <label for="user_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Personal Traits"><%=b.object.name%></label>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :us_lawfully_authorized, for: 'user_us_lawfully_authorized'%>
-      <%= f.select :us_lawfully_authorized, [['Yes', true], ['No', false]], selected: true %>
+    <div class="divider vert-margin"></div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-section-heading">
+          Documents
+          <p>please upload relevant documents</p>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :require_sponsorship, for: 'user_require_sponsorship'%>
-      <%= f.select :require_sponsorship, [['Yes', true], ['No', false]], selected: false %>
+    <div class="row">
+      <div class="col-sm-4 nested-card<%=' incomplete' if !user.resume.exists?%>">
+        <div class="form-group">
+          <%= f.label "Resume / CV"%>
+          <i class="id card outline icon"></i>
+          <% if user.resume.exists? %>
+            <%= link_to user.resume.original_filename, user.resume.url, class:'nested-link' %><br/>
+            <p>Upload a different Resume:</p>
+            <%= f.file_field :resume %>
+
+          <% else %>
+            <%= f.file_field :resume %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-sm-4 nested-card<%=' incomplete' if !user.writing_sample.exists?%>">
+        <div class="form-group">
+          <%= f.label "Writing Sample"%>
+          <i class="write icon"></i>
+          <% if user.writing_sample.exists? %>
+          <%= link_to user.writing_sample.original_filename, user.writing_sample.url, class:'nested-link' %><br/>
+          <p>Upload a different Writing Sample:</p>
+          <%= f.file_field :writing_sample %>
+
+          <% else %>
+          <%= f.file_field :writing_sample %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-sm-4 nested-card<%=' incomplete' if !user.transcript.exists?%>">
+        <div class="form-group">
+          <%= f.label "Transcript"%>
+          <i class="student icon"></i>
+          <% if user.transcript.exists? %>
+          <%= link_to user.transcript.original_filename, user.transcript.url, class:'nested-link' %><br/>
+          <p>Upload a different Transcript:</p>
+          <%= f.file_field :transcript %>
+
+          <% else %>
+            <%= f.file_field :transcript %>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-
-      <% if user.resume.exists? %>
-        <%= link_to user.resume.original_file_name user.resume.url %><br/>
-        <%= f.label "Upload a different Resume", for: 'user_resume'%>
-        <%= f.file_field :resume %>
-
-      <% else %>
-        <%= f.label :resume, for: 'user_resume'%>
-        <%= f.file_field :resume %>
-      <% end %>
-    </div>
-    <div class="form-group">
-
-      <% if user.writing_sample.exists? %>
-        <%= link_to user.writing_sample.original_file_name user.writing_sample.url %><br/>
-        <%= f.label "Upload a different Writing Sample", for: 'user_writing_sample'%>
-        <%= f.file_field :writing_sample %>
-
-      <% else %>
-        <%= f.label :writing_sample, for: 'user_writing_sample'%>
-        <%= f.file_field :writing_sample %>
-      <% end %>
-    </div>
-    <div class="form-group">
-      <% if user.transcript.exists? %>
-        <%= link_to user.transcript.original_file_name user.transcript.url %><br/>
-        <%= f.label "Upload a different Transcript", for: 'user_transcript'%>
-        <%= f.file_field :transcript %>
-
-      <% else %>
-        <%= f.label :transcript, for: 'user_transcript'%>
-        <%= f.file_field :transcript %>
-      <% end %>
-    </div>
-
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Finished", class: 'button btn standard' %>
+    <%= f.submit "Finished", class: 'button btn-standard' %>
   </div>
 <% end %>
+
+<%= render 'layouts/forms/address_finder_js'
+<%= javascript_include_tag "packages/select-validator.js" %>

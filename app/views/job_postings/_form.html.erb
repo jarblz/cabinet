@@ -1,79 +1,139 @@
 <%= form_for(job_posting) do |f| %>
-  <% if job_posting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(job_posting.errors.count, "error") %> prohibited this job_posting from being saved:</h2>
+  <%= render partial: 'layouts/forms/error_notification', locals: { resource: job_posting} %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        Primary Information
+      </div>
+      <div class="form-group">
+          <%= f.label :title, for: 'job_posting_title', class:"label-required"%>
+          <%= f.text_field :title, class: 'form-control' %>
+      </div>
 
-      <ul>
-      <% job_posting.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+      <div class="form-group">
+          <%= f.label :description, for: 'job_posting_description', class:"label-required" %>
+          <%= f.text_area :description, class: 'form-control' %>
+      </div>
     </div>
-  <% end %>
-  <div class="form-group">
-      <%= f.label :title, for: 'job_posting_title'%>
-      <%= f.text_field :title, class: 'form-control' %>
   </div>
-
-  <div class="form-group">
-      <%= f.label :description, for: 'job_posting_description' %>
-      <%= f.text_area :description, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :traits, for: 'job_posting_traits'%>
-    <%=  f.collection_check_boxes :trait_ids, Trait.all, :id, :name do |b| %>
-      <div class="row">
-        <%= b.label(class: "check_box") do %>
-          <div class="col-xs-1">
-            <%= b.check_box(class: "check_box") %>
-          </div>
-
-          <div class="col-xs-11">
-            <%= b.object.name %>
-          </div>
-        <% end %>
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        Location Information
+        <p>Where is the job located? (hit tab to search based on postal)</p>
       </div>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :competencies, for: 'company_status'%>
-    <%= f.collection_check_boxes :competency_ids, Competency.all, :id, :name do |b| %>
-      <div class="row">
-        <%= b.label(class: "check_box") do %>
-          <div class="col-xs-1">
-            <%= b.check_box(class: "check_box") %>
-          </div>
-
-          <div class="col-xs-11">
-            <%= b.object.name %>
-          </div>
-        <% end %>
+      <div class="form-group">
+        <%= f.label :zip_code, for: 'job_posting_zip_code', class:"label-required"%>
+        <%= f.text_field :zip_code, class: 'form-control location-info' %>
       </div>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :users, for: 'company_status'%>
-    <%= f.collection_check_boxes :user_ids, job_posting.company.recruiters.where.not(id: current_user.id), :id, :name do |b| %>
-      <div class="row">
-        <%= b.label(class: "check_box") do %>
-          <div class="col-xs-1">
-            <%= b.check_box(class: "check_box") %>
-          </div>
-
-          <div class="col-xs-11">
-            <%= b.object.name %>
-          </div>
-        <% end %>
+      <div class="form-group address-holder">
+        <i class="marker icon"></i>
+        <div class="address-bar"></div>
       </div>
-    <% end %>
-  </div>
-  <%= f.hidden_field :company_id, value: job_posting.company.id %>
-  <%= f.hidden_field :creator_id, value: current_user.id %>
 
+      <div class="form-group">
+        <%= f.label 'Is this a fully remote role?', class:"label-required"%>
+        <div class="switch-field">
+          <%= f.radio_button :remote, true %>
+          <label for="job_posting_remote_true">Yes</label>
+          <%= f.radio_button :remote, false %>
+          <label for="job_posting_remote_false">No</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <%# TODO: add location %>
+  <%# TODO: add remote %>
+
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        <i class="sun icon"></i>Desired candidate skills (choose 5)
+        <p>This will help us match with capable candidates</p>
+      </div>
+      <div class="form-group">
+        <div class="switch-field">
+          <%= f.collection_check_boxes :competency_ids, Competency.all, :id, :name do |b| %>
+            <%= b.check_box %>
+            <label for="job_posting_competency_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Candidate Skills"><%=b.object.name%></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        <i class="sun icon"></i>Desired Candidate Personality Traits (choose 5)
+        <p>Your team has a culture, find candidates that fit!</p>
+      </div>
+      <div class="form-group">
+        <div class="switch-field">
+          <%= f.collection_check_boxes :trait_ids, Trait.candidate_traits, :id, :name do |b| %>
+            <%= b.check_box %>
+            <label for="job_posting_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Candidate Traits"><%=b.object.name%></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        <i class="sun icon"></i>Tell us about your company culture (choose 5)
+        <p></p>
+      </div>
+      <div class="form-group">
+        <div class="switch-field">
+          <%= f.collection_check_boxes :trait_ids, Trait.recruiter_traits, :id, :name do |b| %>
+            <%= b.check_box %>
+            <label for="job_posting_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Team Traits"><%=b.object.name%></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        Recruiters for this job posting
+      </div>
+      <div class="form-group">
+        <div class="switch-field">
+          <%= f.collection_check_boxes :user_ids, job_posting.company.recruiters.where.not(id: current_user.id), :id, :name do |b| %>
+            <%= b.check_box %>
+            <label for="job_posting_user_ids_<%=b.object.id%>" class="photo-select">
+              <% if current_user.photo %>
+                <%= image_tag current_user.photo.url %>
+              <% else %>
+                <span> <%= curent_user.no_image_text %></span>
+              <% end %>
+            </label>
+          <% end %>
+        </div>
+      </div>
+      <%= f.hidden_field :company_id, value: job_posting.company.id %>
+      <%= f.hidden_field :creator_id, value: current_user.id %>
+    </div>
+  </div>
+
+  <div class="divider vert-margin"></div>
   <div class="actions">
     <%= f.submit 'Save', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<%= render 'layouts/forms/address_finder_js' %>
+
+
+<%= javascript_include_tag "packages/select-validator.js" %>

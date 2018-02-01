@@ -10,16 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery3
+//= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require jquery
 //= require bootstrap-sprockets
-//= require_tree .
-//= require select2
-
-$(function(){
-  $('.alert').slideDown(400).delay(5000).animate({top: '60px',},{
-    duration: 50,}).animate({top: '50px',},{
-    duration: 50,}).slideUp(50);
-})
+// $('.alert').slideDown(400).delay(5000).animate({top: '60px',},{
+//   duration: 50,}).animate({top: '50px',},{
+//   duration: 50,}).slideUp(50);

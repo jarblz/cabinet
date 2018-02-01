@@ -1,3 +1,6 @@
+<div class="splash-logo-holder">
+  <%= image_tag 'brand-text.png', width: '300px' %>
+</div>
 <div class="devise-container">
   <h2>Sign up</h2>
 
@@ -5,31 +8,27 @@
   <%= devise_error_messages! %>
 
   <div class="form-group">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control inverse" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control inverse", placeholder: 'email' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control inverse"  %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control inverse", placeholder: 'name' %>
   </div>
 
   <div class="form-group">
-    <%= f.label "Role" %>&nbsp;
-    <%= f.collection_select :role, User::NON_ADMIN_ROLES, :first, :last, {:include_blank => 'Choose your adventure'}, class:"form-control inverse"  %>
+    <%= f.collection_select :role, User::NON_ADMIN_ROLES, :first, :last, {:include_blank => 'I am a..'}, class:"form-control inverse"  %>
   </div>
 
   <div class="form-group">
-    <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class:"form-control inverse"  %>
+    <%= f.password_field :password, autocomplete: "off", class:"form-control inverse", placeholder: 'password'  %>
   </div>
 
   <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control inverse"  %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control inverse", placeholder: 'confirm password'  %>
   </div>
 
   <div class="actions">

@@ -26,7 +26,6 @@ class JobPostingsController < ApplicationController
   # POST /job_postings.json
   def create
     @job_posting = JobPosting.new(job_posting_params)
-    binding.pry
     respond_to do |format|
       if @job_posting.save
         format.html { redirect_to job_postings_path, notice: 'Job Posting was successfully created.' }
@@ -76,6 +75,6 @@ class JobPostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_posting_params
-      params.require(:job_posting).permit(:title, :name, :description, :company_id, :creator_id, trait_ids: [], competency_ids: [], user_ids: [])
+      params.require(:job_posting).permit(:title, :name, :description, :company_id, :creator_id, :remote, :zip_code, trait_ids: [], competency_ids: [], user_ids: [])
     end
 end
