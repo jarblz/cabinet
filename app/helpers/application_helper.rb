@@ -5,7 +5,7 @@ module ApplicationHelper
       html += image_tag current_user.photo.url(:thumb), width: '30px', class: 'dropdown-trigger'
     elsif current_user
       html += "<div class='text dropdown-trigger'>"
-      html += current.user.no_image_text
+      html += current_user.no_image_text
       html += "</div>"
     end
   end
