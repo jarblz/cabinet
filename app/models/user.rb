@@ -84,13 +84,13 @@ class User < ApplicationRecord
   end
 
   def no_image_text
-    if current_user.name
-      if current_user.name.split(" ").count > 1
-        "#{current_user.name.split(" ").first[0].upcase}#{current_user.name.split(" ").second[0].downcase}"
-      elsif current_user.name.split('').count > 1
-        "#{current_user.name.split('').first.upcase}#{current_user.name.split('').second.downcase}"
+    if name
+      if name.split(" ").count > 1
+        "#{name.split(" ").first[0].upcase}#{name.split(" ").second[0].downcase}"
+      elsif name.split('').count > 1
+        "#{name.split('').first.upcase}#{name.split('').second.downcase}"
       else
-        "#{current_user.name.split('').first.upcase}"
+        "#{name.split('').first.upcase}"
       end
     else
       "Me"
