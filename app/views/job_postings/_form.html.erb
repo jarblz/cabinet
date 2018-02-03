@@ -110,10 +110,21 @@
       </div>
       <div class="form-group">
         <div class="switch-field">
+          <label for="creator" class="photo-select unclickable">
+            <% if job_posting.creator.photo.present? %>
+              <%= image_tag job_posting.creator.photo.url %>
+            <% else %>
+              <div class="text-container">
+                <span> <%= job_posting.creator.no_image_text %></span>
+
+              </div>
+            <% end %>
+          </label>
+
           <%= f.collection_check_boxes :user_ids, job_posting.company.recruiters.where.not(id: current_user.id), :id, :name do |b| %>
             <%= b.check_box %>
             <label for="job_posting_user_ids_<%=b.object.id%>" class="photo-select">
-              <% if current_user.photo %>
+              <% if b.object.photo %>
                 <%= image_tag current_user.photo.url %>
               <% else %>
                 <span> <%= curent_user.no_image_text %></span>
@@ -123,7 +134,7 @@
         </div>
       </div>
       <%= f.hidden_field :company_id, value: job_posting.company.id %>
-      <%= f.hidden_field :creator_id, value: current_user.id %>
+      <%= f.hidden_field :creator_id, value: job_posting.creator.id %>
     </div>
   </div>
 

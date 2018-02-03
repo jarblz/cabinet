@@ -7,6 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :company # if candidate, this will always be nil
   has_many :job_posting_users
   has_many :job_postings, through: :job_posting_users
   has_many :created_jobs, foreign_key: "creator_id", class_name: "JobPosting"
@@ -23,33 +24,42 @@ class User < ApplicationRecord
   has_attached_file :resume
   has_attached_file :writing_sample
   has_attached_file :transcript
-  has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :photo, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
-
-  # TODO: traits relation (company and personal?)
-  # TODO: competencies relation
-
-  belongs_to :company # if candidate, this will always be nil
 
   enum felony: [ :yes, :no, :prefer_not_to_answer ]
   # enum gender: [ :male, :female, :other, :prefer_no_gender ]
   # enum race: [ :american_indian_or_alaska_native, :asian, :black_or_african_american, :native_hawaiian_or_other_pacific_islander, :white, :prefer_no_race ]
   # enum student_professional: [ :professional, :student, :other ]
 
-  before_validation :join_company, :if => :company_code
-
   validates_presence_of :role, :on => :create
-  validates_presence_of :name, :on => :update, unless: :company_code
-  validates_presence_of :email, :on => :update, unless: :company_code
-  validates_presence_of :phone, :on => :update, unless: :company_code
-  validates_presence_of :zip_code, :on => :update, unless: :company_code
-  validates_presence_of :country, :on => :update, unless: :company_code
+
+  with_options if: :recruiter? do |recruiter|
+    recruiter.before_validation :join_company, :if => :company_code
+    recruiter.validates_presence_of :name, :on => :update, unless: :company_code
+    recruiter.validates_presence_of :email, :on => :update, unless: :company_code
+    recruiter.validates_presence_of :phone, :on => :update, unless: :company_code
+  end
+
   with_options if: :candidate? do |candidate|
+    candidate.validates_presence_of :name, :on => :update
+    candidate.validates_presence_of :email, :on => :update
+    candidate.validates_presence_of :phone, :on => :update
+    candidate.validates_presence_of :zip_code, :on => :update
     candidate.validates_presence_of :felony, :on => :update
+    candidate.validates_inclusion_of :us_lawfully_authorized, in:[true, false], :on => :update
+    candidate.validates_inclusion_of :require_sponsorship, in:[true, false], :on => :update
+    candidate.validate :validate_traits_and_competencies
+    candidate.after_save :check_for_matches
   end
 
   after_create :provision_role
+
+  def validate_traits_and_competencies
+    errors.add(:traits, "Please add at least 1") if traits.size == 0
+    errors.add(:competencies, "Please add at least 1") if competencies.size == 0
+  end
 
   def provision_role
     self.grant(role)
@@ -76,7 +86,7 @@ class User < ApplicationRecord
   end
 
   def no_recruiter_company?
-    recruiter? && !company
+    recruiter? && (!company || company.inactive?)
   end
 
   def participating_jobs
@@ -95,6 +105,15 @@ class User < ApplicationRecord
     else
       "Me"
     end
+  end
+
+  def check_for_matches
+    # TODO: Add this to a worker, could take a while
+    Recommendation.check_user_for_matches(self)
+  end
+
+  def fit_score(job)
+    binding.pry
   end
 
   private

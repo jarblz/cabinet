@@ -10,10 +10,57 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-// $('.alert').slideDown(400).delay(5000).animate({top: '60px',},{
-//   duration: 50,}).animate({top: '50px',},{
-//   duration: 50,}).slideUp(50);
+$(document).on('turbolinks:load', function(){
+  $(this).scrollTop(0);
+
+  var subNav = document.getElementById("secondaryFix");
+  var main = document.getElementById("main");
+  var nav = document.getElementById("primary_nav_wrap");
+
+  var sticky = subNav.offsetTop;
+
+  $('.alert').delay(5000).fadeOut()
+
+
+  window.onscroll = function() {setupStickyNav()};
+
+
+  function setupStickyNav() {
+    if(subNav){
+      pushNavBehind();
+      if (window.pageYOffset >= sticky) {
+        subNav.classList.add("sticky");
+        main.classList.add("sticky");
+      } else {
+        subNav.classList.remove("sticky");
+        main.classList.remove("sticky");
+      }
+    }
+  }
+
+  function pushNavBehind(){
+
+    if (window.pageYOffset == 0) {
+      primary_nav_wrap
+      nav.classList.remove("sub-nav");
+    } else {
+      nav.classList.add("sub-nav");
+      hideAllDropdowns();
+    }
+  }
+
+  function hideAllDropdowns(){
+    $('#primary_nav_wrap ul').children('li').each(function(){
+      $(this).children('ul').removeClass('on')
+    })
+  }
+
+
+
+
+
+})

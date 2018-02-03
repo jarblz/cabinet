@@ -21,7 +21,7 @@ class JobPosting < ApplicationRecord
   validate :validate_traits_and_competencies
   validates_presence_of :title
   validates_presence_of :description
-  validates_presence_of :remote
+  validates_inclusion_of :remote, in:[true, false]
   validates_presence_of :zip_code, unless: :remote?
 
   def validate_traits_and_competencies

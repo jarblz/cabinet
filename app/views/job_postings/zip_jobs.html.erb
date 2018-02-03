@@ -1,0 +1,29 @@
+<div class="sub-menu">
+  <h2>available jobs in your area</h2>
+</div>
+<div class="row">
+<% @job_postings.each do |job_posting| %>
+<a href="<%=job_posting['url']%>">
+  <div class="container-card split-cards job-card col-sm-6">
+    <div class="row">
+      <div class="col-sm-4">
+        <i class='building outline icon'></i>
+      </div>
+      <div class='text col-sm-8'>
+        <%=job_posting['name']%>
+        <p><%=job_posting['hiring_company']['name']%></p>
+        <div class="row">
+          <div class="col-sm-6">
+           <p class="footer"><%=job_posting['location'] || 'unknown location'%></p>
+          </div>
+          <div class="col-sm-6">
+            <p class="footer"><%=job_posting['posted_time_friendly']%></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+<% end %>
+
+</div>

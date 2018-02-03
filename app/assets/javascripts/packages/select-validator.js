@@ -1,8 +1,6 @@
 $(function(){
   appendRequiredFields();
-  $('.form-errors').slideDown(400).delay(5000).animate({top: '60px',},{
-      duration: 50,}).animate({top: '50px',},{
-      duration: 50,}).slideUp(50);
+  $('.form-errors').fadeIn(400).delay(5000).slideUp(50);
 
   $('.limited').mouseup(function(){
     validateField($(this))
@@ -18,10 +16,6 @@ $(function(){
   function tooManySelects(field){
     return (field.parent().children('input:checked').length >= field.data('amount'))
   }
-
-    $('.alert').slideDown(400).delay(5000).animate({top: '60px',},{
-      duration: 50,}).animate({top: '50px',},{
-      duration: 50,}).slideUp(50);
 
   function appendRequiredFields(){
     $('.label-required').each(function(){

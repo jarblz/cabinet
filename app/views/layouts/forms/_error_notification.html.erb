@@ -2,8 +2,8 @@
     <div class='form-errors'>
       Oops!
       <ul>
-      <%= resource.errors.full_messages.each do |error| %>
-        <li>error</li>
+      <% resource.errors.full_messages.each do |error| %>
+        <li><%=error%></li>
       <% end %>
     </ul>
     </div>

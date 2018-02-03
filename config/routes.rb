@@ -9,9 +9,11 @@ Rails.application.routes.draw do
     resources :traits
     resources :competencies
     resources :industries
-    resources :job_postings, except: [:new]
+    resources :job_postings, except: [:new, :index]
     resources :companies
   end
+
+
 
   # non-admin routes #########################
   root to: 'dashboard#home'
@@ -28,5 +30,9 @@ Rails.application.routes.draw do
   put "assessment/update", to: 'assessments#update', as: 'update_assessment'
   get "assessment/complete", to: 'assessments#show', as: 'assessment_complete'
   get "assessment/restart", to: 'assessments#restart', as: 'restart_assessment'
+
+  get "candidate-jobs", to: 'job_postings#zip_jobs', as: 'candidate_job_postings'
+  get "jobs/:slug", to: 'job_postings#company', as: 'company_job_postings'
+  get "my-jobs", to: 'job_postings#mine', as: 'my_job_postings'
 
 end

@@ -1,5 +1,9 @@
-<div class="sub-menu">
-  <h3>New Job Posting</h3>
+<div class="sub-menu navigation" id="secondaryFix">
+  <ul>
+    <% job_sub_links(current_user).each do |name, attributes| %>
+      <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
+    <% end %>
+  </ul>
 </div>
 <div class="container container-card no-overflow">
   <%= render 'form', job_posting: @job_posting %>

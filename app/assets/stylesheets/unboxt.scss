@@ -24,8 +24,11 @@ body {
     margin: auto;
   }
   .main {
-    margin-top: 75px;
+    margin-top: 40px;
     margin-bottom: 75px;
+    &.sticky {
+      margin-top: 130px;
+    }
   }
 }
 
@@ -85,22 +88,13 @@ body {
   padding: 0 9px;
 }
 
-.big-shadow{
-  box-shadow: 3px 5px 10px 0px;
-  -webkit-box-shadow: 3px 5px 10px 0px $light-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    3px 5px 10px 0px $light-grey;  /* Firefox 3.5 - 3.6 */
-  box-shadow:         3px 5px 10px 0px $light-grey;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-}
-
-.big-shadow{
-  -webkit-box-shadow: 0px 0px 1px 2px $light-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    0px 0px 1px 2px $light-grey;  /* Firefox 3.5 - 3.6 */
-  box-shadow:         0px 0px 1px 2px $light-grey;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-}
 .bottom-shadow {
-  box-shadow: 0px 3px 2px 0px $light-grey;
-  -webkit-box-shadow: 0px 3px 2px 0px $light-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    0px 3px 2px 0px $light-grey;  /* Firefox 3.5 - 3.6 */
+  // box-shadow: 0px 3px 2px 0px $light-grey;
+  // -webkit-box-shadow: 0px 3px 2px 0px $light-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  // -moz-box-shadow:    0px 3px 2px 0px $light-grey;  /* Firefox 3.5 - 3.6 */
+  -webkit-box-shadow: -1px 3px 8px rgba(0,0,0,.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    -1px 3px 8px rgba(0,0,0,.4);  /* Firefox 3.5 - 3.6 */
+  box-shadow:         -1px 3px 8px rgba(0,0,0,.4);  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 
 }
 
@@ -111,8 +105,9 @@ body {
   margin-bottom: 30px;
   padding-top: 25px;
   position: relative;
-  top: -20px;
+  top: 11px;
   border-bottom: solid 1px $light-grey;
+  letter-spacing: 0.05em;
   h1, h2, h3 {
     border-bottom: solid 2px $blue;
     padding-bottom: 4px;
@@ -120,6 +115,58 @@ body {
     font-family: aller std thin;
     @media(max-width: 578px){
       font-size: 18px;
+    }
+  }
+  &.sticky {
+    position: fixed;
+    top: 0px !important;
+    width: 100%;
+    height: 60px;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform : translate3d(0, 0, 0);
+  }
+  &.navigation {
+    background: linear-gradient(to right, $blue , #6A93CB);
+    opacity: .92;
+    z-index: 2;
+    height: 60px;
+
+
+    ul {
+      font-size: 15px;
+      position: relative;
+      left: 7%;
+      list-style: none;
+      @media(max-width: 420px){
+        display: table;
+        margin: auto;
+        left: unset;
+        font-size: 14px;
+      }
+      li {
+        font-family: 'Aller std thin';
+        color: white;
+        display: inline-block;
+        margin-right: 20px;
+        text-transform: uppercase;
+        a{
+          color: white;
+          position: relative;
+          bottom: 5px;
+          @media(max-width: 420px){ bottom: 1px; }
+          &.active {
+            border-bottom: solid 3px;
+            padding-bottom: 16px;
+            bottom: 4px;
+            text-decoration: none;
+            @media(max-width: 420px){
+              bottom: 1px;
+              padding-bottom: 14px;
+            }
+
+          }
+        }
+      }
     }
   }
 
@@ -130,9 +177,9 @@ body {
   &.no-overflow {
     overflow: hidden;
   }
-  -webkit-box-shadow: 0px 1px 2px 2px $dark-grey;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    0px 1px 2px 2px $dark-grey;  /* Firefox 3.5 - 3.6 */
-  box-shadow:         0px 1px 2px 2px $dark-grey;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  -webkit-box-shadow: -1px 3px 8px rgba(0,0,0,.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    -1px 3px 8px rgba(0,0,0,.4);  /* Firefox 3.5 - 3.6 */
+  box-shadow:         -1px 3px 8px rgba(0,0,0,.4);  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
   padding: 30px 7%;
   @media(max-width: 600px){ padding: 30px 10px; }
   &.tight-vertical { padding: 30px inherit; }

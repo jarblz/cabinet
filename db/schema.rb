@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180131220400) do
+ActiveRecord::Schema.define(version: 20180203154901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 20180131220400) do
   create_table "assessments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "status"
-    t.integer "ie"
-    t.integer "vn"
-    t.integer "oa"
-    t.integer "sm"
-    t.integer "pt"
+    t.integer "ie",      default: 0
+    t.integer "vn",      default: 0
+    t.integer "oa",      default: 0
+    t.integer "sm",      default: 0
+    t.integer "pt",      default: 0
   end
 
   create_table "candidate_industries", force: :cascade do |t|
@@ -61,6 +61,30 @@ ActiveRecord::Schema.define(version: 20180131220400) do
 
   create_table "competencies", force: :cascade do |t|
     t.string "name", null: false
+  end
+
+  create_table "cp_first_synonyms", force: :cascade do |t|
+    t.integer "competency_id"
+    t.integer "first_synonym_id"
+    t.index ["competency_id", "first_synonym_id"], name: "index_cp_first_synonyms_on_competency_id_and_first_synonym_id", unique: true, using: :btree
+    t.index ["competency_id"], name: "index_cp_first_synonyms_on_competency_id", using: :btree
+    t.index ["first_synonym_id"], name: "index_cp_first_synonyms_on_first_synonym_id", using: :btree
+  end
+
+  create_table "cp_second_synonyms", force: :cascade do |t|
+    t.integer "competency_id"
+    t.integer "second_synonym_id"
+    t.index ["competency_id", "second_synonym_id"], name: "index_cp_second_synonyms_on_competency_id_and_second_synonym_id", unique: true, using: :btree
+    t.index ["competency_id"], name: "index_cp_second_synonyms_on_competency_id", using: :btree
+    t.index ["second_synonym_id"], name: "index_cp_second_synonyms_on_second_synonym_id", using: :btree
+  end
+
+  create_table "cp_third_synonyms", force: :cascade do |t|
+    t.integer "competency_id"
+    t.integer "third_synonym_id"
+    t.index ["competency_id", "third_synonym_id"], name: "index_cp_third_synonyms_on_competency_id_and_third_synonym_id", unique: true, using: :btree
+    t.index ["competency_id"], name: "index_cp_third_synonyms_on_competency_id", using: :btree
+    t.index ["third_synonym_id"], name: "index_cp_third_synonyms_on_third_synonym_id", using: :btree
   end
 
   create_table "industries", force: :cascade do |t|
@@ -99,6 +123,16 @@ ActiveRecord::Schema.define(version: 20180131220400) do
     t.string "description", null: false
   end
 
+  create_table "recommendations", force: :cascade do |t|
+    t.integer "job_posting_id"
+    t.integer "company_id"
+    t.integer "user_id"
+    t.integer "status",         default: 0
+    t.decimal "score",          default: "0.25"
+    t.boolean "recruiter_seen", default: false
+    t.boolean "candidate_seen", default: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.string   "resource_type"
@@ -107,6 +141,30 @@ ActiveRecord::Schema.define(version: 20180131220400) do
     t.datetime "updated_at",    null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
+  end
+
+  create_table "trait_first_synonyms", force: :cascade do |t|
+    t.integer "trait_id"
+    t.integer "first_synonym_id"
+    t.index ["first_synonym_id"], name: "index_trait_first_synonyms_on_first_synonym_id", using: :btree
+    t.index ["trait_id", "first_synonym_id"], name: "index_trait_first_synonyms_on_trait_id_and_first_synonym_id", unique: true, using: :btree
+    t.index ["trait_id"], name: "index_trait_first_synonyms_on_trait_id", using: :btree
+  end
+
+  create_table "trait_second_synonyms", force: :cascade do |t|
+    t.integer "trait_id"
+    t.integer "second_synonym_id"
+    t.index ["second_synonym_id"], name: "index_trait_second_synonyms_on_second_synonym_id", using: :btree
+    t.index ["trait_id", "second_synonym_id"], name: "index_trait_second_synonyms_on_trait_id_and_second_synonym_id", unique: true, using: :btree
+    t.index ["trait_id"], name: "index_trait_second_synonyms_on_trait_id", using: :btree
+  end
+
+  create_table "trait_third_synonyms", force: :cascade do |t|
+    t.integer "trait_id"
+    t.integer "third_synonym_id"
+    t.index ["third_synonym_id"], name: "index_trait_third_synonyms_on_third_synonym_id", using: :btree
+    t.index ["trait_id", "third_synonym_id"], name: "index_trait_third_synonyms_on_trait_id_and_third_synonym_id", unique: true, using: :btree
+    t.index ["trait_id"], name: "index_trait_third_synonyms_on_trait_id", using: :btree
   end
 
   create_table "traits", force: :cascade do |t|
@@ -191,4 +249,16 @@ ActiveRecord::Schema.define(version: 20180131220400) do
     t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
   end
 
+  add_foreign_key "cp_first_synonyms", "competencies"
+  add_foreign_key "cp_first_synonyms", "competencies", column: "first_synonym_id"
+  add_foreign_key "cp_second_synonyms", "competencies"
+  add_foreign_key "cp_second_synonyms", "competencies", column: "second_synonym_id"
+  add_foreign_key "cp_third_synonyms", "competencies"
+  add_foreign_key "cp_third_synonyms", "competencies", column: "third_synonym_id"
+  add_foreign_key "trait_first_synonyms", "traits"
+  add_foreign_key "trait_first_synonyms", "traits", column: "first_synonym_id"
+  add_foreign_key "trait_second_synonyms", "traits"
+  add_foreign_key "trait_second_synonyms", "traits", column: "second_synonym_id"
+  add_foreign_key "trait_third_synonyms", "traits"
+  add_foreign_key "trait_third_synonyms", "traits", column: "third_synonym_id"
 end

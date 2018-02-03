@@ -1,4 +1,4 @@
-<% if current_user.company %>
+<% if !current_user.no_recruiter_company? %>
   <%= render partial: 'valid_company' %>
 <% else %>
   <%= render partial: 'unlinked_recruiter' %>

@@ -16,7 +16,7 @@ module Admin
 
     # GET /job_postings/new
     def new
-      @job_posting = JobPosting.new(company: Company.friendly.find(params[:name]))
+      @job_posting = JobPosting.new(company: Company.friendly.find(params[:name]), creator: current_user)
     end
 
     # GET /job_postings/1/edit

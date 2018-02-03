@@ -1,12 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-# user = CreateAdminService.new.call
-# puts 'CREATED ADMIN USER: ' << user.email
+
+user = CreateAdminService.new.call
+puts 'CREATED ADMIN USER: ' << user.email
+
 traits = Trait.create([
   { name: "Accountable",
     is_recruiter: false
@@ -129,6 +124,7 @@ competencies = Competency.create([
   { name: "Cinematography" },
   { name: "Corporate Banking" },
   { name: "Culinary" },
+  { name: "Consulting" },
   { name: "Cyber Security" },
   { name: "Data Analytics" },
   { name: "Digital Marketing" },
@@ -162,6 +158,7 @@ competencies = Competency.create([
   { name: "Urban Planning" },
   { name: "Web Development" }
 ])
+
 
 [
   "Accounting",

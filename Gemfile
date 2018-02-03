@@ -24,10 +24,9 @@ gem 'rolify'
 # administration
 # gem "administrate" # not customizeable enough
 
-gem 'country_select'
-gem "select2-rails"
 gem 'semantic-ui-sass'
 
+gem 'httparty'
 # other gems I should be using
 # Kaminari - pagination
 # Ransack - pagination, searching/filtering

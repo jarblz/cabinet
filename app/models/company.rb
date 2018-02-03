@@ -8,8 +8,15 @@ class Company < ApplicationRecord
   has_many :recruiters, foreign_key: "company_id", class_name: "User"
   has_many :job_postings
 
-  has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :logo, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
+  validates_attachment_presence :logo
+  validates_presence_of :name
+  validates_presence_of :contact_email
+  validates_presence_of :phone
+  validates_presence_of :account_limit
+  validates_presence_of :bio
+  validates_presence_of :status
 
   before_save :generate_code
 

@@ -1,75 +1,77 @@
 <%= form_for([:admin, company]) do |f| %>
-  <% if company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
-      <ul>
-      <% company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="form-group">
-    <%= f.label :name, for: 'company_name'%>
-    <%= f.text_field :name, class: 'form-control' %>
-  </div>
+  <%= render partial: 'layouts/forms/error_notification', locals: { resource: company} %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        Primary Information
+      </div>
+      <div class="form-group">
+        <%= f.label :name, for: 'company_name', class:"label-required"%>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :contact_email, for: 'company_contact_email'%>
-    <%= f.text_field :contact_email, class: 'form-control' %>
-  </div>
+      <div class="form-group">
+        <%= f.label :contact_email, for: 'company_contact_email', class:"label-required"%>
+        <%= f.text_field :contact_email, class: 'form-control' %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :phone, for: 'company_phone'%>
-    <%= f.text_field :phone, class: 'form-control' %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :account_limit, for: 'company_account_limit'%>
-    <%= f.number_field :account_limit, class: 'form-control' %>
-  </div>
+      <div class="form-group">
+        <%= f.label :phone, for: 'company_phone', class:"label-required"%>
+        <%= f.text_field :phone, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :account_limit, for: 'company_account_limit', class:"label-required"%>
+        <%= f.number_field :account_limit, class: 'form-control' %>
+      </div>
 
 
-  <div class="form-group">
-    <%= f.label :bio, for: 'company_bio'%>
-    <%= f.text_field :bio, class: 'form-control' %>
-  </div>
+      <div class="form-group">
+        <%= f.label :bio, for: 'company_bio', class:"label-required"%>
+        <%= f.text_field :bio, class: 'form-control' %>
+      </div>
+      <div class="form-group">
 
-  <div class="form-group">
+        <% if company.logo.exists? %>
+          <%= image_tag company.logo.url(:thumb) %><br/>
+          <%= f.label "Upload a different logo", for: 'company_logo', class:"label-required"%>
+          <%= f.file_field :logo %>
 
-    <% if company.logo.exists? %>
-      <%= image_tag company.logo.url(:thumb) %><br/>
-      <%= f.label "Upload a different logo", for: 'company_logo'%>
-      <%= f.file_field :logo %>
-
-    <% else %>
-      <%= f.label :logo, for: 'company_logo'%>
-      <%= f.file_field :logo %>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :status, for: 'company_status'%>
-    <%= f.select :status, Company.statuses.keys.map { |w| [w.humanize, w] } %>
-  </div>
-
-
-  <div class="form-group">
-    <%= f.label :traits, for: 'company_status'%>
-    <%= f.collection_check_boxes :trait_ids, Trait.all, :id, :name do |b| %>
-      <div class="row">
-        <%= b.label(class: "check_box") do %>
-          <div class="col-xs-1">
-            <%= b.check_box(class: "check_box") %>
-          </div>
-
-          <div class="col-xs-11">
-            <%= b.object.name %>
-          </div>
+        <% else %>
+          <%= f.label :logo, for: 'company_logo', class:"label-required"%>
+          <%= f.file_field :logo %>
         <% end %>
       </div>
-    <% end %>
+
+      <div class="form-group">
+        <%= f.label :status, for: 'company_status'%>
+        <div class="switch-field">
+          <%Company.statuses.keys.each do  |w| %>
+            <%= f.radio_button :status, w %>
+            <label for="company_status_<%=w%>"><%= w.humanize %></label>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        <i class="sun icon"></i>Tell us about your company culture (choose 5)
+        <p></p>
+      </div>
+      <div class="form-group">
+        <div class="switch-field">
+          <%= f.collection_check_boxes :trait_ids, Trait.recruiter_traits, :id, :name do |b| %>
+            <%= b.check_box %>
+            <label for="company_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Team Traits"><%=b.object.name%></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -77,3 +79,5 @@
     <%= f.submit 'Save', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<%= javascript_include_tag "packages/select-validator.js" %>

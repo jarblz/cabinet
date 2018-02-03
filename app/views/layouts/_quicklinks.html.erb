@@ -1,12 +1,7 @@
-<% if current_user.try(:recruiter?) %>
-  <li class='full-width right-most'> <%= link_to "Jobs", job_postings_path %></li>
-  <li class='full-width'> <%= link_to "Connections", "#" %></li>
-  <li class='full-width active'> <%= link_to "Messages", "#" %></li>
-<% else %>
-  <li class='full-width right-most'> <%= link_to "Jobs", job_postings_path %></li>
-  <li class='full-width'> <%= link_to "Connections", "#" %></li>
-  <li class='full-width active'> <%= link_to "Messages", "#" %></li>
+<% quicklinks(current_user).each do |link_name, attributes| %>
+  <li class='full-width <%=attributes[1]%>'> <%= link_to link_name, attributes[0] %></li>
 <% end %>
+
 <li class='mobile-width-links dropper-parent'>
   <a href="#" class="dropper">
     <div class="dropdown-trigger">
@@ -14,18 +9,9 @@
     </div>
   </a>
   <ul class='left-menu bottom-shadow'>
-    <% if current_user.try(:recruiter?) %>
-    <li class='sub'> <%= link_to "Jobs", job_postings_path %></li>
-    <div class="divider"></div>
-    <li class='sub'> <%= link_to "Connections", "#" %></li>
-    <div class="divider"></div>
-    <li class='sub'> <%= link_to "Messages", "#" %></li>
-    <% else %>
-    <li class='sub'> <%= link_to "Jobs", job_postings_path %></li>
-    <div class="divider"></div>
-    <li class='sub'> <%= link_to "Connections", "#" %></li>
-    <div class="divider"></div>
-    <li class='sub'> <%= link_to "Messages", "#" %></li>
+    <% quicklinks(current_user).each do |link_name, attributes| %>
+      <li class='sub'> <%= link_to link_name, attributes[0] %></li>
+      <div class="divider"></div>
     <% end %>
   </ul>
 </li>

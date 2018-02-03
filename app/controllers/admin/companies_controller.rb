@@ -29,7 +29,7 @@ module Admin
 
       respond_to do |format|
         if @company.save
-          format.html { redirect_to admin_company_path(@company), notice: 'Company was successfully created.' }
+          format.html { redirect_to admin_companies_path, notice: 'Company was successfully created.' }
           format.json { render :show, status: :created, location: @company }
         else
           format.html { render :new }
@@ -43,7 +43,7 @@ module Admin
     def update
       respond_to do |format|
         if @company.update(company_params)
-          format.html { redirect_to admin_company_path(@company), notice: 'Company was successfully updated.' }
+          format.html { redirect_to admin_companies_path, notice: 'Company was successfully updated.' }
           format.json { render :show, status: :ok, location: @company }
         else
           format.html { render :edit }
@@ -57,7 +57,7 @@ module Admin
     def destroy
       @company.destroy
       respond_to do |format|
-        format.html { redirect_to admin_companies_url, notice: 'Company was successfully destroyed.' }
+        format.html { redirect_to admin_companies_path, notice: 'Company was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
@@ -65,7 +65,7 @@ module Admin
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_company
-        @company = Company.find(params[:id])
+        @company = Company.friendly.find(params[:id])
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.

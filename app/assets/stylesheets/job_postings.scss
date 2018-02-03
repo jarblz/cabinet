@@ -1,0 +1,25 @@
+.job-card {
+  margin-bottom: 20px;
+  .foot{
+    position: relative;
+    top: 29px;
+    .left-bottom{
+    }
+    .right-bottom{
+    }
+  }
+  i {
+    font-size: 5em;
+  }
+  .text {
+    font-size: 18px;
+    p {
+      font-size: 14px;
+      color: $dark-grey;
+      &.footer{
+        font-size: 12px;
+        color: $dark-blue;
+      }
+    }
+  }
+}

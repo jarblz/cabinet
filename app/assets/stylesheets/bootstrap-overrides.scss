@@ -4,6 +4,16 @@
 //navigation
 .alert {
   opacity: .85;
+  position: fixed;
+  top: 55px;
+  z-index: 4;
+  &.sub-nav {
+    -webkit-transform: translate(0px, 60px);
+  }
+  
+  .flash-content {
+    overflow: hidden;
+  }
 }
 .alert-success {
   color: white !important;
@@ -146,11 +156,37 @@ input[type="file"] {
   -ms-transition:     all 0.1s ease-in-out;
   -o-transition:      all 0.1s ease-in-out;
   transition:         all 0.1s ease-in-out;
+  &.registration {
+    border: none;
+    width: 38%;
+    color: $dark-grey;
+    opacity: .87;
+
+  }
   &.photo-select {
     padding: 3px;
     border: dashed 5px #ccc;
     img {
       width: 100%;
+    }
+    .text-container {
+      height: 100px;
+      display: block;
+      border-radius: 60px;
+      span {
+        display: table;
+        margin: auto;
+        position: relative;
+        top: 20px;
+        font-size: 42px;
+      }
+    }
+  }
+  &.unclickable {
+    background-color: $yellow;
+    border-color: $yellow;
+    &:hover {
+      cursor: text;
     }
   }
 }
@@ -161,11 +197,11 @@ input[type="file"] {
 
 .switch-field input:checked + label {
   background-color: $yellow;
+  border-color: $yellow;
   color: white;
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  padding: 12px 15px;
   &.photo-select {
     padding: 12px;
   }
