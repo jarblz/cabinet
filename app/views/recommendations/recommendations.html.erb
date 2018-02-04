@@ -1,0 +1,29 @@
+<div class="sub-menu navigation">
+  <ul>
+    <% connection_sub_links(current_user).each do |name, attributes| %>
+      <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
+    <% end %>
+  </ul>
+</div>
+<div class="container container-card">
+  <div class="header-bar">
+    <h1 style="display:inline;">recommendations</h1>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">candidate</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @recommendations.each do |recommendation| %>
+        <tr>
+          <td><%= recommendation.type.humanize %></td>
+          <td><%= recommendation.candidate.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

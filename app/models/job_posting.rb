@@ -24,6 +24,8 @@ class JobPosting < ApplicationRecord
   validates_inclusion_of :remote, in:[true, false]
   validates_presence_of :zip_code, unless: :remote?
 
+  after_save :generate_recommendations
+
   def validate_traits_and_competencies
     errors.add(:traits, "Please add at least 1") if traits.size == 0
     errors.add(:competencies, "Please add at least 1") if competencies.size == 0
@@ -32,6 +34,14 @@ class JobPosting < ApplicationRecord
   def participants
     [creator] + users
   end
+
+  def generate_recommendations
+    User.candidates.each do |candidate|
+      Recommendation.generate(self,candidate)
+    end
+  end
+
+
 
   private
 

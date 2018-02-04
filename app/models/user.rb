@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :traits, through: :user_traits
   has_many :user_competencies
   has_many :competencies, through: :user_competencies
+  has_many :recommendations
 
   has_attached_file :resume
   has_attached_file :writing_sample
@@ -51,7 +52,7 @@ class User < ApplicationRecord
     candidate.validates_inclusion_of :us_lawfully_authorized, in:[true, false], :on => :update
     candidate.validates_inclusion_of :require_sponsorship, in:[true, false], :on => :update
     candidate.validate :validate_traits_and_competencies
-    candidate.after_save :check_for_matches
+    candidate.after_save :generate_recommendations
   end
 
   after_create :provision_role
@@ -81,6 +82,11 @@ class User < ApplicationRecord
     has_role?(:candidate)
   end
 
+  def self.candidates(location=nil)
+    # TODO: make this spatial
+    User.all.select{ |u| u.candidate? }
+  end
+
   def no_candidate_assessment?
     candidate? && personality.blank?
   end
@@ -107,13 +113,42 @@ class User < ApplicationRecord
     end
   end
 
-  def check_for_matches
+  def generate_recommendations
     # TODO: Add this to a worker, could take a while
-    Recommendation.check_user_for_matches(self)
+    JobPosting.all.each do |job|
+      Recommendation.generate_posting(job, self)
+    end
+    Company.all.each do |company|
+      Recommendation.generate_company(company, self)
+    end
   end
 
-  def fit_score(job)
-    binding.pry
+  def job_fit_score(job)
+    score = 25.0
+    score += Trait.score(job.traits, self.traits) * 50
+    score += Competency.score(job.competencies, self.competencies) * 25
+    score += experience_score(job)
+    return score/Recommendation::JOB_FIT_POINTS
+  end
+
+  def experience_score(job)
+    15.0
+  end
+
+  def company_fit_score(company)
+    Trait.score(company.traits, self.traits)/Recommendation::COMPANY_FIT_POINTS
+  end
+
+  def active_recommendations
+    if recruiter?
+      recommendations.select{ |r| r.initial? }
+    else
+      recommendations.select{ |r| r.recruiter_approved? }
+    end
+  end
+
+  def connections
+    recommendations.select{ |r| r.match? }
   end
 
   private

@@ -17,4 +17,30 @@ class Trait < ApplicationRecord
   scope :recruiter_traits, -> { where(is_recruiter: true) }
   scope :candidate_traits, -> { where.not(is_recruiter: true)}
 
+
+  def self.score(target_traits, matching_traits)
+    denominator = target_traits.count
+    score = 0.0
+    score += (target_traits & matching_traits).count
+    remaining = target_traits - matching_traits
+    if denominator == 0
+      0.0
+    else
+      remaining.each do |target_trait|
+        matching_traits.each do |matching_trait|
+          if matching_trait.first_synonyms.include? target_trait
+            score += 1
+          elsif matching_trait.first_synonyms.include? target_trait
+            score += 0.5
+          elsif matching_trait.first_synonyms.include? target_trait
+            score += 0.25
+          end
+        end
+      end
+
+      return score / denominator
+    end
+  end
+
+
 end

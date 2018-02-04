@@ -19,6 +19,7 @@ class Company < ApplicationRecord
   validates_presence_of :status
 
   before_save :generate_code
+  after_save :generate_recommendations
 
   def generate_code
     self.code = loop do
@@ -29,6 +30,12 @@ class Company < ApplicationRecord
 
   def at_account_limit?
     self.recruiters.count == account_limit
+  end
+
+  def generate_recommendations
+    User.candidates.each do |user|
+      Recommendation.generate_company(company, user)
+    end
   end
 
 end
