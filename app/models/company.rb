@@ -38,4 +38,9 @@ class Company < ApplicationRecord
     end
   end
 
+  def match_recruiters
+    []
+    # TODO: recruiters.where(company_matcher: true) add validation to
+  end
+
 end

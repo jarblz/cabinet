@@ -105,7 +105,8 @@ body {
   margin-bottom: 30px;
   padding-top: 25px;
   position: relative;
-  top: 11px;
+  top: 12px;
+  border-top: solid 1px $light-grey;
   border-bottom: solid 1px $light-grey;
   letter-spacing: 0.05em;
   h1, h2, h3 {
@@ -130,7 +131,7 @@ body {
     opacity: .92;
     z-index: 2;
     height: 60px;
-
+    border: none;
 
     ul {
       font-size: 15px;
@@ -152,12 +153,12 @@ body {
         a{
           color: white;
           position: relative;
-          bottom: 5px;
+          bottom: 4px;
           @media(max-width: 420px){ bottom: 1px; }
           &.active {
             border-bottom: solid 3px;
             padding-bottom: 16px;
-            bottom: 4px;
+            bottom: 3px;
             text-decoration: none;
             @media(max-width: 420px){
               bottom: 1px;
@@ -183,7 +184,7 @@ body {
   padding: 30px 7%;
   @media(max-width: 600px){ padding: 30px 10px; }
   &.tight-vertical { padding: 30px inherit; }
-  &.no-padding { padding: 0px; }
+  &.no-padding { padding: 0px; padding-bottom: 30px;}
   margin: auto;
   .header-section {
     display: table;

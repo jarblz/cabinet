@@ -2,7 +2,6 @@
 #primary_nav_wrap {
   height: 50px;
   background: white;
-  border-bottom: solid rgba(0,0,0,.35) 1px;
   color: #333;
   position: fixed;
   width: 100%;
@@ -47,7 +46,7 @@
     border-bottom: solid $blue;
     position: relative;
     top: -4px;
-    padding-bottom: 0px;
+    padding-bottom: 1px;
     a {
       position: relative;
       top: 5px;
@@ -95,18 +94,17 @@
       top: -2px;
       height: 28px;
       width: 28px;
-      background: $light-blue;
+      background: linear-gradient(to right, $lightish-blue , #6A93CB);;
       position: relative;
       display: inline-block;
       float: right;
       border-radius: 14px;
       color: white;
       overflow: hidden;
-      border: solid 1px $logo-black;
+      // border: solid 1px $logo-black;
       .text {
-        position: relative;
-        left: 7px;
-        top: 0px;
+        display: table;
+        margin: auto;
       }
       img {
         position: relative;

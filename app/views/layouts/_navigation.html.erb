@@ -26,34 +26,3 @@
     <li><a href="#">Contact Us</a></li> -->
   </ul>
 </nav>
-
-<script type="text/javascript">
-  $(document).click(function(e) {
-    var target = $(e.target), article;
-    if(target.hasClass('dropper')) {
-      e.preventDefault();
-      if($(target).parent().children('ul').hasClass('on')){
-        $(target).parent().children('ul').removeClass('on')
-      } else {
-        hideAllDropdowns();
-        $(target).parent().children('ul').addClass('on')
-      }
-    } else if(target.hasClass('dropdown-trigger')) {
-      e.preventDefault();
-      target.closest('.dropper').click()
-      // TODO: catch any other elements that might be clicked inside the a tag
-    } else if(target.hasClass('dropper-parent')) {
-      e.preventDefault();
-      target.children('.dropper').click()
-    } else {
-      hideAllDropdowns();
-    }
-  });
-
-  function hideAllDropdowns(){
-    $('#primary_nav_wrap ul').children('li').each(function(){
-      $(this).children('ul').removeClass('on')
-    })
-  }
-
-</script>

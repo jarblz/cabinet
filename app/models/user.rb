@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   rolify
   attr_accessor :role # allows us to set role in registration form
   attr_accessor :company_code
@@ -139,16 +140,36 @@ class User < ApplicationRecord
     Trait.score(company.traits, self.traits)/Recommendation::COMPANY_FIT_POINTS
   end
 
-  def active_recommendations
-    if recruiter?
-      recommendations.select{ |r| r.initial? }
-    else
-      recommendations.select{ |r| r.recruiter_approved? }
-    end
+  def candidate_company_connections
+    recommendations.select{ |r| r.match? && r.job_posting }
   end
 
-  def connections
-    recommendations.select{ |r| r.match? }
+  def candidate_job_connections
+    recommendations.select{ |r| r.match? && r.company }
+  end
+
+  def candidate_job_recommendations
+    recommendations.select{ |r| r.recruiter_approved? && r.job_posting }
+  end
+
+  def candidate_company_recommendations
+    recommendations.select{ |r| r.recruiter_approved? && r.company }
+  end
+
+  def recruiter_job_recommendations
+    Recommendation.recruiter_job_recommendations self
+  end
+
+  def recruiter_company_recommendations
+    Recommendation.recruiter_company_recommendations self
+  end
+
+  def recruiter_job_connections
+    Recommendation.recruiter_job_connections self
+  end
+
+  def recruiter_company_connections
+    Recommendation.recruiter_company_connections self
   end
 
   private

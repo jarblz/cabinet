@@ -20,7 +20,7 @@
     <tbody>
       <% @recommendations.each do |recommendation| %>
         <tr>
-          <td><%= recommendation.type.humanize %></td>
+          <td><%= recommendation.type.to_s.humanize %></td>
           <td><%= recommendation.candidate.name %></td>
         </tr>
       <% end %>

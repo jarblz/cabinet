@@ -20,7 +20,7 @@
     <tbody>
       <% @connections.each do |connection| %>
         <tr>
-          <td><%= connection.type.humanize %></td>
+          <td><%= connection.type.to_s.humanize %></td>
           <td><%= connection.candidate.name %></td>
         </tr>
       <% end %>

@@ -38,8 +38,9 @@ Rails.application.routes.draw do
     get "my-jobs", to: 'job_postings#mine', as: 'my_job_postings'
 
     # recommendations
-    get "connections", to: 'recommendations#connections', as: 'connections'
-    get "recommendations", to: 'recommendations#recommendations', as: 'recommendations'
+    get "connections/:type", to: 'recommendations#connections', as: 'connections'
+    get "recommendations/:type", to: 'recommendations#recommendations', as: 'recommendations'
+    post "recommendations/:id", to: 'recommendations#act_on_recommendation', as: 'act_on_recommendation'
 
 
 end

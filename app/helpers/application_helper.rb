@@ -11,12 +11,13 @@ module ApplicationHelper
   end
 
   def quicklinks(user)
-    if !user.active?
+    if !user || !user.active?
       {}
     else
-      {"Jobs": [path_for_job_landing(user), "#{'active' if controller?('job_postings')} right-most"],
-        "Connections": [connections_path, "#{'active' if controller?('recommendations')}"],
-        "Messages": [job_postings_path, "#{'active' if controller?('job_postings')&&action?('kewl')}"] #false
+      {
+        "Jobs": [path_for_job_landing(user), "#{'active' if controller?('job_postings')} right-most"],
+        "Connections": [connections_path(:job), "#{'active' if controller?('recommendations')}"]
+        # "Messages": [job_postings_path, "#{'active' if controller?('job_postings')&&action?('kewl')}"] #false
       }
     end
   end
@@ -31,8 +32,8 @@ module ApplicationHelper
 
   def connection_sub_links(user)
     {
-      "connections": [connections_path, "#{'active' if controller?('recommendations')&&action?('connections')}"],
-      "recommendations": [recommendations_path, "#{'active'  if controller?('recommendations')&&action?('recommendations')}"]
+      "connections": [connections_path(:job), "#{'active' if controller?('recommendations')&&action?('connections')}"],
+      "recommendations": [recommendations_path(:job), "#{'active'  if controller?('recommendations')&&action?('recommendations')}"]
     }
   end
 

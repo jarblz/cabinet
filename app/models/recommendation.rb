@@ -6,6 +6,9 @@ class Recommendation < ApplicationRecord
   belongs_to :company, optional: true
   belongs_to :job_posting, optional: true
 
+  scope :jobs, -> { where.not(job_posting: nil) }
+  scope :companies, -> { where.not(company: nil) }
+
   JOB_FIT_POINTS = 125.0
   COMPANY_FIT_POINTS = 25.0
 
@@ -32,11 +35,27 @@ class Recommendation < ApplicationRecord
   end
 
   def type
-    if company?
+    if company
       :company
     else
       :job
     end
+  end
+
+  def self.recruiter_job_recommendations(user)
+    self.jobs.select{|r| r.job_posting.participants.include?(user) && r.initial?}
+  end
+
+  def self.recruiter_company_recommendations(user)
+    self.compies.select{|r| r.company.match_recruiters.include?(user) && r.initial?}
+  end
+
+  def self.recruiter_job_connections(user)
+    self.jobs.select{|r| r.job_posting.participants.include?(user) && r.match?}
+  end
+
+  def self.recruiter_company_connections(user)
+    self.compies.select{|r| r.company.match_recruiters.include?(user) && r.match?}
   end
 
 end

@@ -1,5 +1,8 @@
 .container {
   max-width: 1024px;
+  &.extra-top-margin {
+    margin-top: 45px;
+  }
 }
 //navigation
 .alert {
@@ -10,7 +13,7 @@
   &.sub-nav {
     -webkit-transform: translate(0px, 60px);
   }
-  
+
   .flash-content {
     overflow: hidden;
   }

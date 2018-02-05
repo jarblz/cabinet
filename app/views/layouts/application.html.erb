@@ -6,6 +6,7 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UnBoxt" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'unboxt', 'data-turbolinks-track' => "reload" %>
     <%= csrf_meta_tags %>
     <style media="screen"><%= yield :stylesheets %></style>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
