@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :competencies, through: :user_competencies
   has_many :recommendations
 
+  # has_many :match_recruiters, class_name: 'MatchRecruiter', foreign_key: 'user_id'
+
   has_attached_file :resume
   has_attached_file :writing_sample
   has_attached_file :transcript
@@ -137,7 +139,9 @@ class User < ApplicationRecord
   end
 
   def company_fit_score(company)
-    Trait.score(company.traits, self.traits)/Recommendation::COMPANY_FIT_POINTS
+    score = 25.0
+    score+= Trait.score(company.traits, self.traits)*75
+    score/Recommendation::COMPANY_FIT_POINTS
   end
 
   def candidate_company_connections

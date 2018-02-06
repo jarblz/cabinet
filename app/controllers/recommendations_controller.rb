@@ -1,5 +1,5 @@
 class RecommendationsController < ApplicationController
-
+  before_action :set_recommendation, only: [:act_on_recommendation]
 
 
   def connections
@@ -11,8 +11,20 @@ class RecommendationsController < ApplicationController
   end
 
   def act_on_recommendation
-    binding.pry
-    # TODO: accept/deny post goes here
+    if params[:accept]
+      @recommendation.approve(current_user.recruiter? ? :recruiter : :candidate)
+    else
+      @recommendation.deny(current_user.recruiter? ? :recruiter : :candidate)
+    end
+
+    respond_to do |format|
+      if @recommendation.errors.any?
+        format.json { render(json: "error") }
+      else
+        format.json { render(json: {result: 'success', recommendation: @recommendation}.to_json) }
+      end
+    end
+
   end
 
   private
@@ -31,6 +43,10 @@ class RecommendationsController < ApplicationController
     else
       current_user.recruiter? ? current_user.recruiter_job_recommendations : current_user.candidate_job_recommendations
     end
+  end
+
+  def set_recommendation
+    @recommendation = Recommendation.find(params[:id])
   end
 
 end

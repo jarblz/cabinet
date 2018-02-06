@@ -1,5 +1,5 @@
 class Recommendation < ApplicationRecord
-  enum status: [:initial, :recruiter_approved, :match]
+  enum status: [:initial, :recruiter_approved, :match, :denied]
   # inital=no approval, matched=recruiter and candidated approved
 
   belongs_to :candidate, class_name: "User", :foreign_key => "user_id"
@@ -10,7 +10,7 @@ class Recommendation < ApplicationRecord
   scope :companies, -> { where.not(company: nil) }
 
   JOB_FIT_POINTS = 125.0
-  COMPANY_FIT_POINTS = 25.0
+  COMPANY_FIT_POINTS = 100.0
 
   def self.generate_posting(job, user)
     score = user.job_fit_score(job)
@@ -34,6 +34,18 @@ class Recommendation < ApplicationRecord
     end
   end
 
+  def approve(role)
+    if role == :recruiter
+      recruiter_approved!
+    else
+      match!
+    end
+  end
+
+  def deny(role)
+    denied!
+  end
+
   def type
     if company
       :company
@@ -43,19 +55,19 @@ class Recommendation < ApplicationRecord
   end
 
   def self.recruiter_job_recommendations(user)
-    self.jobs.select{|r| r.job_posting.participants.include?(user) && r.initial?}
+    Recommendation.jobs.select{|r| r.job_posting.participants.include?(user) && r.initial?}
   end
 
   def self.recruiter_company_recommendations(user)
-    self.compies.select{|r| r.company.match_recruiters.include?(user) && r.initial?}
+    Recommendation.companies.select{|r| r.company.participants.include?(user) && r.initial?}
   end
 
   def self.recruiter_job_connections(user)
-    self.jobs.select{|r| r.job_posting.participants.include?(user) && r.match?}
+    Recommendation.jobs.select{|r| r.job_posting.participants.include?(user) && r.match?}
   end
 
   def self.recruiter_company_connections(user)
-    self.compies.select{|r| r.company.match_recruiters.include?(user) && r.match?}
+    Recommendation.companies.select{|r| r.company.participants.include?(user) && r.match?}
   end
 
 end
