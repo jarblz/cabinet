@@ -13,7 +13,9 @@ class RecommendationsController < ApplicationController
   def act_on_recommendation
     if params[:accept]
       @recommendation.approve(current_user.recruiter? ? :recruiter : :candidate)
+      result = 'accepted'
     else
+      result = 'denied'
       @recommendation.deny(current_user.recruiter? ? :recruiter : :candidate)
     end
 
@@ -21,7 +23,7 @@ class RecommendationsController < ApplicationController
       if @recommendation.errors.any?
         format.json { render(json: "error") }
       else
-        format.json { render(json: {result: 'success', recommendation: @recommendation}.to_json) }
+        format.json { render(json: {result: result, recommendation: @recommendation}.to_json) }
       end
     end
 

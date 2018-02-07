@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   rolify
   attr_accessor :role # allows us to set role in registration form
   attr_accessor :company_code
@@ -44,6 +45,7 @@ class User < ApplicationRecord
     recruiter.validates_presence_of :name, :on => :update, unless: :company_code
     recruiter.validates_presence_of :email, :on => :update, unless: :company_code
     recruiter.validates_presence_of :phone, :on => :update, unless: :company_code
+    recruiter.validates_inclusion_of :unvetted_matcher, in:[true, false], :on => :update
   end
 
   with_options if: :candidate? do |candidate|

@@ -17,6 +17,11 @@ class UsersController < ApplicationController
 
   end
 
+  def modal_content
+    binding.pry
+  end
+
+
   def link_recruiter_company
     if @user.update(company_code: params[:company_code])
       redirect_to root_path, notice: "You're now part of the #{@user.company.name} organization."
@@ -49,7 +54,7 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(
-        :name, :email, :phone, :country, :zip_code, :remote, :felony, :us_lawfully_authorized,
+        :name, :email, :phone, :country, :zip_code, :remote, :felony, :us_lawfully_authorized, :unvetted_matcher,
         :require_sponsorship, :photo, :resume, :writing_sample, :transcript, trait_ids: [], competency_ids: [])
     end
 end

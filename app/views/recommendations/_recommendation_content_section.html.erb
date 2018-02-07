@@ -1,0 +1,15 @@
+<% if !@recommendations.blank? %>
+  <% if current_user.recruiter? %>
+    <% if params[:type] == 'job' %>
+      <%= render partial: 'recommendations/recommendation_components/recruiter_job_recommendations' %>
+    <% else %>
+      <%= render partial: 'recommendations/recommendation_components/recruiter_company_recommendations' %>
+    <% end %>
+  <% else %>
+    <%= render partial: 'recommendations/recommendation_components/candidate_recommendations' %>
+  <% end %>
+<% else %>
+  <div class="no-items">
+    <h3>You have no recommendations!</h3>
+  </div>
+<% end %>

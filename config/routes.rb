@@ -13,8 +13,6 @@ Rails.application.routes.draw do
       resources :companies
     end
 
-
-
   # non-admin #########################
     root to: 'dashboard#home'
 
@@ -41,6 +39,11 @@ Rails.application.routes.draw do
     get "connections/:type", to: 'recommendations#connections', as: 'connections'
     get "recommendations/:type", to: 'recommendations#recommendations', as: 'recommendations'
     post "recommendations/:id", to: 'recommendations#act_on_recommendation', as: 'act_on_recommendation'
+
+    get "companies/modal_content/:slug", to: 'companies#modal_content', as: 'company_modal_content'
+    get "users/modal_content/:id", to: 'users#modal_content', as: 'user_modal_content'
+    get "job_postings/modal_content/:slug", to: 'job_postings#modal_content', as: 'job_posting_modal_content'
+
 
 
 end

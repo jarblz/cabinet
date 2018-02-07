@@ -2,7 +2,7 @@ require 'httparty'
 
 class JobPostingsController < ApplicationController
   before_action :set_company, only: [:company]
-  before_action :set_job_posting, only: [:show, :edit, :update, :destroy]
+  before_action :set_job_posting, only: [:show, :edit, :update, :destroy, :modal_content]
   before_action :confirm_recruiter, only: [:new, :edit, :update, :destroy]
 
   # GET /job_postings
@@ -79,6 +79,10 @@ class JobPostingsController < ApplicationController
       format.html { redirect_to my_job_postings_url, notice: 'Job Posting was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # GET /core_info
+  def modal_content
   end
 
   private

@@ -5,29 +5,17 @@
     <% end %>
   </ul>
 </div>
-<div class="container container-card">
-  <div class="header-bar">
-    <h1 style="display:inline;">recommendations</h1>
-  </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Type</th>
-        <th scope="col">candidate</th>
-        <th scope="col" colspan="3">actions</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @recommendations.each do |recommendation| %>
-        <tr class="rec-row-<%=recommendation.id%>">
-          <td><%= recommendation.type.to_s.humanize %></td>
-          <td><%= recommendation.candidate.name %></td>
-          <td><button class="button btn-standard act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?accept=true">Accept</button>|<button class="button btn-standard" data-link="<%=act_on_recommendation_path(recommendation)%>?deny=true">Deny</button></td>
-        </tr>
+<% if current_user.candidate? || current_user.unvetted_matcher? %>
+  <div class="vetted-unvetted-toggle">
+    <ul>
+      <% vetted_unvetted_sub_links(current_user).each do |name, attributes| %>
+      <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
       <% end %>
-    </tbody>
-  </table>
+    </ul>
+  </div>
+<% end %>
+<div class="container container-card no-overflow no-padding">
+  <%= render partial: 'recommendation_content_section' %>
 </div>
 
 <script type="text/javascript">
@@ -37,12 +25,45 @@
       type: 'post',
       dataType: 'json',
       success: function(data) {
-        if (data.result=='success') {
-          $(".rec-row-"+data.recommendation.id).fadeOut()
+        if (data.result=='accepted') {
+          acceptRow(data.recommendation.id);
+        } else if (data.result=='denied'){
+          denyRow(data.recommendation.id);
         } else {
           alert('hm, how embarassing. something went wrong')
         }
       }
     });
   })
+
+  function denyRow(id){
+    $("#rec-"+id).addClass('deny').delay(400).slideUp(150, function(){
+      checkEnd();
+    });
+  }
+
+  function acceptRow(id){
+    $("#rec-"+id).addClass('accept').delay(400).slideUp(150, function(){
+      checkEnd();
+    });
+
+  }
+
+  function checkEnd(){
+    if ($('.rec-row:visible').length == 0) {
+      $('.no-items').fadeIn();
+    }
+  }
+
 </script>
+
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="close-x" data-dismiss="modal" aria-label="Close">&Cross;</div>
+        stuff
+      </div><!-- /.modal-body -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

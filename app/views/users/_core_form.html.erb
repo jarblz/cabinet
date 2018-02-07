@@ -32,7 +32,17 @@
         <%= f.text_field :phone, class: 'form-control' %>
       </div>
       <%# TODO: link to change password %>
+      <div class="form-group">
+        <%= f.label 'Would you like to review unvetted (company) matches?', for: 'user_zip_code', class:"label-required"%>
+        <div class="switch-field">
+          <%= f.radio_button :unvetted_matcher, true %>
+          <label for="user_unvetted_matcher_true">Yes</label>
+          <%= f.radio_button :unvetted_matcher, false %>
+          <label for="user_unvetted_matcher_false">No</label>
+        </div>
+      </div>
     </div>
+
 
   </div>
   <% if current_user.candidate? %>

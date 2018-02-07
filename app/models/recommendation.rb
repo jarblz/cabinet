@@ -54,12 +54,24 @@ class Recommendation < ApplicationRecord
     end
   end
 
+  def matching_traits
+    if company
+      candidate.traits && company.traits
+    else
+      candidate.traits && job_posting.traits
+    end
+  end
+
   def self.recruiter_job_recommendations(user)
     Recommendation.jobs.select{|r| r.job_posting.participants.include?(user) && r.initial?}
   end
 
   def self.recruiter_company_recommendations(user)
-    Recommendation.companies.select{|r| r.company.participants.include?(user) && r.initial?}
+    if user.unvetted_matcher?
+      Recommendation.companies.select{|r| r.company.recruiters.include?(user) && r.initial?}
+    else
+      []
+    end
   end
 
   def self.recruiter_job_connections(user)
@@ -67,7 +79,11 @@ class Recommendation < ApplicationRecord
   end
 
   def self.recruiter_company_connections(user)
-    Recommendation.companies.select{|r| r.company.participants.include?(user) && r.match?}
+    if user.unvetted_matcher?
+      Recommendation.companies.select{|r| r.company.recruiters.include?(user) && r.match?}
+    else
+      []
+    end
   end
 
 end

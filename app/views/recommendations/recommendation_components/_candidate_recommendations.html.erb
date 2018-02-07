@@ -1,0 +1,39 @@
+<% @recommendations.each do |recommendation| %>
+  <div class="rec-row-<%=recommendation.id%> single-circle">
+    <%#= recommendation.type.to_s.humanize %>
+    <%#= recommendation.candidate.name %>
+    <div class="circle" data-toggle="modal" data-target="#thingModal" data-populate-modal-with="<%=company_modal_content_path(recommendation.company.slug)%>" >
+      <%# TODO: look at trailmonkeez for this modal flow %>
+      <%= image_tag company.logo.url %>
+    </div>
+    <h3 data-toggle="modal" data-target="#thingModal"> <%= recommendation.company.title %> </h3>
+    <h4> recommendation.company.location</h4>
+    <p>
+      <% recommendation.matching_traits.each do |trait| %>
+        <span><%= trait %></span>
+      <% end %>
+    </p>
+
+    <div class="score-circle">
+      <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
+      <span><%=  %></span>
+    </div>
+    <div class="actions">
+      <i class="check circle outline icon"></i>
+      <i class="remove circle outline icon"></i>
+    </div>
+
+    <td><button class="button btn-standard act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?accept=true">Accept</button>|<button class="button btn-standard" data-link="<%=act_on_recommendation_path(recommendation)%>?deny=true">Deny</button></td>
+  </div>
+<% end %>
+
+<div class="modal fade" id="thingModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="close-x" data-dismiss="modal" aria-label="Close">&Cross;</div>
+
+      </div><!-- /.modal-body -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

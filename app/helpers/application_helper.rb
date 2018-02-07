@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def percentize(number)
+    number_to_percentage(number*100, precision: 0).split('%').first
+  end
+
   def avatar_contents
     html = ""
     if current_user && current_user.photo.exists?
@@ -35,6 +40,22 @@ module ApplicationHelper
       "connections": [connections_path(:job), "#{'active' if controller?('recommendations')&&action?('connections')}"],
       "recommendations": [recommendations_path(:job), "#{'active'  if controller?('recommendations')&&action?('recommendations')}"]
     }
+  end
+
+  def vetted_unvetted_sub_links(user)
+    if controller?('recommendations')&&action?('connections')
+      {
+        "Job": [connections_path(:job), "#{'active' if params[:type]=='job'}"],
+        "#": [recommendations_path(:company), "middle"], # hacky divider
+        "Company": [connections_path(:company), "#{'active' if params[:type]=='company'}"]
+      }
+    elsif controller?('recommendations')&&action?('recommendations')
+      {
+        "Job": [recommendations_path(:job), "#{'active' if params[:type]=='job'}"],
+        "#": [recommendations_path(:company), "middle"], # hacky divider
+        "Company": [recommendations_path(:company), "#{'active' if params[:type]=='company'}"]
+      }
+    end
   end
 
   def controller?(*controller)
