@@ -1,4 +1,4 @@
-<div class="sub-menu navigation">
+<div class="sub-menu navigation" id="secondaryFix">
   <ul>
     <% connection_sub_links(current_user).each do |name, attributes| %>
       <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
