@@ -45,7 +45,7 @@ class User < ApplicationRecord
     recruiter.validates_presence_of :name, :on => :update, unless: :company_code
     recruiter.validates_presence_of :email, :on => :update, unless: :company_code
     recruiter.validates_presence_of :phone, :on => :update, unless: :company_code
-    recruiter.validates_inclusion_of :unvetted_matcher, in:[true, false], :on => :update
+    recruiter.validates_inclusion_of :unvetted_matcher, in:[true, false], :on => :update, unless: :company_code
   end
 
   with_options if: :candidate? do |candidate|
