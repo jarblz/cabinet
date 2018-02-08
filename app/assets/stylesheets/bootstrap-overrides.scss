@@ -4,6 +4,27 @@
     margin-top: 45px;
   }
 }
+
+.modal-dialog {
+  @media(min-width: 767px){
+    width: 80%;
+    max-width: 1024px;
+  }
+  overflow: hidden;
+  .divider {
+    border-bottom: dashed 2px $grey;
+    position: relative;
+    left: -1000px;
+    width: 1000%;
+  }
+  .close-x {
+    cursor: pointer;
+    font-size: 42px;
+    position: absolute;
+    right: 20px;
+    top: -10px;
+  }
+}
 //navigation
 .alert {
   opacity: .85;

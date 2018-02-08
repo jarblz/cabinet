@@ -1,0 +1,39 @@
+<% @connections.each do |connection| %>
+  <div class="rec-row single-circle" id="rec-<%=connection.id%>">
+    <div class="left-photo">
+      <div class="circle-photo info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(connection.job_posting.id)%>" >
+        <%# TODO: look at trailmonkeez for this modal flow %>
+        <%= image_tag connection.job_posting.company.logo.url(:medium) %>
+      </div>
+      <div class="mobile-actions single">
+        <i class="mail outline icon"></i>
+      </div>
+    </div>
+    <div class="middle-info">
+      <h3 data-toggle="modal" data-target="#infoModal" class="info-modal">
+        <%= connection.job_posting.name %>
+        <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
+        <div class="score-circle">
+          <span><%= percentize connection.score %></span>
+        </div>
+
+      </h3>
+      <h4><%= connection.job_posting.try(:zip_code) %></h4>
+      <p>
+        <% connection.matching_traits.limit(3).each do |trait| %>
+        <span class='match-items'><%= trait.name %></span>
+        <% end %>
+        <span class='match-items info-modal' data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(connection.job_posting.id)%>">...</span>
+      </p>
+
+    </div>
+    <div class="recommendation-actions single">
+      <i class="mail outline icon"></i>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+<% end %>
+<div class="no-items" style='display:none;'>
+  <h3>No connections!</h3>
+</div>

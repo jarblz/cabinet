@@ -1,0 +1,71 @@
+<script type="text/javascript">
+  $('.info-modal').click(function(){
+    $('.modal-body').html("");
+    $.ajax({
+      url: $(this).data('populate-modal-with'),
+      type: 'get',
+      dataType: 'json',
+      success: function(data) {
+        if (data.html) {
+          $('.modal-body').html(data.html)
+        } else {
+          alert('hm, how embarassing. something went wrong')
+        }
+      }
+    });
+  })
+
+  $('.act-recommendation').click(function(){
+    $.ajax({
+      url: $(this).data('link'),
+      type: 'post',
+      dataType: 'json',
+      success: function(data) {
+        if (data.result=='accepted') {
+          acceptRow(data.recommendation.id);
+        } else if (data.result=='denied'){
+          denyRow(data.recommendation.id);
+        } else {
+          alert('hm, how embarassing. something went wrong')
+        }
+      }
+    });
+  })
+
+  function denyRow(id){
+    hideStuff(id)
+    $('#rec-+id').next('.divider').fadeOut();
+    $("#rec-"+id).addClass('deny').delay(400).slideUp(150, function(){
+      checkEnd();
+    });
+  }
+
+  function acceptRow(id){
+    hideStuff(id)
+    $("#rec-"+id).addClass('accept').delay(400).slideUp(150, function(){
+      checkEnd();
+    });
+  }
+
+  function checkEnd(){
+    if ($('.rec-row:visible').length == 0) {
+      $('.no-items').fadeIn();
+    }
+  }
+  function hideStuff(id){
+    $('#rec-'+id).children('.right-section').children('.match-line').hide()
+    $('#rec-'+id).children('.left-section').children('.match-line').hide()
+    $('#rec-'+id).children('.left-section').children('.phantom-background').hide()
+    $('#rec-'+id).children('.right-section').children('.phantom-background').hide()
+    $('#rec-'+id).next('.divider').fadeOut();
+  }
+
+</script>
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      </div><!-- /.modal-body -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

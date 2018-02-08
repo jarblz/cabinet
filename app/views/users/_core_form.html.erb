@@ -5,7 +5,7 @@
       <div class="form-group">
         <%= f.label :photo, for: 'user_photo'%>
         <% if user.photo.exists? %>
-          <%= image_tag user.photo.url %><br/>
+          <%= image_tag user.photo.url(:medium) %><br/>
           <%= f.label "Upload a different Photo", for: 'user_photo'%>
           <%= f.file_field :photo %>
 

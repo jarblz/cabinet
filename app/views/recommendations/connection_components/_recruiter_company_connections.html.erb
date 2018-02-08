@@ -1,0 +1,38 @@
+<% @connections.each do |connection| %>
+  <div class="rec-row single-circle" id="rec-<%=connection.id%>">
+    <div class="left-photo">
+      <div class="circle-photo info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(connection.candidate.id)%>" >
+        <%# TODO: look at trailmonkeez for this modal flow %>
+        <%= raw user_photo_content(connection.candidate) %>
+      </div>
+      <div class="mobile-actions single">
+        <i class="mail outline icon"></i>
+      </div>
+    </div>
+    <div class="middle-info">
+      <h3 data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=user_modal_content_path(connection.candidate.id)%>">
+        <%= connection.candidate.name %>
+        <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
+        <div class="score-circle">
+          <span><%= percentize connection.score %></span>
+        </div>
+
+      </h3>
+      <h4><%= connection.candidate.competencies.first.name %>,&nbsp <%= connection.candidate.try(:location) %></h4>
+      <p>
+        <% connection.matching_traits.limit(3).each do |trait| %>
+        <span class='match-items'><%= trait.name %></span>
+        <% end %>
+        <span class='match-items info-modal' data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(connection.candidate.id)%>">...</span>
+      </p>
+    </div>
+    <div class="recommendation-actions single">
+      <i class="mail outline icon"></i>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+<% end %>
+<div class="no-items" style='display:none;'>
+  <h3>No Connections!</h3>
+</div>

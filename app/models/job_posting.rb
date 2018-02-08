@@ -37,8 +37,17 @@ class JobPosting < ApplicationRecord
 
   def generate_recommendations
     User.candidates.each do |candidate|
-      Recommendation.generate(self,candidate)
+      Recommendation.generate_posting(self,candidate)
     end
+  end
+
+
+  def company_traits
+    traits.where(is_recruiter: true)
+  end
+
+  def personality_traits
+    traits.where(is_recruiter: false)
   end
 
 

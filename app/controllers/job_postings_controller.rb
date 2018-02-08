@@ -81,8 +81,10 @@ class JobPostingsController < ApplicationController
     end
   end
 
-  # GET /core_info
   def modal_content
+    respond_to do |format|
+      format.json { render json: { html: JobModalHtml.show(@job_posting) } }
+    end
   end
 
   private

@@ -1,6 +1,10 @@
-<h1>Editing Job Posting</h1>
+<div class="sub-menu">
+  <h3>edit job_posting</h3>
+</div>
+<div class="container container-card no-overflow">
 
-<%= render 'form', job_posting: @job_posting %>
+  <%= render 'form', job_posting: @job_posting %>
 
-<%= link_to 'Show', admin_job_posting_path(@job_posting) %> |
-<%= link_to 'Back', admin_job_postings_path %>
+  <%= link_to 'Show', admin_job_posting_path(@job_posting) %> |
+  <%= link_to 'Back', admin_job_postings_path %>
+</div>

@@ -1,1 +1,42 @@
-stuff
+<% @recommendations.each do |recommendation| %>
+  <div class="rec-row double-circle" id="rec-<%=recommendation.id%>">
+    <div class="left-section">
+      <div class="two-circle-photo left info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(recommendation.job_posting.slug)%>" >
+        <%# TODO: look at trailmonkeez for this modal flow %>
+        <%= image_tag recommendation.job_posting.company.logo.url(:medium) %>
+      </div>
+      <div class="match-line"></div>
+      <i class="remove circle icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?deny=true"></i>
+      <div class="phantom-background"></div>
+    </div>
+    <div class="middle-spacer">
+      <div class="score-circle-middle">
+        <span><%= percentize recommendation.score %></span>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="two-circle-photo smaller info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(recommendation.candidate.id)%>" >
+        <%# TODO: look at trailmonkeez for this modal flow %>
+        <%= raw user_photo_content(recommendation.candidate) %>
+      </div>
+      <div class="match-line"></div>
+      <i class="check circle icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?accept=true"></i>
+      <div class="phantom-background"></div>
+
+    </div>
+    <div class="left-section-bottom">
+      <h3 class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(recommendation.job_posting.slug)%>"> <%= recommendation.job_posting.title  %></h3>
+      <h4> Atlanta, GA</h4>
+      <p>2 days ago</p>
+    </div>
+    <div class="right-section-bottom">
+      <h3 class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(recommendation.candidate.id)%>"> <%= recommendation.candidate.name %></h3>
+      <h4> <%= recommendation.candidate.competencies.first.name %></h4>
+      <p>Atlanta, GA</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+<% end %>
+<div class="no-items" style='display:none;'>
+  <h3>No new recommendations</h3>
+</div>

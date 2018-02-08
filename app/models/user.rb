@@ -29,7 +29,7 @@ class User < ApplicationRecord
   has_attached_file :resume
   has_attached_file :writing_sample
   has_attached_file :transcript
-  has_attached_file :photo, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
+  has_attached_file :photo, styles: { large: "300x300#", medium: "200x200#", thumb: "120x120#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
 
@@ -146,12 +146,20 @@ class User < ApplicationRecord
     score/Recommendation::COMPANY_FIT_POINTS
   end
 
+  def company_traits
+    traits.where(is_recruiter: true)
+  end
+
+  def personality_traits
+    traits.where(is_recruiter: false)
+  end
+
   def candidate_company_connections
-    recommendations.select{ |r| r.match? && r.job_posting }
+    recommendations.select{ |r| r.match? && r.company }
   end
 
   def candidate_job_connections
-    recommendations.select{ |r| r.match? && r.company }
+    recommendations.select{ |r| r.match? && r.job_posting }
   end
 
   def candidate_job_recommendations
@@ -176,6 +184,10 @@ class User < ApplicationRecord
 
   def recruiter_company_connections
     Recommendation.recruiter_company_connections self
+  end
+
+  def show_modal
+    ModalHtml.user(self)
   end
 
   private

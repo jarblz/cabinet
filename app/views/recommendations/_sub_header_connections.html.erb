@@ -1,0 +1,16 @@
+<div class="sub-menu navigation">
+  <ul>
+    <% connection_sub_links(current_user).each do |name, attributes| %>
+      <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
+    <% end %>
+  </ul>
+</div>
+<% if current_user.candidate? || current_user.unvetted_matcher? %>
+  <div class="vetted-unvetted-toggle">
+    <ul>
+      <% vetted_unvetted_sub_links(current_user).each do |name, attributes| %>
+      <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,9 +1,9 @@
 <% @recommendations.each do |recommendation| %>
   <div class="rec-row single-circle" id="rec-<%=recommendation.id%>">
     <div class="left-photo">
-      <div class="circle-photo info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(recommendation.candidate.id)%>" >
+      <div class="circle-photo info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(recommendation.job_posting.id)%>" >
         <%# TODO: look at trailmonkeez for this modal flow %>
-        <%= raw user_photo_content(recommendation.candidate) %>
+        <%= image_tag recommendation.job_posting.company.logo.url(:medium) %>
       </div>
       <div class="mobile-actions">
         <i class="remove circle outline icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?deny=true"></i>
@@ -11,20 +11,20 @@
       </div>
     </div>
     <div class="middle-info">
-      <h3 data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=user_modal_content_path(recommendation.candidate.id)%>">
-        <%= recommendation.candidate.name %>
+      <h3 data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=job_modal_content_path(recommendation.job_posting.id)%>">
+        <%= recommendation.job_posting.title %>
         <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
         <div class="score-circle">
           <span><%= percentize recommendation.score %></span>
         </div>
 
       </h3>
-      <h4><%= recommendation.candidate.competencies.first.name %>,&nbsp <%= recommendation.candidate.try(:location) %></h4>
+      <h4><%= recommendation.job_posting.try(:zip_code) %></h4>
       <p>
         <% recommendation.matching_traits.limit(3).each do |trait| %>
         <span class='match-items'><%= trait.name %></span>
         <% end %>
-        <span class='match-items info-modal' data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(recommendation.candidate.id)%>">...</span>
+        <span class='match-items info-modal' data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(recommendation.job_posting.id)%>">...</span>
       </p>
 
     </div>
@@ -37,5 +37,5 @@
 
 <% end %>
 <div class="no-items" style='display:none;'>
-  <h3>No new recommendations</h3>
+  <h3>No new recommendations!</h3>
 </div>

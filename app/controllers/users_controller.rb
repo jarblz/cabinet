@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  include UserModalHtml
+  before_action :set_user, except: [:modal_content]
+  before_action :set_user_by_id, only: [:modal_content]
 
   # # GET /users/1
   # # GET /users/1.json
@@ -18,7 +20,9 @@ class UsersController < ApplicationController
   end
 
   def modal_content
-    binding.pry
+    respond_to do |format|
+      format.json { render json: { html: UserModalHtml.show(@user) } }
+    end
   end
 
 
@@ -49,6 +53,10 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = current_user
+    end
+
+    def set_user_by_id
+      @user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,30 +1,23 @@
-<div class="sub-menu navigation">
-  <ul>
-    <% connection_sub_links(current_user).each do |name, attributes| %>
-      <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
-    <% end %>
-  </ul>
-</div>
-<% if current_user.candidate? || current_user.unvetted_matcher? %>
-  <div class="vetted-unvetted-toggle">
-    <ul>
-      <% vetted_unvetted_sub_links(current_user).each do |name, attributes| %>
-      <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render partial: 'sub_header_connections' %>
 <div class="container container-card no-overflow">
-  <%= render partial: 'connection_content_section' %>
+  <% if !@connections.blank? %>
+    <% if current_user.recruiter? %>
+      <% if params[:type] == 'job' %>
+        <%= render partial: 'recommendations/connection_components/recruiter_job_connections' %>
+      <% else %>
+        <%= render partial: 'recommendations/connection_components/recruiter_company_connections' %>
+      <% end %>
+    <% else %>
+      <% if params[:type] == 'job' %>
+        <%= render partial: 'recommendations/connection_components/candidate_job_connections' %>
+      <% else %>
+        <%= render partial: 'recommendations/connection_components/candidate_company_connections' %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="no-items">
+      <h3>You have no connections!</h3>
+    </div>
+  <% end %>
 </div>
-
-<div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="close-x" data-dismiss="modal" aria-label="Close">&Cross;</div>
-        stuff
-      </div><!-- /.modal-body -->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<%= render partial: 'jquery_components' %>

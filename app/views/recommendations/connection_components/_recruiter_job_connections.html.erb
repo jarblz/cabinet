@@ -1,0 +1,36 @@
+<% @connections.each do |connection| %>
+  <div class="rec-row double-circle" id="rec-<%=connection.id%>">
+    <div class="left-section connection">
+      <div class="two-circle-photo left info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(connection.job_posting.slug)%>" >
+        <%# TODO: look at trailmonkeez for this modal flow %>
+        <%= image_tag connection.job_posting.company.logo.url(:medium) %>
+      </div>
+      <div class="match-line"></div>
+      <div class="phantom-background-middle"></div>
+      <i class="mail icon"></i>
+    </div>
+    <div class="right-section connection">
+      <div class="two-circle-photo smaller info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(connection.candidate.id)%>" >
+        <%# TODO: look at trailmonkeez for this modal flow %>
+        <%= raw user_photo_content(connection.candidate) %>
+      </div>
+      <div class="match-line"></div>
+      <div class="phantom-background"></div>
+
+    </div>
+    <div class="left-section-bottom">
+      <h3 class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(connection.job_posting.slug)%>"> <%= connection.job_posting.title  %></h3>
+      <h4> Atlanta, GA</h4>
+      <p>2 days ago</p>
+    </div>
+    <div class="right-section-bottom">
+      <h3 class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(connection.candidate.id)%>"> <%= connection.candidate.name %></h3>
+      <h4> <%= connection.candidate.competencies.first.name %></h4>
+      <p>Atlanta, GA</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+<% end %>
+<div class="no-items" style='display:none;'>
+  <h3>No new connections</h3>
+</div>
