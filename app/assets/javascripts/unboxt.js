@@ -36,7 +36,6 @@ $(document).on('turbolinks:load', function() {
    var subNav = document.getElementById("secondaryFix");
    var main = document.getElementById("main");
    var nav = document.getElementById("primary_nav_wrap");
-   debugger;
 
    if (subNav){
      var sticky = subNav.offsetTop;

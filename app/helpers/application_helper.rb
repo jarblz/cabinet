@@ -4,6 +4,10 @@ module ApplicationHelper
     number_to_percentage(number*100, precision: 0).split('%').first
   end
 
+  def time_ago(timestamp)
+    "#{((Time.now-timestamp)/60/60/24).to_i} Days Ago"
+  end
+
   def avatar_contents
     html = ""
     if current_user && current_user.photo.exists?

@@ -1,40 +1,56 @@
-<div class="sub-menu navigation">
+<div class="sub-menu navigation" id="secondaryFix">
   <ul>
     <% job_sub_links(current_user).each do |name, attributes| %>
       <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
     <% end %>
   </ul>
 </div>
-<div class="container container-card">
-  <div class="header-bar">
-    <h1 style="display:inline;">Job Postings</h1>
-    <%= link_to 'Create a Job', new_job_posting_path, class: 'btn btn-info inline' %>&nbsp;
-    <%= link_to 'Back', root_path, class: 'btn btn-info inline' %>
-  </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Company</th>
-        <th scope="col">User Count</th>
+<div class="container container-card no-overflow">
+  <% if !@job_postings.blank? %>
+    <% @job_postings.each do |job_posting| %>
+      <div class="rec-row single-circle">
+        <div class="left-photo">
+          <div class="circle-photo info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(job_posting.id)%>" >
+            <%# TODO: look at trailmonkeez for this modal flow %>
+            <%= image_tag job_posting.company.logo.url(:medium) %>
+          </div>
+          <!-- <div class="mobile-actions single">
+            <i class="mail outline icon"></i>
+          </div> -->
+        </div>
+        <div class="middle-info">
+          <h3>
+            <span data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=job_modal_content_path(job_posting.id)%>">
+              <%= job_posting.title %>
+            </span>&nbsp;&nbsp;
+            <a href="<%=edit_job_posting_path(job_posting)%>"><i class="write icon job-actions"></i></a>
+            <a href = "<%=job_posting_path(job_posting)%>" data-confirm= "Are you sure you want to remove this job?", data-method = "delete")>
+              <i class="trash outline icon job-actions"></i>
+            </a>
+            <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
 
-        <th scope="col" colspan="3"></th>
-      </tr>
-    </thead>
+          </h3>
+          <h4><%= job_posting.try(:zip_code) %></h4>
+          <p>
+            <%= time_ago(job_posting.created_at) %>
+          </p>
 
-    <tbody>
-      <% @job_postings.each do |job_posting| %>
-        <tr>
-          <td><%= job_posting.title %></td>
-          <td><%= job_posting.description %></td>
-          <td><%= job_posting.company.name %></td>
-          <td><%= job_posting.participants.count %></td>
-          <td><%= link_to 'Show', job_posting_path(job_posting), class: 'btn btn-info btn-xs' %></td>
-          <td><%= link_to 'Edit', edit_job_posting_path(job_posting), class: 'btn btn-info btn-xs'  %></td>
-          <td><%= link_to 'Destroy', job_posting_path(job_posting), method: :delete, class: 'btn btn-info btn-xs' , data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </div>
+        <!-- <div class="recommendation-actions single">
+          <i class="mail outline icon"></i>
+        </div> -->
+      </div>
+      <div class="divider"></div>
+
+    <% end %>
+    <div class="no-items" style='display:none;'>
+      <h3>No Job Postings yet!</h3>
+    </div>
+
+  <% else %>
+    <div class="no-items">
+      <h3>No Company Job Postings yet!</h3>
+    </div>
+  <% end %>
 </div>
+<%= render partial: 'layouts/show_something_modal' %>

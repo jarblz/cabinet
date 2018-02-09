@@ -3,6 +3,7 @@ class CreateUserCompetencies < ActiveRecord::Migration[5.0]
     create_table :user_competencies do |t|
       t.integer :user_id
       t.integer :competency_id
+      t.timestamps null: false
     end
   end
 end

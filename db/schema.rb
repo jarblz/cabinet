@@ -16,26 +16,32 @@ ActiveRecord::Schema.define(version: 20180206212218) do
   enable_extension "plpgsql"
 
   create_table "assessment_questions", force: :cascade do |t|
-    t.string  "category",                null: false
-    t.string  "question",                null: false
-    t.string  "page_number",             null: false
-    t.integer "format",      default: 0, null: false
+    t.string   "category",                null: false
+    t.string   "question",                null: false
+    t.string   "page_number",             null: false
+    t.integer  "format",      default: 0, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "assessments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "status"
-    t.integer "ie",      default: 0
-    t.integer "vn",      default: 0
-    t.integer "oa",      default: 0
-    t.integer "sm",      default: 0
-    t.integer "pt",      default: 0
+    t.integer  "user_id"
+    t.integer  "status"
+    t.integer  "ie",         default: 0
+    t.integer  "vn",         default: 0
+    t.integer  "oa",         default: 0
+    t.integer  "sm",         default: 0
+    t.integer  "pt",         default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "candidate_industries", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "industry_id"
-    t.string  "experience"
+    t.integer  "user_id"
+    t.integer  "industry_id"
+    t.string   "experience"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -45,6 +51,8 @@ ActiveRecord::Schema.define(version: 20180206212218) do
     t.string   "bio",               default: "", null: false
     t.integer  "status",            default: 0,  null: false
     t.string   "code",              default: "", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -55,82 +63,106 @@ ActiveRecord::Schema.define(version: 20180206212218) do
   end
 
   create_table "company_traits", force: :cascade do |t|
-    t.integer "company_id", null: false
-    t.integer "trait_id",   null: false
+    t.integer  "company_id", null: false
+    t.integer  "trait_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "competencies", force: :cascade do |t|
-    t.string "name", null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cp_first_synonyms", force: :cascade do |t|
-    t.integer "competency_id"
-    t.integer "first_synonym_id"
+    t.integer  "competency_id"
+    t.integer  "first_synonym_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["competency_id", "first_synonym_id"], name: "index_cp_first_synonyms_on_competency_id_and_first_synonym_id", unique: true, using: :btree
     t.index ["competency_id"], name: "index_cp_first_synonyms_on_competency_id", using: :btree
     t.index ["first_synonym_id"], name: "index_cp_first_synonyms_on_first_synonym_id", using: :btree
   end
 
   create_table "cp_second_synonyms", force: :cascade do |t|
-    t.integer "competency_id"
-    t.integer "second_synonym_id"
+    t.integer  "competency_id"
+    t.integer  "second_synonym_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["competency_id", "second_synonym_id"], name: "index_cp_second_synonyms_on_competency_id_and_second_synonym_id", unique: true, using: :btree
     t.index ["competency_id"], name: "index_cp_second_synonyms_on_competency_id", using: :btree
     t.index ["second_synonym_id"], name: "index_cp_second_synonyms_on_second_synonym_id", using: :btree
   end
 
   create_table "cp_third_synonyms", force: :cascade do |t|
-    t.integer "competency_id"
-    t.integer "third_synonym_id"
+    t.integer  "competency_id"
+    t.integer  "third_synonym_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["competency_id", "third_synonym_id"], name: "index_cp_third_synonyms_on_competency_id_and_third_synonym_id", unique: true, using: :btree
     t.index ["competency_id"], name: "index_cp_third_synonyms_on_competency_id", using: :btree
     t.index ["third_synonym_id"], name: "index_cp_third_synonyms_on_third_synonym_id", using: :btree
   end
 
   create_table "industries", force: :cascade do |t|
-    t.string "name"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "job_posting_competencies", force: :cascade do |t|
-    t.integer "job_posting_id", null: false
-    t.integer "competency_id",  null: false
+    t.integer  "job_posting_id", null: false
+    t.integer  "competency_id",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "job_posting_traits", force: :cascade do |t|
-    t.integer "job_posting_id", null: false
-    t.integer "trait_id",       null: false
+    t.integer  "job_posting_id", null: false
+    t.integer  "trait_id",       null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "job_posting_users", force: :cascade do |t|
-    t.integer "job_posting_id", null: false
-    t.integer "user_id",        null: false
+    t.integer  "job_posting_id", null: false
+    t.integer  "user_id",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "job_postings", force: :cascade do |t|
-    t.integer "creator_id",  null: false
-    t.integer "company_id",  null: false
-    t.string  "title",       null: false
-    t.text    "description", null: false
-    t.string  "slug"
-    t.boolean "remote"
-    t.string  "zip_code"
+    t.integer  "creator_id",  null: false
+    t.integer  "company_id",  null: false
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "slug"
+    t.boolean  "remote"
+    t.string   "zip_code"
     t.index ["slug"], name: "index_job_postings_on_slug", unique: true, using: :btree
   end
 
   create_table "personalities", force: :cascade do |t|
-    t.string "name",        null: false
-    t.string "code",        null: false
-    t.string "description", null: false
+    t.string   "name",        null: false
+    t.string   "code",        null: false
+    t.string   "description", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.integer "job_posting_id"
-    t.integer "company_id"
-    t.integer "user_id"
-    t.integer "status",         default: 0
-    t.decimal "score",          default: "0.25"
-    t.boolean "recruiter_seen", default: false
-    t.boolean "candidate_seen", default: false
+    t.integer  "job_posting_id"
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.integer  "status",         default: 0
+    t.decimal  "score",          default: "0.25"
+    t.boolean  "recruiter_seen", default: false
+    t.boolean  "candidate_seen", default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -144,24 +176,30 @@ ActiveRecord::Schema.define(version: 20180206212218) do
   end
 
   create_table "trait_first_synonyms", force: :cascade do |t|
-    t.integer "trait_id"
-    t.integer "first_synonym_id"
+    t.integer  "trait_id"
+    t.integer  "first_synonym_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["first_synonym_id"], name: "index_trait_first_synonyms_on_first_synonym_id", using: :btree
     t.index ["trait_id", "first_synonym_id"], name: "index_trait_first_synonyms_on_trait_id_and_first_synonym_id", unique: true, using: :btree
     t.index ["trait_id"], name: "index_trait_first_synonyms_on_trait_id", using: :btree
   end
 
   create_table "trait_second_synonyms", force: :cascade do |t|
-    t.integer "trait_id"
-    t.integer "second_synonym_id"
+    t.integer  "trait_id"
+    t.integer  "second_synonym_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["second_synonym_id"], name: "index_trait_second_synonyms_on_second_synonym_id", using: :btree
     t.index ["trait_id", "second_synonym_id"], name: "index_trait_second_synonyms_on_trait_id_and_second_synonym_id", unique: true, using: :btree
     t.index ["trait_id"], name: "index_trait_second_synonyms_on_trait_id", using: :btree
   end
 
   create_table "trait_third_synonyms", force: :cascade do |t|
-    t.integer "trait_id"
-    t.integer "third_synonym_id"
+    t.integer  "trait_id"
+    t.integer  "third_synonym_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["third_synonym_id"], name: "index_trait_third_synonyms_on_third_synonym_id", using: :btree
     t.index ["trait_id", "third_synonym_id"], name: "index_trait_third_synonyms_on_trait_id_and_third_synonym_id", unique: true, using: :btree
     t.index ["trait_id"], name: "index_trait_third_synonyms_on_trait_id", using: :btree
@@ -176,13 +214,17 @@ ActiveRecord::Schema.define(version: 20180206212218) do
   end
 
   create_table "user_competencies", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "competency_id"
+    t.integer  "user_id"
+    t.integer  "competency_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "user_traits", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "trait_id"
+    t.integer  "user_id"
+    t.integer  "trait_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

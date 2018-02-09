@@ -8,6 +8,7 @@ class CreateAssessment < ActiveRecord::Migration[5.0]
       t.integer :oa, default: 0
       t.integer :sm, default: 0
       t.integer :pt, default: 0
+      t.timestamps null: false
     end
   end
 end

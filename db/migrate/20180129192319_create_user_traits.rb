@@ -3,6 +3,7 @@ class CreateUserTraits < ActiveRecord::Migration[5.0]
     create_table :user_traits do |t|
       t.integer :user_id
       t.integer :trait_id
+      t.timestamps null: false
     end
   end
 end

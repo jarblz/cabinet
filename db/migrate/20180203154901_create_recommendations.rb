@@ -8,6 +8,7 @@ class CreateRecommendations < ActiveRecord::Migration[5.0]
       t.decimal :score, default: 0.25
       t.boolean :recruiter_seen, default: false
       t.boolean :candidate_seen, default: false
+      t.timestamps null: false
     end
   end
 end

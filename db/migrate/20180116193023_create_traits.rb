@@ -5,7 +5,7 @@ class CreateTraits < ActiveRecord::Migration[5.0]
       t.boolean :is_recruiter
       t.text :description
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

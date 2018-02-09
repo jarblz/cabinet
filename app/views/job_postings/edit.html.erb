@@ -1,6 +1,6 @@
 <div class="sub-menu navigation" id="secondaryFix">
   <ul>
-    <% job_sub_links(current_user).each do |name, attributes| %>
+    <% job_sub_links(current_user, @job_posting).each do |name, attributes| %>
       <li> <%= link_to name, attributes[0], class: attributes[1] %></li>
     <% end %>
   </ul>

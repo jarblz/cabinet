@@ -1,0 +1,26 @@
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      </div><!-- /.modal-body -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+  $('.info-modal').click(function(){
+    $('.modal-body').html("");
+    $.ajax({
+      url: $(this).data('populate-modal-with'),
+      type: 'get',
+      dataType: 'json',
+      success: function(data) {
+        if (data.html) {
+          $('.modal-body').html(data.html)
+        } else {
+          alert('hm, how embarassing. something went wrong')
+        }
+      }
+    });
+  })
+</script>

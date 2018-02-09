@@ -22,7 +22,7 @@ class User < ApplicationRecord
   has_many :traits, through: :user_traits
   has_many :user_competencies
   has_many :competencies, through: :user_competencies
-  has_many :recommendations
+  has_many :recommendations, dependent: :delete_all
 
   # has_many :match_recruiters, class_name: 'MatchRecruiter', foreign_key: 'user_id'
 
@@ -41,21 +41,21 @@ class User < ApplicationRecord
   validates_presence_of :role, :on => :create
 
   with_options if: :recruiter? do |recruiter|
-    recruiter.before_validation :join_company, :if => :company_code
-    recruiter.validates_presence_of :name, :on => :update, unless: :company_code
-    recruiter.validates_presence_of :email, :on => :update, unless: :company_code
-    recruiter.validates_presence_of :phone, :on => :update, unless: :company_code
-    recruiter.validates_inclusion_of :unvetted_matcher, in:[true, false], :on => :update, unless: :company_code
+    recruiter.validate :has_company
+    recruiter.validates_presence_of :name,          :on => :update
+    recruiter.validates_presence_of :email,         :on => :update
+    recruiter.validates_presence_of :phone,         :on => :update
+    recruiter.validates_inclusion_of :unvetted_matcher, in:[true, false], :on => :update
   end
 
   with_options if: :candidate? do |candidate|
-    candidate.validates_presence_of :name, :on => :update
-    candidate.validates_presence_of :email, :on => :update
-    candidate.validates_presence_of :phone, :on => :update
-    candidate.validates_presence_of :zip_code, :on => :update
-    candidate.validates_presence_of :felony, :on => :update
+    candidate.validates_presence_of :name,      :on => :update
+    candidate.validates_presence_of :email,     :on => :update
+    candidate.validates_presence_of :phone,     :on => :update
+    candidate.validates_presence_of :zip_code,  :on => :update
+    candidate.validates_presence_of :felony,    :on => :update
     candidate.validates_inclusion_of :us_lawfully_authorized, in:[true, false], :on => :update
-    candidate.validates_inclusion_of :require_sponsorship, in:[true, false], :on => :update
+    candidate.validates_inclusion_of :require_sponsorship, in:[true, false],    :on => :update
     candidate.validate :validate_traits_and_competencies
     candidate.after_save :generate_recommendations
   end
@@ -72,7 +72,7 @@ class User < ApplicationRecord
   end
 
   def active?
-    valid? && !no_candidate_assessment? && !no_recruiter_company?
+    valid? && !personality.blank?
   end
 
   def admin?
@@ -90,10 +90,6 @@ class User < ApplicationRecord
   def self.candidates(location=nil)
     # TODO: make this spatial
     User.all.select{ |u| u.candidate? }
-  end
-
-  def no_candidate_assessment?
-    candidate? && personality.blank?
   end
 
   def no_recruiter_company?
@@ -192,15 +188,17 @@ class User < ApplicationRecord
 
   private
 
-  def join_company
-    if !Company.exists? code: self.company_code
-      errors.add(:company_id, ": Invalid Code")
-    elsif self.company
-      errors.add(:company_id, ": You've already joined a company")
-    elsif Company.find_by_code(self.company_code).at_account_limit?
-      errors.add(:company_id, ": This company has reached it's account limit!")
-    else
-      self.company = Company.find_by_code(self.company_code)
+  def has_company
+    if !self.company # maybe do something smarter later, but this is fine for now
+      if !Company.exists? code: self.company_code
+        errors.add(:company_id, ": Invalid Code")
+      elsif self.company
+        errors.add(:company_id, ": You've already joined a company")
+      elsif Company.find_by_code(self.company_code).at_account_limit?
+        errors.add(:company_id, ": This company has reached it's account limit!")
+      else
+        self.company = Company.find_by_code(self.company_code)
+      end
     end
   end
 

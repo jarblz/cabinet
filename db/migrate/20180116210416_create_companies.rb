@@ -7,6 +7,7 @@ class CreateCompanies < ActiveRecord::Migration[5.0]
       t.string :bio,              null: false, default: ""
       t.integer :status,           null: false, default: 0
       t.string :code,              null: false, default: ""
+      t.timestamps null: false
     end
   end
 end

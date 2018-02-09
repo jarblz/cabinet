@@ -64,6 +64,13 @@
   }
   i {
     cursor: pointer;
+    &.job-actions {
+      font-size: .9em;
+      position: relative;
+      bottom: 2px;
+      right: 2px;
+      margin-right: 0px;
+    }
   }
   .info-modal {
     cursor: pointer;
@@ -416,10 +423,24 @@
         width: 100px;
         height: 100px;
       }
+      .text {
+        color: white;
+        display: table;
+        margin: auto;
+        position: relative;
+        top: 24px;
+        font-size: 48px;
+      }
       &.smaller {
         width: 100px;
         height: 100px;
         float: right;
+        .text {
+          top: 16px;
+          @media(max-width: 480px){
+            top: 6px;
+          }
+        }
         @media(max-width: 480px){
           width: 80px;
           height: 80px;
@@ -430,14 +451,6 @@
             width: 80px;
           }
         }
-      }
-      .text {
-        color: white;
-        display: table;
-        margin: auto;
-        position: relative;
-        top: 24px;
-        font-size: 48px;
       }
       img {
         width: 120px;

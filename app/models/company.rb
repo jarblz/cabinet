@@ -7,6 +7,7 @@ class Company < ApplicationRecord
   has_many :traits, through: :company_traits
   has_many :recruiters, foreign_key: "company_id", class_name: "User"
   has_many :job_postings
+  has_many :recommendations, :dependent => :delete_all
 
   has_attached_file :logo, styles: { large: "300x300#", medium: "200x200#", thumb: "120x120#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/

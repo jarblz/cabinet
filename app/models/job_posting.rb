@@ -12,6 +12,8 @@ class JobPosting < ApplicationRecord
   has_many :job_posting_users
   has_many :users, through: :job_posting_users
 
+  has_many :recommendations, :dependent => :delete_all
+
   belongs_to :company
 
   belongs_to :creator, foreign_key: "creator_id", class_name: "User"
