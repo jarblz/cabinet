@@ -6,11 +6,11 @@
         <%= image_tag recommendation.job_posting.company.logo.url(:medium) %>
       </div>
       <div class="match-line"></div>
-      <i class="remove circle icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?deny=true"></i>
+      <i class="remove circle icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?deny=true" data-toggle="tooltip" data-placement="top" title="Deny Recommendation"></i>
       <div class="phantom-background"></div>
     </div>
     <div class="middle-spacer">
-      <div class="score-circle-middle">
+      <div class="score-circle-middle" data-toggle="tooltip" data-placement="top" title="Candidate Fit Score">
         <span><%= percentize recommendation.score %></span>
       </div>
     </div>
@@ -20,7 +20,7 @@
         <%= raw user_photo_content(recommendation.candidate) %>
       </div>
       <div class="match-line"></div>
-      <i class="check circle icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?accept=true"></i>
+      <i class="check circle icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?accept=true" data-toggle="tooltip" data-placement="top" title="Accept Recommendation"></i>
       <div class="phantom-background"></div>
 
     </div>

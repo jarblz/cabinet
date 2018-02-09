@@ -14,7 +14,7 @@
       <h3 data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=company_modal_content_path(recommendation.company.slug)%>">
         <%= recommendation.company.name %>
         <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
-        <div class="score-circle">
+        <div class="score-circle" data-toggle="tooltip" data-placement="top" title="Company Fit Score">
           <span><%= percentize recommendation.score %></span>
         </div>
 
@@ -29,8 +29,8 @@
 
     </div>
     <div class="recommendation-actions">
-      <i class="check circle outline icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?accept=true"></i>
-      <i class="remove circle outline icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?deny=true"></i>
+      <i class="check circle outline icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?accept=true" data-toggle="tooltip" data-placement="left" title="Accept Recommendation"></i>
+      <i class="remove circle outline icon act-recommendation" data-link="<%=act_on_recommendation_path(recommendation)%>?deny=true" data-toggle="tooltip" data-placement="left" title="Deny Recommendation"></i>
     </div>
   </div>
   <div class="divider"></div>

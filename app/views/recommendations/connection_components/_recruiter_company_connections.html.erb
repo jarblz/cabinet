@@ -13,7 +13,7 @@
       <h3 data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=user_modal_content_path(connection.candidate.id)%>">
         <%= connection.candidate.name %>
         <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
-        <div class="score-circle">
+        <div class="score-circle" data-toggle="tooltip" data-placement="top" title="Candidate Fit Score">
           <span><%= percentize connection.score %></span>
         </div>
 

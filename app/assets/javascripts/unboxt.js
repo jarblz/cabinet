@@ -1,7 +1,6 @@
 $(this).scrollTop(0);
 $('.alert').delay(5000).fadeOut()
-
-
+$('[data-toggle="tooltip"]').tooltip()
 
 $(document).click(function(e) {
   var target = $(e.target), article;
@@ -32,38 +31,39 @@ function hideAllDropdowns(){
 }
 
 $(document).on('turbolinks:load', function() {
+  $('[data-toggle="tooltip"]').tooltip()
 
-   var subNav = document.getElementById("secondaryFix");
-   var main = document.getElementById("main");
-   var nav = document.getElementById("primary_nav_wrap");
+  var subNav = document.getElementById("secondaryFix");
+  var main = document.getElementById("main");
+  var nav = document.getElementById("primary_nav_wrap");
 
-   if (subNav){
-     var sticky = subNav.offsetTop;
-   }
-   window.onscroll = function() {setupStickyNav()};
+  if (subNav){
+   var sticky = subNav.offsetTop;
+  }
+  window.onscroll = function() {setupStickyNav()};
 
-   function setupStickyNav() {
-     if(subNav){
-       pushNavBehind();
-       if (window.pageYOffset >= sticky) {
-         subNav.classList.add("sticky");
-         main.classList.add("sticky");
-       } else {
-         subNav.classList.remove("sticky");
-         main.classList.remove("sticky");
-       }
-     }
-   }
-
-   function pushNavBehind(){
-
-     if (window.pageYOffset == 0) {
-       primary_nav_wrap
-       nav.classList.remove("sub-nav");
+  function setupStickyNav() {
+   if(subNav){
+     pushNavBehind();
+     if (window.pageYOffset >= sticky) {
+       subNav.classList.add("sticky");
+       main.classList.add("sticky");
      } else {
-       nav.classList.add("sub-nav");
-       hideAllDropdowns();
+       subNav.classList.remove("sticky");
+       main.classList.remove("sticky");
      }
    }
+  }
+
+  function pushNavBehind(){
+
+   if (window.pageYOffset == 0) {
+     primary_nav_wrap
+     nav.classList.remove("sub-nav");
+   } else {
+     nav.classList.add("sub-nav");
+     hideAllDropdowns();
+   }
+  }
 
 });
