@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  include UserModalHtml
   before_action :set_user, except: [:modal_content]
   before_action :set_user_by_id, only: [:modal_content]
 
@@ -20,8 +19,9 @@ class UsersController < ApplicationController
   end
 
   def modal_content
+    html = render_to_string partial: 'modals/user/show', locals: {user: @user, viewer: current_user}
     respond_to do |format|
-      format.json { render json: { html: UserModalHtml.show(@user) } }
+      format.json { render json: { html: html } }
     end
   end
 

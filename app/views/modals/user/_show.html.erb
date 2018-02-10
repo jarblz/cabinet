@@ -1,0 +1,5 @@
+<% if viewer.candidate? %>
+  <%= render partial: 'modals/user/recruiter', locals: {user: @user} %>
+<% else %>
+  <%= render partial: 'modals/user/candidate', locals: {user: @user} %>
+<% end %>

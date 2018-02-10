@@ -87,9 +87,9 @@ class User < ApplicationRecord
     has_role?(:candidate)
   end
 
-  def self.candidates(location=nil)
+  def self.valid_candidates(location=nil)
     # TODO: make this spatial
-    User.all.select{ |u| u.candidate? }
+    User.all.select{ |u| u.candidate? && u.valid? }
   end
 
   def no_recruiter_company?

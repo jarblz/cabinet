@@ -38,7 +38,7 @@ class JobPosting < ApplicationRecord
   end
 
   def generate_recommendations
-    User.candidates.each do |candidate|
+    User.valid_candidates.each do |candidate|
       Recommendation.generate_posting(self,candidate)
     end
   end

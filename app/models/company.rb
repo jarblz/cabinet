@@ -34,7 +34,7 @@ class Company < ApplicationRecord
   end
 
   def generate_recommendations
-    User.candidates.each do |user|
+    User.valid_candidates.each do |user|
       Recommendation.generate_company(self, user)
     end
   end
