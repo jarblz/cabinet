@@ -25,8 +25,8 @@ module ApplicationHelper
     else
       {
         "Jobs": [path_for_job_landing(user), "#{'active' if controller?('job_postings')} right-most"],
-        "Connections": [connections_path(:job), "#{'active' if controller?('recommendations')}"]
-        # "Messages": [job_postings_path, "#{'active' if controller?('job_postings')&&action?('kewl')}"] #false
+        "Connections": [connections_path(:job), "#{'active' if controller?('recommendations')}"],
+        "Messages": [conversations_path, "#{'active' if controller?('conversations')||controller?('messages')}"]
       }
     end
   end
@@ -34,8 +34,8 @@ module ApplicationHelper
   def job_sub_links(user, job=nil)
     {
       "company jobs": [company_job_postings_path(current_user.company), "#{'active' if company_job?(user,job)}"],
-      "my jobs": [my_job_postings_path, "#{'active' if my_job?(user,job)}"], #false
-      "create job": [new_job_posting_path, "#{'active' if controller?('job_postings')&&action?('new')}"] #false
+      "my jobs": [my_job_postings_path, "#{'active' if my_job?(user,job)}"],
+      "create job": [new_job_posting_path, "#{'active' if controller?('job_postings')&&action?('new')}"]
     }
   end
 

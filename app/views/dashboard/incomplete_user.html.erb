@@ -7,7 +7,7 @@
   <% else %>
     <%= render partial: 'no_assessment' %>
   <% end %>
-  <% if current_user.valid? %>
+  <% if current_user.profile_complete? %>
     <%= render partial: 'valid_profile' %>
   <% else %>
     <%= render partial: 'invalid_profile' %>

@@ -2,11 +2,10 @@
   <div class="rec-row single-circle" id="rec-<%=connection.id%>">
     <div class="left-photo">
       <div class="circle-photo info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=company_modal_content_path(connection.company.slug)%>" >
-        <%# TODO: look at trailmonkeez for this modal flow %>
         <%= image_tag connection.company.logo.url(:medium) %>
       </div>
       <div class="mobile-actions single">
-        <i class="mail outline icon"></i>
+        <a href="<%=new_message_path(receiver_id: connection.message_receiver(current_user, connection_id: connection.id))%>"><i class="mail icon"></i></a>
       </div>
     </div>
     <div class="middle-info">
@@ -28,7 +27,7 @@
 
     </div>
     <div class="recommendation-actions single">
-        <i class="mail outline icon"></i>
+      <a href="<%=new_message_path(receiver_id: connection.message_receiver(current_user), connection_id: connection.id)%>"><i class="mail icon"></i></a>
     </div>
   </div>
   <div class="divider"></div>

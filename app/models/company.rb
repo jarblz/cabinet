@@ -39,9 +39,8 @@ class Company < ApplicationRecord
     end
   end
 
-  def match_recruiters
-    []
-    # TODO: recruiters.where(company_matcher: true) add validation to
+  def unvetted_matchers
+    self.recruiters.select { |r| r.unvetted_matcher? }
   end
 
 end

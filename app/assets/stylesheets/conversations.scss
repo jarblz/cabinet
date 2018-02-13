@@ -1,0 +1,84 @@
+#conversation-main {
+  @media(max-width: 767px){
+    position: relative;
+    top: -20px;
+  }
+}
+.conversation-header {
+  background: linear-gradient(to right, $blue , #6A93CB);
+  padding: 10px 0px;
+
+  .left {
+    width: 48%;
+    display: inline-block;
+    height: 60px;
+    vertical-align: top;
+    margin-left: 1.5%;
+    padding-right: 15%;
+    .circle {
+      height: 60px;
+      width: 60px;
+      border-radius: 30px;
+      background: white;
+      overflow: hidden;
+      border: solid 2px white;
+      float: right;
+      img {
+        width: 60px;
+        position: relative;
+        right: 2px;
+        bottom: 2px;
+        z-index: 2;
+      }
+      .text {
+        color: $blue;
+        display: table;
+        margin: auto;
+        position: relative;
+        top: 11px;
+        font-size: 1.9em;
+      }
+    }
+  }
+  .right {
+    width: 48%;
+    display: inline-block;
+    height: 45px;
+    vertical-align: top;
+    padding-left: 15%;
+    position: relative;
+    top: 8px;
+    .circle {
+      height: 45px;
+      width: 45px;
+      border-radius: 30px;
+      background: white;
+      overflow: hidden;
+      border: solid 2px white;
+      .text {
+        color: $blue;
+        display: table;
+        margin: auto;
+        position: relative;
+        top: 6px;
+        font-size: 1.6em;
+      }
+      img {
+        width: 45px;
+        right: 2px;
+        bottom: 2px;
+      }
+    }
+  }
+  .middle-line{
+    position: relative;
+    width: 99%;
+    left: 96%;
+    top: -43px;
+    border-bottom: solid white 3px;
+    height: 1px;
+    display: inline-block;
+
+  }
+
+}

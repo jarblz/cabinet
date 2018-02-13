@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206212218) do
+ActiveRecord::Schema.define(version: 20180212162436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(version: 20180206212218) do
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "author_id"
+    t.integer  "receiver_id"
+    t.integer  "connection_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["author_id"], name: "index_conversations_on_author_id", using: :btree
+    t.index ["connection_id"], name: "index_conversations_on_connection_id", using: :btree
+    t.index ["receiver_id"], name: "index_conversations_on_receiver_id", using: :btree
   end
 
   create_table "cp_first_synonyms", force: :cascade do |t|
@@ -143,6 +154,16 @@ ActiveRecord::Schema.define(version: 20180206212218) do
     t.boolean  "remote"
     t.string   "zip_code"
     t.index ["slug"], name: "index_job_postings_on_slug", unique: true, using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "personalities", force: :cascade do |t|
@@ -300,6 +321,8 @@ ActiveRecord::Schema.define(version: 20180206212218) do
   add_foreign_key "cp_second_synonyms", "competencies", column: "second_synonym_id"
   add_foreign_key "cp_third_synonyms", "competencies"
   add_foreign_key "cp_third_synonyms", "competencies", column: "third_synonym_id"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "trait_first_synonyms", "traits"
   add_foreign_key "trait_first_synonyms", "traits", column: "first_synonym_id"
   add_foreign_key "trait_second_synonyms", "traits"

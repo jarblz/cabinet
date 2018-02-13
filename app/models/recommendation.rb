@@ -5,9 +5,13 @@ class Recommendation < ApplicationRecord
   belongs_to :candidate, class_name: "User", :foreign_key => "user_id"
   belongs_to :company, optional: true
   belongs_to :job_posting, optional: true
+  has_many :conversations, class_name: 'Conversation', foreign_key: 'connection_id'
+
 
   scope :jobs, -> { where.not(job_posting: nil) }
   scope :companies, -> { where.not(company: nil) }
+
+  after_save :send_emails
 
   JOB_FIT_POINTS = 125.0
   COMPANY_FIT_POINTS = 100.0
@@ -24,12 +28,14 @@ class Recommendation < ApplicationRecord
   end
 
   def self.generate_company(company, user)
-    score = user.company_fit_score(company)
-    if score >= 0.8
-      if !Recommendation.exists?(candidate: user, company: company)
-        Recommendation.create(candidate: user, company: company, score: score)
-      else
-        Recommendation.find_by(candidate: user, company: company).update(score: score)
+    if !company.unvetted_matchers.blank?
+      score = user.company_fit_score(company)
+      if score >= 0.8
+        if !Recommendation.exists?(candidate: user, company: company)
+          Recommendation.create(candidate: user, company: company, score: score)
+        else
+          Recommendation.find_by(candidate: user, company: company).update(score: score)
+        end
       end
     end
   end
@@ -62,6 +68,16 @@ class Recommendation < ApplicationRecord
     end
   end
 
+  def message_receiver(current_user)
+    if current_user.recruiter?
+      return self.candidate
+    elsif type == :job
+      return self.job_posting.creator
+    else
+      return self.company.unvetted_matchers.first
+    end
+  end
+
   def self.recruiter_job_recommendations(user)
     Recommendation.jobs.select{|r| r.job_posting.participants.include?(user) && r.initial?}
   end
@@ -83,6 +99,18 @@ class Recommendation < ApplicationRecord
       Recommendation.companies.select{|r| r.company.recruiters.include?(user) && r.match?}
     else
       []
+    end
+  end
+
+  def send_emails
+    # TODO: new recommendation mailer, method for recruiter, and method for candidate
+  end
+
+  def company_logo
+    if self.company
+      self.company.logo.url(:medium)
+    else
+      self.job_posting.company.logo.url(:medium)
     end
   end
 

@@ -57,6 +57,57 @@
       </div>
     </div>
   <% end %>
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        <i class="sun icon"></i>Tell us about your skills (choose 5)
+        <p>This will help us tailor our matching algorithm to you!</p>
+      </div>
+      <div class="form-group">
+        <div class="switch-field">
+          <%= f.collection_check_boxes :competency_ids, Competency.all, :id, :name do |b| %>
+            <%= b.check_box %>
+            <label for="user_competency_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Skills"><%=b.object.name%></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        <i class="sun icon"></i>Tell us about your desired company (choose 5)
+        <p>You know what you want in company culture, tell us!</p>
+      </div>
+      <div class="form-group">
+        <div class="switch-field">
+          <%= f.collection_check_boxes :trait_ids, Trait.recruiter_traits, :id, :name do |b| %>
+            <%= b.check_box %>
+            <label for="user_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Company Traits"><%=b.object.name%></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider vert-margin"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-section-heading">
+        <i class="sun icon"></i>Tell us about you (choose 5)
+        <p>Lets get into your personality. Be honest!</p>
+      </div>
+      <div class="form-group">
+        <div class="switch-field">
+          <%= f.collection_check_boxes :trait_ids, Trait.candidate_traits, :id, :name do |b| %>
+            <%= b.check_box %>
+            <label for="user_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Personal Traits"><%=b.object.name%></label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <% if current_user.candidate? %>
     <div class="divider vert-margin"></div>
@@ -125,58 +176,6 @@
         </div>
       </div>
     </div>
-    <div class="divider vert-margin"></div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-section-heading">
-          <i class="sun icon"></i>Tell us about your skills (choose 5)
-          <p>This will help us match you up with jobs</p>
-        </div>
-        <div class="form-group">
-          <div class="switch-field">
-            <%= f.collection_check_boxes :competency_ids, Competency.all, :id, :name do |b| %>
-              <%= b.check_box %>
-              <label for="user_competency_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Skills"><%=b.object.name%></label>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="divider vert-margin"></div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-section-heading">
-          <i class="sun icon"></i>Tell us about your desired company (choose 5)
-          <p>You know what you want in company culture, tell us!</p>
-        </div>
-        <div class="form-group">
-          <div class="switch-field">
-            <%= f.collection_check_boxes :trait_ids, Trait.recruiter_traits, :id, :name do |b| %>
-              <%= b.check_box %>
-              <label for="user_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Company Traits"><%=b.object.name%></label>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="divider vert-margin"></div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-section-heading">
-          <i class="sun icon"></i>Tell us about you (choose 5)
-          <p>Lets get into your personality. Be honest!</p>
-        </div>
-        <div class="form-group">
-          <div class="switch-field">
-            <%= f.collection_check_boxes :trait_ids, Trait.candidate_traits, :id, :name do |b| %>
-              <%= b.check_box %>
-              <label for="user_trait_ids_<%=b.object.id%>" class="limited" data-amount="5" data-thing="Personal Traits"><%=b.object.name%></label>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="divider vert-margin"></div>
     <div class="row">
       <div class="col-sm-12">

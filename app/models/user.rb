@@ -23,7 +23,9 @@ class User < ApplicationRecord
   has_many :user_competencies
   has_many :competencies, through: :user_competencies
   has_many :recommendations, dependent: :delete_all
-
+  has_many :authored_conversations, class_name: 'Conversation', foreign_key: 'author_id'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'received_id'
+  has_many :messages, dependent: :destroy
   # has_many :match_recruiters, class_name: 'MatchRecruiter', foreign_key: 'user_id'
 
   has_attached_file :resume
@@ -32,31 +34,27 @@ class User < ApplicationRecord
   has_attached_file :photo, styles: { large: "300x300#", medium: "200x200#", thumb: "120x120#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
-
   enum felony: [ :yes, :no, :prefer_not_to_answer ]
   # enum gender: [ :male, :female, :other, :prefer_no_gender ]
   # enum race: [ :american_indian_or_alaska_native, :asian, :black_or_african_american, :native_hawaiian_or_other_pacific_islander, :white, :prefer_no_race ]
   # enum student_professional: [ :professional, :student, :other ]
 
   validates_presence_of :role, :on => :create
+  validates_presence_of :name,          :on => :update
+  validates_presence_of :email,         :on => :update
+  validates_presence_of :phone,         :on => :update
+  validates_inclusion_of :unvetted_matcher, in:[true, false], :on => :update
+  validate :validate_traits_and_competencies, on: :update
 
   with_options if: :recruiter? do |recruiter|
     recruiter.validate :has_company
-    recruiter.validates_presence_of :name,          :on => :update
-    recruiter.validates_presence_of :email,         :on => :update
-    recruiter.validates_presence_of :phone,         :on => :update
-    recruiter.validates_inclusion_of :unvetted_matcher, in:[true, false], :on => :update
   end
 
   with_options if: :candidate? do |candidate|
-    candidate.validates_presence_of :name,      :on => :update
-    candidate.validates_presence_of :email,     :on => :update
-    candidate.validates_presence_of :phone,     :on => :update
     candidate.validates_presence_of :zip_code,  :on => :update
     candidate.validates_presence_of :felony,    :on => :update
     candidate.validates_inclusion_of :us_lawfully_authorized, in:[true, false], :on => :update
     candidate.validates_inclusion_of :require_sponsorship, in:[true, false],    :on => :update
-    candidate.validate :validate_traits_and_competencies
     candidate.after_save :generate_recommendations
   end
 
@@ -72,7 +70,7 @@ class User < ApplicationRecord
   end
 
   def active?
-    valid? && !personality.blank?
+    !no_recruiter_company? && profile_complete? && !personality.blank?
   end
 
   def admin?
@@ -87,9 +85,27 @@ class User < ApplicationRecord
     has_role?(:candidate)
   end
 
+  def profile_complete?
+    required = []
+    required << !self.name.blank?
+    required << !self.email.blank?
+    required << !self.phone.blank?
+    required << ([true,false].include? self.unvetted_matcher)
+    required << !self.traits.empty?
+    required << !self.competencies.empty?
+
+    if candidate?
+      required << !self.zip_code.blank?
+      required << !self.felony.blank?
+      required << ([true,false].include? self.us_lawfully_authorized)
+      required << ([true,false].include? self.require_sponsorship)
+    end
+    eval required.join(" && ")
+  end
+
   def self.valid_candidates(location=nil)
     # TODO: make this spatial
-    User.all.select{ |u| u.candidate? && u.valid? }
+    User.all.select{ |u| u.candidate? && u.active? }
   end
 
   def no_recruiter_company?

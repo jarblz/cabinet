@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get "user_modal_content/:id", to: 'users#modal_content', as: 'user_modal_content'
     get "job_posting_modal_content/:id", to: 'job_postings#modal_content', as: 'job_modal_content'
 
-
+    resources :messages, only: [:new, :create]
+    resources :conversations, only: [:index, :show]
 
 end

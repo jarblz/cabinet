@@ -1,0 +1,18 @@
+<div class="sub-menu">
+  <h3><a href="<%=conversations_path%>">Conversations</a></h3><h3 class='no-border'>&nbsp;>&nbsp;</h3><h3><span class="sender-modal info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(@receiver.id)%>"><%= @receiver.name %></span></h3>
+</div>
+
+<div id="conversation-main">
+  <div id="conversation-body">
+    <%= render @conversation.messages %>
+  </div>
+  <div class="new-message-bar">
+    <%= form_for @message do |f| %>
+      <%= hidden_field_tag 'conversation_id', @conversation.id %>
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

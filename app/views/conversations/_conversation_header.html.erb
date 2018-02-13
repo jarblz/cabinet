@@ -1,0 +1,37 @@
+<div class="conversation-header">
+  <div class="left">
+    <% if current_user.recruiter? %>
+      <% if @connection.company %>
+        <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=company_modal_content_path(@connection.company.slug)%>">
+          <%= image_tag @connection.company_logo %>
+        </div>
+      <% else %>
+        <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(@connection.job_posting.id)%>">
+          <%= image_tag @connection.company_logo %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(current_user.id)%>">
+        <%= raw user_photo_content(current_user) %>
+      </div>
+    <% end %>
+    <div class="middle-line"></div>
+  </div>
+  <div class="right">
+      <% if current_user.recruiter? %>
+        <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(@receiver.id)%>">
+          <%= raw user_photo_content(@receiver) %>
+        </div>
+      <% else %>
+        <% if @connection.company %>
+          <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=company_modal_content_path(@connection.company.slug)%>">
+            <%= image_tag @connection.company_logo %>
+          </div>
+        <% else %>
+          <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(@connection.job_posting.id)%>">
+            <%= image_tag @connection.company_logo %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
