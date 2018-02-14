@@ -1,0 +1,12 @@
+<h1>Hi there, <%= @receiver.name.split(' ').first %></h1>
+<p>
+  You have a new message!,
+  from: <%= @conversation.with(@reciever).name %>,
+  Message: <%= @message.body %>
+
+
+</p>
+<p>
+  View this conversation here: <%= @url %>.
+</p>
+<p>Thanks and have a great day!</p>

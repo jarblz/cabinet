@@ -1,0 +1,15 @@
+<h1>Hi there, <%= @recruiter.name.split(' ').first %></h1>
+<p>
+  You have a new connection!,
+  candidate: <%= @recommendation.candidate.name %>,
+  <% if @recommendation.company %>
+    <%= @recommendation.company.name %>
+  <% else %>
+    Job: <%= @recommendation.job_posting.title %>
+  <% end %>
+
+</p>
+<p>
+  View this connection here: <%= @url %>.
+</p>
+<p>Thanks and have a great day!</p>

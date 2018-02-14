@@ -7,7 +7,7 @@ class Message < ApplicationRecord
   private
 
   def notify_receiver
-    # TODO: mailer hook goes here
+    MessageMailer.new_message(self).deliver_later
   end
 
 

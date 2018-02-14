@@ -1,0 +1,13 @@
+<h1>Hi there, <%= @recommendation.candidate.name.split(' ').first %></h1>
+<p>
+  You have a new recommendation!,
+  <% if @recommendation.company %>
+    <%= @recommendation.company.name %>
+  <% else %>
+    <%= @recommendation.job_posting.title %>, <%= @recommendation.job_posting.company.name %>
+  <% end %>
+</p>
+<p>
+  View this recommendation here: <%= @url %>.
+</p>
+<p>Thanks and have a great day!</p>

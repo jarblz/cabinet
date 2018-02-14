@@ -5,13 +5,15 @@ class Recommendation < ApplicationRecord
   belongs_to :candidate, class_name: "User", :foreign_key => "user_id"
   belongs_to :company, optional: true
   belongs_to :job_posting, optional: true
-  has_many :conversations, class_name: 'Conversation', foreign_key: 'connection_id'
+  has_many :conversations, class_name: 'Conversation', foreign_key: 'connection_id', dependent: :destroy
 
 
   scope :jobs, -> { where.not(job_posting: nil) }
   scope :companies, -> { where.not(company: nil) }
 
-  after_save :send_emails
+  after_create :notify_recommendation_recruiter
+  after_save :notify_recommendation_candidate, if: :recruiter_approved?
+  after_save :notify_match_recruiter, if: :match?
 
   JOB_FIT_POINTS = 125.0
   COMPANY_FIT_POINTS = 100.0
@@ -60,6 +62,14 @@ class Recommendation < ApplicationRecord
     end
   end
 
+  def recruiter
+    if company
+      company.unvetted_matchers.first
+    else
+      job_posting.creator
+    end
+  end
+
   def matching_traits
     if company
       candidate.traits && company.traits
@@ -71,10 +81,8 @@ class Recommendation < ApplicationRecord
   def message_receiver(current_user)
     if current_user.recruiter?
       return self.candidate
-    elsif type == :job
-      return self.job_posting.creator
     else
-      return self.company.unvetted_matchers.first
+      self.recruiter
     end
   end
 
@@ -102,8 +110,16 @@ class Recommendation < ApplicationRecord
     end
   end
 
-  def send_emails
-    # TODO: new recommendation mailer, method for recruiter, and method for candidate
+  def notify_recommendation_recruiter
+    RecommendationMailer.recruiter_recommendation.deliver_later(self)
+  end
+
+  def notify_recommendation_candidate
+    RecommendationMailer.candidate_recommendation.deliver_later(self)
+  end
+
+  def notify_match_recruiter
+    RecommendationMailer.recruiter_match.deliver_later(self)
   end
 
   def company_logo

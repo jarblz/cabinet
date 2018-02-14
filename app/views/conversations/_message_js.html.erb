@@ -6,7 +6,9 @@
 
   $(document).on('turbolinks:load', function() {
     var element = document.getElementById("messages");
-    element.scrollTop = element.scrollHeight+100000;
+    if(element){
+      element.scrollTop = element.scrollHeight+100000;
+    }
     $(document).keypress(function(e) {
       if(e.which == 13 && e.shiftKey) {
         console.log('kewl, new line')
