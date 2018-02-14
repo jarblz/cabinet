@@ -7,7 +7,7 @@ class Message < ApplicationRecord
   private
 
   def notify_receiver
-    MessageMailer.new_message(self).deliver_later
+    MessageMailer.new_message(self).deliver_later!
   end
 
 

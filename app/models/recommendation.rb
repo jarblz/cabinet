@@ -111,15 +111,15 @@ class Recommendation < ApplicationRecord
   end
 
   def notify_recommendation_recruiter
-    RecommendationMailer.recruiter_recommendation.deliver_later(self)
+    RecommendationMailer.recruiter_recommendation(self).deliver_later!
   end
 
   def notify_recommendation_candidate
-    RecommendationMailer.candidate_recommendation.deliver_later(self)
+    RecommendationMailer.candidate_recommendation(self).deliver_later!
   end
 
   def notify_match_recruiter
-    RecommendationMailer.recruiter_match.deliver_later(self)
+    RecommendationMailer.recruiter_match(self).deliver_later!
   end
 
   def company_logo
