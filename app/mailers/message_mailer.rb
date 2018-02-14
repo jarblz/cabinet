@@ -7,6 +7,6 @@ class MessageMailer < ApplicationMailer
   end
 
   def set_url(message)
-    @url = conversations_path(message.conversation.id)
+    @url = conversations_url(message.conversation.id)
   end
 end

@@ -22,9 +22,9 @@ class RecommendationMailer < ApplicationMailer
 
   def set_url(recommendation)
     if recommendation.company
-      @url = recommendations_path(:company)
+      @url = recommendations_url(:company)
     else
-      @url = recommendations_path(:job)
+      @url = recommendations_url(:job)
     end
   end
 
