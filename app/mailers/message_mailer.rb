@@ -1,4 +1,5 @@
 class MessageMailer < ApplicationMailer
+  default from: 'notifications@unboxt.com'
   def new_message(message)
     @message = message
     @receiver = message.conversation.with(@message.user)

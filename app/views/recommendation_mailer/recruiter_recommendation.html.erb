@@ -1,10 +1,12 @@
-<h1>Hi there, <%= @recommendation.candidate.name.split(' ').first %></h1>
+<h1>Hi there, <%= @recommendation.recruiter.name.split(' ').first %></h1>
 <p>
   You have a new recommendation!,
+  candidate: <%= @recommendation.candidate.name %>,
+
   <% if @recommendation.company %>
-    <%= @recommendation.company.name %>
+    Type: Company Recommendation
   <% else %>
-    <%= @recommendation.job_posting.title %>, <%= @recommendation.job_posting.company.name %>
+    Type: Job Recommendation - <%= @recommendation.job_posting.title %>
   <% end %>
 </p>
 <p>

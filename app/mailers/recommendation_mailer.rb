@@ -1,4 +1,5 @@
 class RecommendationMailer < ApplicationMailer
+  default from: 'notifications@unboxt.com'
 
   def recruiter_recommendation(recommendation)
     @recommendation = recommendation
