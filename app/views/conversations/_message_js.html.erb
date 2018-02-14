@@ -1,0 +1,19 @@
+<script type="text/javascript">
+  $('#main').addClass('no-bottom-margin')
+  $('.send-button').click(function(){
+    $('.send-message').click();
+  })
+
+  $(document).on('turbolinks:load', function() {
+    var element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight+100000;
+    $(document).keypress(function(e) {
+      if(e.which == 13 && e.shiftKey) {
+        console.log('kewl, new line')
+      } else if (e.which == 13 && $(document.activeElement)[0] == $('textarea')[0]){
+        e.preventDefault();
+        $('.send-message').click();
+      }
+    });
+  })
+</script>

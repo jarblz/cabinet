@@ -82,8 +82,9 @@ class JobPostingsController < ApplicationController
   end
 
   def modal_content
+    html = render_to_string partial: 'modals/job_posting/show', locals: { job: @job_posting }
     respond_to do |format|
-      format.json { render json: { html: JobModalHtml.show(@job_posting) } }
+      format.json { render json: { html: html } }
     end
   end
 

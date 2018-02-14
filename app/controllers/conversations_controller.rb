@@ -14,6 +14,8 @@ class ConversationsController < ApplicationController
 
   def set_conversation
     @conversation = Conversation.find_by(id: params[:id])
+    @receiver = @conversation.with(current_user)
+    @connection = @conversation.connection
   end
 
   def check_participating!

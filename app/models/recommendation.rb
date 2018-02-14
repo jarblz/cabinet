@@ -114,4 +114,12 @@ class Recommendation < ApplicationRecord
     end
   end
 
+  def conversation_text
+    if self.company
+      "Company Match: #{self.company.name}"
+    else
+      self.job_posting.title
+    end
+  end
+
 end

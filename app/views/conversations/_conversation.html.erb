@@ -1,8 +1,17 @@
-<div>
-  Chatting with <%= conversation.with(current_user).name %>
-  <br>
-  <em><%= conversation.messages.last.body.truncate(50) %></em>
-  <br>
-  <%= link_to 'View conversation', conversation_path(conversation) %>
-  <hr>
+<div class="conversation-row">
+  <div class="left">
+    <div class="image-holder">
+      <%= raw user_photo_content(conversation.with(current_user)) %>
+    </div>
+  </div>
+  <div class="right">
+    <h3><%= conversation.with(current_user).name %></h3>
+    <p> <%= conversation.connection.conversation_text %> </p>
+    <a href="<%= conversation_path(conversation) %>"><h4><%= last_message_sender_text(conversation.messages.last) %>:&nbsp;<%= conversation.messages.last.body.truncate(50) %>&nbsp;<span>(view conversation)</span></h4></a>
+    <h4 class='right-timestamp'></h4>
+    <div class="date">
+      <%= conversation.last_message_date.strftime("%m/%d/%Y") %>
+    </div>
+  </div>
 </div>
+<div class="divider"></div>

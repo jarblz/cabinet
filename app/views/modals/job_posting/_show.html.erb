@@ -1,0 +1,52 @@
+<div class="close-x" data-dismiss="modal" aria-label="Close">&Cross;</div>
+<div class="row show-row">
+  <div class="col-sm-12">
+    <h2><%= job.title %></h2>
+  </div>
+</div>
+<div class="row show-row">
+  <div class="col-sm-6">
+    <div class="show-photo">
+      <%= image_tag job.company.logo.url(:medium) %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class='section-title'>Competencies Required</div>
+        <p>
+          <% job.competencies.each do |c| %>
+            <span><%= c.name %></span>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class='section-title'>Company Culture</div>
+        <p>
+          <% job.company_traits.each do |t| %>
+            <span><%= t.name %></span>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class='section-title'>Personality Traits</div>
+        <p>
+          <% job.personality_traits.each do |t| %>
+            <span><%= t.name %></span>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+<div class="row show-row full">
+  <div class="col-sm-12">
+    <div class='section-title'>Location</div>
+    <div class='section-content'><%= job.zip_code %></div>
+  </div>
+</div>

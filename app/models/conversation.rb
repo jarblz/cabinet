@@ -26,6 +26,10 @@ class Conversation < ApplicationRecord
     author == user || receiver == user
   end
 
+  def last_message_date
+    self.messages.last.created_at
+  end
+
   private
 
   def connection_is_match

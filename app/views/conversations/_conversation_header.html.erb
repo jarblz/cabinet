@@ -2,35 +2,47 @@
   <div class="left">
     <% if current_user.recruiter? %>
       <% if @connection.company %>
-        <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=company_modal_content_path(@connection.company.slug)%>">
-          <%= image_tag @connection.company_logo %>
-        </div>
+        <span class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=company_modal_content_path(@connection.company.slug)%>" data-toggle="tooltip" data-placement="top" title="<%=@connection.company.name%>">
+          <div class="circle" data-toggle="tooltip" data-placement="top" title="<%=@connection.company.name%>"  >
+            <%= image_tag @connection.company_logo %>
+          </div>
+        </span>
       <% else %>
-        <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(@connection.job_posting.id)%>">
-          <%= image_tag @connection.company_logo %>
-        </div>
+        <span class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(@connection.job_posting.id)%>">
+          <div class="circle" data-toggle="tooltip" data-placement="top" title="<%=@connection.job_posting.title%>"  >
+            <%= image_tag @connection.company_logo %>
+          </div>
+        </span>
       <% end %>
     <% else %>
-      <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(current_user.id)%>">
-        <%= raw user_photo_content(current_user) %>
-      </div>
+      <span class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(current_user.id)%>">
+        <div class="circle" data-toggle="tooltip" data-placement="top" title="<%=current_user.name%>">
+          <%= raw user_photo_content(current_user, :thumb) %>
+        </div>
+      </span>
     <% end %>
     <div class="middle-line"></div>
   </div>
   <div class="right">
       <% if current_user.recruiter? %>
-        <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(@receiver.id)%>">
-          <%= raw user_photo_content(@receiver) %>
-        </div>
+        <span class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(@receiver.id)%>">
+          <div class="circle" data-toggle="tooltip" data-placement="top" title="<%=@receiver.name%>">
+            <%= raw user_photo_content(@receiver) %>
+          </div>
+        </span>
       <% else %>
         <% if @connection.company %>
-          <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=company_modal_content_path(@connection.company.slug)%>">
-            <%= image_tag @connection.company_logo %>
-          </div>
+          <span class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=company_modal_content_path(@connection.company.slug)%>">
+            <div class="circle" data-toggle="tooltip" data-placement="top" title="<%=@connection.company.name%>">
+              <%= image_tag @connection.company_logo %>
+            </div>
+          </span>
         <% else %>
-          <div class="circle info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(@connection.job_posting.id)%>">
-            <%= image_tag @connection.company_logo %>
-          </div>
+          <span class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(@connection.job_posting.id)%>">
+            <div class="circle" data-toggle="tooltip" data-placement="top" title="<%=@connection.job_posting.title%>">
+              <%= image_tag @connection.company_logo %>
+            </div>
+          </span>
         <% end %>
       <% end %>
     </div>

@@ -1,4 +1,19 @@
-<p><%= message.body %></p>
-<p>at <strong><%= message.created_at %></strong><br>
-  by <strong><%= message.user.name %></strong></p>
-<hr>
+<div class="message-row">
+  <% if message.user==current_user %>
+    <div class="message right" data-toggle="tooltip" data-placement="left" title="<%= time_ago(message.created_at) %>">
+      <%= message.body %>
+      <span></span>
+    </div>
+  <% else %>
+    <span class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(@receiver.id)%>">
+      <div class="avatar-holder-left" data-toggle="tooltip" data-placement="top" title="<%=@receiver.name%>">
+        <%= raw user_photo_content(@receiver) %>
+      </div>
+    </span>
+    <div class="message left" data-toggle="tooltip" data-placement="right" title="<%= time_ago(message.created_at) %>">
+      <div class="body">
+        <%= message.body %>
+      </div>
+    </div>
+  <% end %>
+</div>

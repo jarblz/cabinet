@@ -4,21 +4,31 @@
 <div id="conversation-main" class="container container-card no-padding">
   <%= render partial: 'conversations/conversation_header' %>
   <div id="conversation-body">
-    <div class="new-message">
-      <h4>This is the beginning of your message history with <%= @receiver.name %></h4>
+    <div class="messages">
+      <div class="new-message">
+        <div class="image-holder info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=user_modal_content_path(@receiver.id)%>">
+          <%= raw user_photo_content(@receiver, :medium) %>
+        </div>
+        <h4>This is the beginning of your message history with <%= @receiver.name %></h4>
+      </div>
+    </div>
+    <div class="new-message-bar">
+      <%= form_for @message do |f| %>
+        <%= hidden_field_tag 'receiver_id', @receiver.id %>
+        <%= f.text_area :body, required: true, placeholder: "Say Hello to #{@receiver.name}!" %>
+        <% if @connection %>
+          <%= hidden_field_tag 'connection_id', @connection.id %>
+        <% end %>
+        <div class="button-holder">
+          <div class = 'send-button info-modal'>
+            <i class="send outline icon"></i>
+          </div>
+        </div>
+        <%= f.submit "send", class: 'send-message', hidden: true %>
+      <% end %>
     </div>
   </div>
-  <div class="new-message-bar">
-    <%= form_for @message do |f| %>
-      <%= hidden_field_tag 'receiver_id', @receiver.id %>
-
-      <%= f.label :body %>
-      <%= f.text_area :body %>
-      <% if @connection %>
-        <%= hidden_field_tag 'connection_id', @connection.id %>
-      <% end %>
-      <%= f.submit %>
-    <% end %>
-  </div>
 </div>
+
 <%= render partial: 'modals/show_something_modal' %>
+<%= render partial: 'conversations/message_js.html.erb' %>

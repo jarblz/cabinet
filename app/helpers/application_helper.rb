@@ -5,7 +5,12 @@ module ApplicationHelper
   end
 
   def time_ago(timestamp)
-    "#{((Time.now-timestamp)/60/60/24).to_i} Days Ago"
+    days = ((Time.now-timestamp)/60/60/24).to_i
+    if days != 0
+      "#{days} Days Ago"
+    else
+      timestamp.strftime("%I:%M%p")
+    end
   end
 
   def avatar_contents
