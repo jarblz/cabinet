@@ -4,7 +4,7 @@ class MessageMailer < ApplicationMailer
     @message = message
     @receiver = message.conversation.with(@message.user)
     set_url(message)
-    mail(to: @receiver.email, subject: 'You have a new recommendation!')
+    mail(to: @receiver.email, subject: 'You have a new message!')
   end
 
   def set_url(message)

@@ -29,4 +29,13 @@ class RecommendationMailer < ApplicationMailer
     end
   end
 
+  def set_connection_url(recommendation)
+    if recommendation.company
+      @url = connections_url(:company)
+    else
+      @url = connections_url(:job)
+    end
+  end
+
+
 end
