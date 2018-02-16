@@ -1,7 +1,7 @@
 <h1>Hi there, <%= @receiver.name.split(' ').first %></h1>
 <p>
   You have a new message!,
-  from: <%= @message.conversation.with(@reciever).name %>,
+  from: <%= @message.user.name %>,
   Message: <%= @message.body %>
 
 

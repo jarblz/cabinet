@@ -12,8 +12,7 @@ class Recommendation < ApplicationRecord
   scope :companies, -> { where.not(company: nil) }
 
   after_create :notify_recommendation_recruiter
-  after_save :notify_recommendation_candidate, if: :recruiter_approved?
-  after_save :notify_match_recruiter, if: :match?
+  after_save :recommendation_notifications, if: :status_changed?
 
   JOB_FIT_POINTS = 125.0
   COMPANY_FIT_POINTS = 100.0
@@ -114,12 +113,12 @@ class Recommendation < ApplicationRecord
     RecommendationMailer.recruiter_recommendation(self).deliver_now!
   end
 
-  def notify_recommendation_candidate
-    RecommendationMailer.candidate_recommendation(self).deliver_now!
-  end
-
-  def notify_match_recruiter
-    RecommendationMailer.recruiter_match(self).deliver_now!
+  def recommendation_notifications
+    if recruiter_approved?
+      RecommendationMailer.candidate_recommendation(self).deliver_now!
+    elsif match?
+      RecommendationMailer.recruiter_match(self).deliver_now!
+    end
   end
 
   def company_logo

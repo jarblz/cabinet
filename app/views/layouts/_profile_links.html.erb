@@ -5,10 +5,8 @@
   <li class="sub"><%= link_to 'Manage Job Postings', admin_job_postings_path%></li>
   <li class="sub"><%= link_to 'Manage Industries', admin_industries_path%></li>
   <div class="divider"></div>
-<% elsif current_user.try(:active?) %>
-  <% if current_user.candidate? %>
-    <li class="sub"><%= link_to 'Edit Assessment', assessment_complete_path %></li>
-  <% end %>
+<% elsif !current_user.try(:personality).blank? %>
+  <li class="sub"><%= link_to 'Edit Assessment', assessment_complete_path %></li>
   <%# TODO: other links %>
   <div class="divider"></div>
 <% end %>

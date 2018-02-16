@@ -124,10 +124,12 @@
           <%= f.collection_check_boxes :user_ids, job_posting.company.recruiters.where.not(id: current_user.id), :id, :name do |b| %>
             <%= b.check_box %>
             <label for="job_posting_user_ids_<%=b.object.id%>" class="photo-select">
-              <% if b.object.photo %>
-                <%= image_tag current_user.photo.url %>
+              <% if b.object.photo.exists? %>
+                <%= image_tag b.object.photo.url(:medium) %>
               <% else %>
-                <span> <%= curent_user.no_image_text %></span>
+                <div class="text-container">
+                  <span> <%= current_user.no_image_text %></span>
+                </div>
               <% end %>
             </label>
           <% end %>
