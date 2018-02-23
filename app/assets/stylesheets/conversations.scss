@@ -1,3 +1,18 @@
+.new-conversation {
+  position: fixed;
+  bottom: 60px;
+  right: 5%;
+  i {
+    font-size: 4em;
+    opacity: .8;
+    color: $light-blue;
+  }
+}
+.connection-list {
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 #conversation-main {
   height: 81vh;
   @media(max-width: 767px){
@@ -258,6 +273,9 @@
         top: 20px;
         font-size: 2.6em;
         color: white;
+      }
+      img {
+        width: 90px;
       }
     }
 

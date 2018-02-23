@@ -639,6 +639,7 @@ GEM
     ffi (1.9.18)
     friendly_id (5.2.3)
       activerecord (>= 4.0.0)
+    geocoder (1.4.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     high_voltage (3.0.0)
@@ -830,6 +831,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   friendly_id
+  geocoder
   high_voltage
   httparty
   jbuilder (~> 2.5)

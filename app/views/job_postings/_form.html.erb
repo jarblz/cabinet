@@ -24,13 +24,21 @@
         <p>Where is the job located? (hit tab to search based on postal)</p>
       </div>
       <div class="form-group">
-        <%= f.label :zip_code, for: 'job_posting_zip_code', class:"label-required"%>
+        <%= f.label "Enter City, Zip, or Address", for: 'job_posting_zip_code', class:"label-required"%>
         <%= f.text_field :zip_code, class: 'form-control location-info' %>
       </div>
-      <div class="form-group address-holder">
+      <div class="form-group address-holder" id = "address-holder">
         <i class="marker icon"></i>
         <div class="address-bar"></div>
+        <div class="try-again"><i class="trash alternate outline icon" data-toggle="tooltip" data-placement="top" title="try another address"></i></div>
       </div>
+      <div class="form-group address-holder error">
+        <i class="exclamation circle icon"></i>
+        <div class="address-bar"></div>
+        <div class="try-again"><i class="trash alternate outline icon" data-toggle="tooltip" data-placement="top" title="try another address"></i></div>
+
+      </div>
+
 
       <div class="form-group">
         <%= f.label 'Is this a fully remote role?', class:"label-required"%>
@@ -137,6 +145,7 @@
       </div>
       <%= f.hidden_field :company_id, value: job_posting.company.id %>
       <%= f.hidden_field :creator_id, value: job_posting.creator.id %>
+      <%= f.hidden_field :address %>
     </div>
   </div>
 

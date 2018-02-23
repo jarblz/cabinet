@@ -62,7 +62,7 @@
     <div class="col-sm-12">
       <div class="form-section-heading">
         <i class="sun icon"></i>Tell us about your skills (choose 5)
-        <p>This will help us tailor our matching algorithm to you!</p>
+        <p>Selecting your skills helps us tailor your results!</p>
       </div>
       <div class="form-group">
         <div class="switch-field">
@@ -118,12 +118,18 @@
           <p>where are you seeking a job? (hit tab to search based on postal)</p>
         </div>
         <div class="form-group">
-          <%= f.label :zip_code, for: 'user_zip_code', class:"label-required"%>
+          <%= f.label "Enter City, Zip, or Address", for: 'user_zip_code', class:"label-required"%>
           <%= f.text_field :zip_code, class: 'form-control location-info' %>
         </div>
-        <div class="form-group address-holder">
+        <div class="form-group address-holder" id="address-holder">
           <i class="marker icon"></i>
           <div class="address-bar"></div>
+          <div class="try-again"><i class="trash alternate outline icon" data-toggle="tooltip" data-placement="top" title="try another address"></i></div>
+        </div>
+        <div class="form-group address-holder error">
+          <i class="exclamation circle icon"></i>
+          <div class="address-bar"></div>
+          <div class="try-again"><i class="trash alternate outline icon" data-toggle="tooltip" data-placement="top" title="try another address"></i></div>
         </div>
         <div class="form-group">
           <%= f.label 'Are you open to fully remote opportunities?', for: 'user_zip_code', class:"label-required"%>
@@ -231,6 +237,7 @@
       </div>
     </div>
   <% end %>
+  <%= f.hidden_field :address %>
 
   <div class="actions">
     <%= f.submit "Finished", class: 'button btn-standard' %>

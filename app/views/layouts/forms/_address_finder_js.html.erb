@@ -1,25 +1,62 @@
 <script>
-
-function initMap() {
-  isMapsApiLoaded = true;
-  var geocoder = new google.maps.Geocoder();
-  $('.location-info').blur(function() {
-    geocodeAddress(geocoder, $(this).val())
-  });
-}
-
-function geocodeAddress(geocoder, address) {
-  var resultAddress = "Not Found"
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      $('.address-bar').html(results[0].formatted_address);
-      $('.address-holder').fadeIn(1000)
-    } else {
-      alert('We could not find your location for the following reason: ' + status);
+  $(document).on('turbolinks:load', function() {
+    var googleDeclared = true;
+    try { google; }
+    catch(e) {
+      if(e.name == "ReferenceError") {
+        googleDeclared = false;
+      }
     }
-  });
+    if(googleDeclared){
+      console.log('maps already loaded!')
+      initMap();
+    } else {
+      $.getScript("https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_API_KEY']%>", function() {
+        initMap();
+      });
+    }
+  })
 
-}
+  function initMap() {
+    isMapsApiLoaded = true;
+    var geocoder = new google.maps.Geocoder();
+    geocodeAddress(geocoder,$('.location-info').val())
+    $('.location-info').blur(function() {
+      geocodeAddress(geocoder, $(this).val())
+    });
+    $('.try-again').click(function(){
+      $('.location-info').val("")
+      $('.location-info').focus();
+      $('.address-holder.error').hide()
+      $('#address-holder').hide()
+      $('*[id*=address]').val("");
+    })
+    $('form').submit(function() {
+      if($('.location-info').is(":focus")){
+        $('html, body').animate({
+          scrollTop: $('.location-info').offset().top-100
+        }, 200);
+        $('.location-info').blur();
+        return false
+      }
+    });
+
+  }
+
+  function geocodeAddress(geocoder, address) {
+    var resultAddress = "Not Found"
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        $('.address-bar').html(results[0].formatted_address);
+        $('.address-holder.error').hide();
+        $('#address-holder').fadeIn(1000);
+        $('*[id*=address]').val(results[0].formatted_address);
+      } else {
+        $('.address-bar').html('Sorry! that address is invalid');
+        $('#address-holder').hide();
+        $('.address-holder.error').fadeIn(1000);
+        $('*[id*=address]').val("");
+      }
+    });
+  }
 </script>
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_API_KEY']%>&callback=initMap" data-turbolinks-eval="false"></script>

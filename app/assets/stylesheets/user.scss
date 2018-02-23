@@ -20,4 +20,19 @@
   .address-bar {
     display: inline-block;
   }
+  &.error {
+    background: $lightest-red;
+  }
+  .try-again {
+    float: right;
+    position: relative;
+    bottom: 13px;
+    left: 6px;
+    cursor: pointer;
+    i {
+      font-size: 1.6em;
+      position: relative;
+      top: 6px;
+    }
+  }
 }

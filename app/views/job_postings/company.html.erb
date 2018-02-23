@@ -23,14 +23,16 @@
             <span data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=job_modal_content_path(job_posting.id)%>">
               <%= job_posting.title %>
             </span>&nbsp;&nbsp;
-            <a href="<%=edit_job_posting_path(job_posting)%>"><i class="write icon job-actions"></i></a>
-            <a href = "<%=job_posting_path(job_posting)%>" data-confirm= "Are you sure you want to remove this job?", data-method = "delete")>
-              <i class="trash outline icon job-actions"></i>
-            </a>
+            <% if job_posting.participant?(current_user) %>
+              <a href="<%=edit_job_posting_path(job_posting)%>"><i class="write icon job-actions"></i></a>
+              <a href = "<%=job_posting_path(job_posting)%>" data-confirm= "Are you sure you want to remove this job?", data-method = "delete")>
+                <i class="trash outline icon job-actions"></i>
+              </a>
+            <% end %>
             <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
 
           </h3>
-          <h4><%= job_posting.try(:zip_code) %></h4>
+          <h4><%= Geocoder.city(job_posting) %></h4>
           <p>
             <%= time_ago(job_posting.created_at) %>
           </p>
@@ -53,4 +55,3 @@
     </div>
   <% end %>
 </div>
-<%= render partial: 'modals/show_something_modal' %>

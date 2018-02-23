@@ -5,3 +5,9 @@
 <div id="conversations" class="container container-card no-overflow">
   <%= render @conversations %>
 </div>
+
+<div class="new-conversation">
+  <span class="info-modal" data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=connection_list_modal_content_path%>">
+    <i class="plus circle icon" data-toggle="tooltip" data-placement="top" title="start a new conversation"></i>
+  </span>
+</div>

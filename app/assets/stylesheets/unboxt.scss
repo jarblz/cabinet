@@ -204,6 +204,7 @@ body {
   @media(max-width: 600px){ padding: 30px 10px; }
   &.tight-vertical { padding: 30px inherit; }
   &.no-padding { padding: 0px; padding-bottom: 30px;}
+  &.overflow-scroll { overflow-x: scroll; }
   margin: auto;
   .header-section {
     display: table;

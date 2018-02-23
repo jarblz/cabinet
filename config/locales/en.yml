@@ -21,3 +21,40 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        zip_code: "Location"
+        address: "Location"
+        unvetted_matcher: "Unvetted (company) recommendations"
+        us_lawfully_authorized: "Lawfully authorized to work in the US"
+        require_sponsorship: "Sponsorship Required"
+        remote: "Open to fully remote positions"
+      job_posting:
+        zip_code: "Location"
+        address: "Location"
+        remote: "Fully remote opportunity"
+    errors:
+      models:
+        user:
+          attributes:
+            zip_code:
+              blank: "is required"
+            address:
+              blank: "must be valid!"
+            unvetted_matcher:
+              inclusion: "please choose yes or no"
+            us_lawfully_authorized:
+              inclusion: "please choose yes or no"
+            require_sponsorship:
+              inclusion: "please choose yes or no"
+            remote:
+              inclusion: "please choose yes or no"
+        job_posting:
+          attributes:
+            zip_code:
+              blank: "is required"
+            address:
+              blank: "must be valid!"
+            remote:
+              inclusion: "please choose yes or no"

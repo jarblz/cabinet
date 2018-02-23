@@ -1,5 +1,8 @@
 .job-card {
   margin-bottom: 20px;
+  @media(max-width: 767px){
+    text-align: center;
+  }
   .foot{
     position: relative;
     top: 29px;
@@ -10,6 +13,11 @@
   }
   i {
     font-size: 5em;
+    @media(max-width: 767px){
+      font-size: 7em;
+      margin-bottom: 35px;
+    }
+
   }
   .text {
     font-size: 18px;

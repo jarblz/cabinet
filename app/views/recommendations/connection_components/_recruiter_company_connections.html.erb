@@ -17,7 +17,7 @@
         </div>
 
       </h3>
-      <h4><%= connection.candidate.competencies.first.name %>,&nbsp <%= connection.candidate.try(:location) %></h4>
+      <h4><%= connection.candidate.competencies.first.name %>,&nbsp <%= Geocoder.city(connection.candidate) %></h4>
       <p>
         <% connection.matching_traits.limit(3).each do |trait| %>
         <span class='match-items'><%= trait.name %></span>

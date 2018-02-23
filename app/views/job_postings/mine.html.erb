@@ -30,7 +30,7 @@
             <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
 
           </h3>
-          <h4><%= job_posting.try(:zip_code) %></h4>
+          <h4><%= Geocoder.city(job_posting) %></h4>
           <p>
             <%= time_ago(job_posting.created_at) %>
           </p>
@@ -48,4 +48,3 @@
     </div>
   <% end %>
 </div>
-<%= render partial: 'modals/show_something_modal' %>

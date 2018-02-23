@@ -16,6 +16,13 @@
     position: relative;
     left: -1000px;
     width: 1000%;
+    &.small {
+      display: table;
+      margin: auto;
+      width: 60%;
+      margin-bottom: 20px;
+      left: unset;
+    }
   }
   .close-x {
     cursor: pointer;
@@ -90,7 +97,7 @@ label {
 }
 
 .form-errors {
-  background: $red;
+  background: $light-red;
   color: white;
   border-radius: 3px;
   padding: 20px;

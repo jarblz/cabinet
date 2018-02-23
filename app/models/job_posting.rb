@@ -19,13 +19,16 @@ class JobPosting < ApplicationRecord
   belongs_to :creator, foreign_key: "creator_id", class_name: "User"
 
   # TODO: add maximum number of accounts when we want to begin monetizing
+  geocoded_by :address
 
   validate :validate_traits_and_competencies
   validates_presence_of :title
   validates_presence_of :description
   validates_inclusion_of :remote, in:[true, false]
   validates_presence_of :zip_code, unless: :remote?
+  validates_presence_of :address, unless: :remote?
 
+  after_validation :geocode
   after_save :generate_recommendations
 
   def validate_traits_and_competencies
@@ -52,7 +55,9 @@ class JobPosting < ApplicationRecord
     traits.where(is_recruiter: false)
   end
 
-
+  def participant?(user)
+    participants.include? user
+  end
 
   private
 

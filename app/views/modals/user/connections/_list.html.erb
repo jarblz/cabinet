@@ -1,0 +1,28 @@
+<div class="close-x" data-dismiss="modal" aria-label="Close">&Cross;</div>
+<h2>Choose a connection below:</h2>
+<div class="connection-list">
+  <div class="row show-row">
+    <% if user.connections.blank? %>
+      <div class="col-sm-12">
+        <h2>You haven't made any connections yet! We are working hard on that!</h2>
+      </div>
+    <% else %>
+      <% if user.recruiter? %>
+        <% user.connections.each do |connection| %>
+        <div class="divider small"></div>
+          <div class="col-sm-12" style="margin-bottom:20px;">
+            <h3> <a href="<%=new_message_path(receiver_id: connection.message_receiver(user))%>"><%= connection.user.name %> : <%= connection.conversation_text %></a></h3>
+          </div>
+        <% end %>
+      <% else %>
+        <% user.connections.each do |connection| %>
+        <div class="divider small"></div>
+          <div class="col-sm-12" style="margin-bottom:20px;">
+            <h3> <a href="<%=new_message_path(receiver_id: connection.message_receiver(user))%>"><%= connection.recruiter.name %> : <%= connection.conversation_text %></a></h3>
+          </div>
+        <% end %>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>

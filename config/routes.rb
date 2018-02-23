@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :traits
       resources :competencies
       resources :industries
-      resources :job_postings, except: [:new, :index]
+      resources :job_postings, except: [:new]
       resources :companies
     end
 
@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     get "company_modal_content/:slug", to: 'companies#modal_content', as: 'company_modal_content'
     get "user_modal_content/:id", to: 'users#modal_content', as: 'user_modal_content'
     get "job_posting_modal_content/:id", to: 'job_postings#modal_content', as: 'job_modal_content'
+
+    get "connection_list_modal_content", to: 'users#connection_list_modal_content', as: 'connection_list_modal_content'
 
     resources :messages, only: [:new, :create]
     resources :conversations, only: [:index, :show]

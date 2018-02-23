@@ -6,10 +6,12 @@ module ApplicationHelper
 
   def time_ago(timestamp)
     days = ((Time.now-timestamp)/60/60/24).to_i
-    if days != 0
+    if days == 1
+      "#{days} Day Ago"
+    elsif days != 0
       "#{days} Days Ago"
     else
-      timestamp.strftime("%I:%M%p")
+      "Today"
     end
   end
 

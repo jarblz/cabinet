@@ -27,6 +27,8 @@ gem 'rolify'
 gem 'semantic-ui-sass'
 
 gem 'httparty'
+
+gem 'geocoder'
 # other gems I should be using
 # Kaminari - pagination
 # Ransack - pagination, searching/filtering

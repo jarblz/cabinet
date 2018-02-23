@@ -9,6 +9,9 @@
     <div class="show-photo">
       <%= image_tag job.company.logo.url(:medium) %>
     </div>
+    <div class="company-text">
+      <h3><%= job.company.name %></h3>
+    </div>
   </div>
   <div class="col-sm-6">
     <div class="row">
@@ -53,6 +56,6 @@
 <div class="row show-row full">
   <div class="col-sm-12">
     <div class='section-title'>Location</div>
-    <div class='section-content'><%= job.zip_code %></div>
+    <div class='section-content'><%= Geocoder.city(job) %></div>
   </div>
 </div>

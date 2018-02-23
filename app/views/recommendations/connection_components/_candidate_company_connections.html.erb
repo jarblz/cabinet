@@ -5,11 +5,11 @@
         <%= image_tag connection.company.logo.url(:medium) %>
       </div>
       <div class="mobile-actions single">
-        <a href="<%=new_message_path(receiver_id: connection.message_receiver(current_user, connection_id: connection.id))%>"><i class="mail icon"></i></a>
+        <a href="<%=new_message_path(receiver_id: connection.message_receiver(current_user), connection_id: connection.id)%>"><i class="mail icon"></i></a>
       </div>
     </div>
     <div class="middle-info">
-      <h3 data-toggle="modal" data-target="#infoModal" class="info-modal">
+      <h3 data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=company_modal_content_path(connection.company.slug)%>">
         <%= connection.company.name %>
         <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
         <div class="score-circle" data-toggle="tooltip" data-placement="top" title="Company Fit Score">

@@ -39,6 +39,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def connection_list_modal_content
+    html = render_to_string partial: 'modals/user/connections/list', locals: { user: current_user }
+    respond_to do |format|
+      format.json { render json: { html: html } }
+    end
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -53,7 +61,7 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(
-        :name, :email, :phone, :country, :zip_code, :company_code, :remote, :felony, :us_lawfully_authorized, :unvetted_matcher,
+        :name, :email, :phone, :country, :zip_code, :address, :company_code, :remote, :felony, :us_lawfully_authorized, :unvetted_matcher,
         :require_sponsorship, :photo, :resume, :writing_sample, :transcript, trait_ids: [], competency_ids: [])
     end
 end

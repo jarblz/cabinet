@@ -19,10 +19,11 @@
         </div>
 
       </h3>
-      <h4><%= recommendation.job_posting.try(:zip_code) %></h4>
+      <h4><%= recommendation.job_posting.company.name %></h4>
+      <h5><%= Geocoder.city(recommendation.job_posting) %></h5>
       <p>
         <% recommendation.matching_traits.limit(3).each do |trait| %>
-        <span class='match-items'><%= trait.name %></span>
+          <span class='match-items'><%= trait.name %></span>
         <% end %>
         <span class='match-items info-modal' data-toggle="modal" data-target="#infoModal" data-populate-modal-with="<%=job_modal_content_path(recommendation.job_posting.id)%>">...</span>
       </p>

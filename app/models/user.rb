@@ -38,6 +38,7 @@ class User < ApplicationRecord
   # enum gender: [ :male, :female, :other, :prefer_no_gender ]
   # enum race: [ :american_indian_or_alaska_native, :asian, :black_or_african_american, :native_hawaiian_or_other_pacific_islander, :white, :prefer_no_race ]
   # enum student_professional: [ :professional, :student, :other ]
+  geocoded_by :address
 
   validates_presence_of :role, :on => :create
   validates_presence_of :name,          :on => :update
@@ -52,11 +53,14 @@ class User < ApplicationRecord
 
   with_options if: :candidate? do |candidate|
     candidate.validates_presence_of :zip_code,  :on => :update
+    candidate.validates_presence_of :address, on: :update
     candidate.validates_presence_of :felony,    :on => :update
     candidate.validates_inclusion_of :us_lawfully_authorized, in:[true, false], :on => :update
     candidate.validates_inclusion_of :require_sponsorship, in:[true, false],    :on => :update
     candidate.after_save :generate_recommendations
   end
+
+  after_validation :geocode
 
   after_create :provision_role
 
@@ -198,8 +202,12 @@ class User < ApplicationRecord
     Recommendation.recruiter_company_connections self
   end
 
-  def show_modal
-    ModalHtml.user(self)
+  def connections
+    if self.recruiter?
+      self.recruiter_job_connections + self.recruiter_company_connections
+    else
+      self.candidate_job_connections + self.candidate_company_connections
+    end
   end
 
   private
