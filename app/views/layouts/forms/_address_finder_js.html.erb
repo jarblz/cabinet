@@ -20,10 +20,14 @@
   function initMap() {
     isMapsApiLoaded = true;
     var geocoder = new google.maps.Geocoder();
-    geocodeAddress(geocoder,$('.location-info').val())
+    if($('.location-info').val()){
+      geocodeAddress(geocoder,$('.location-info').val())
+    }
+
     $('.location-info').blur(function() {
       geocodeAddress(geocoder, $(this).val())
     });
+
     $('.try-again').click(function(){
       $('.location-info').val("")
       $('.location-info').focus();
@@ -31,6 +35,7 @@
       $('#address-holder').hide()
       $('*[id*=address]').val("");
     })
+
     $('form').submit(function() {
       if($('.location-info').is(":focus")){
         $('html, body').animate({
