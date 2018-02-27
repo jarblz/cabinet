@@ -32,8 +32,8 @@ class JobPosting < ApplicationRecord
   after_save :generate_recommendations
 
   def validate_traits_and_competencies
-    errors.add(:traits, "Please add at least 1") if traits.size == 0
-    errors.add(:competencies, "Please add at least 1") if competencies.size == 0
+    errors.add(:traits, "Please choose 5 personal, and 5 company") if traits.size != 10
+    errors.add(:competencies, "Please choose 5") if competencies.size != 5
   end
 
   def participants

@@ -65,8 +65,8 @@ class User < ApplicationRecord
   after_create :provision_role
 
   def validate_traits_and_competencies
-    errors.add(:traits, "Please add at least 1") if traits.size == 0
-    errors.add(:competencies, "Please add at least 1") if competencies.size == 0
+    errors.add(:traits, "Please choose 5 personal, and 5 company") if traits.size != 10
+    errors.add(:competencies, "Please choose 5") if competencies.size != 5
   end
 
   def provision_role
@@ -95,8 +95,8 @@ class User < ApplicationRecord
     required << !self.email.blank?
     required << !self.phone.blank?
     required << ([true,false].include? self.unvetted_matcher)
-    required << !self.traits.empty?
-    required << !self.competencies.empty?
+    required << self.traits.count == 10
+    required << self.competencies.count == 5
 
     if candidate?
       required << !self.zip_code.blank?

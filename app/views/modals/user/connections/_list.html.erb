@@ -11,14 +11,14 @@
         <% user.connections.each do |connection| %>
         <div class="divider small"></div>
           <div class="col-sm-12" style="margin-bottom:20px;">
-            <h3> <a href="<%=new_message_path(receiver_id: connection.message_receiver(user))%>"><%= connection.user.name %> : <%= connection.conversation_text %></a></h3>
+            <h3> <a href="<%=new_message_path(receiver_id: connection.message_receiver(user), connection_id: connection.id)%>"><%= connection.user.name %> : <%= connection.conversation_text %></a></h3>
           </div>
         <% end %>
       <% else %>
         <% user.connections.each do |connection| %>
         <div class="divider small"></div>
           <div class="col-sm-12" style="margin-bottom:20px;">
-            <h3> <a href="<%=new_message_path(receiver_id: connection.message_receiver(user))%>"><%= connection.recruiter.name %> : <%= connection.conversation_text %></a></h3>
+            <h3> <a href="<%=new_message_path(receiver_id: connection.message_receiver(user), connection_id: connection.id)%>"><%= connection.recruiter.name %> : <%= connection.conversation_text %></a></h3>
           </div>
         <% end %>
       <% end %>

@@ -205,6 +205,7 @@ body {
   &.tight-vertical { padding: 30px inherit; }
   &.no-padding { padding: 0px; padding-bottom: 30px;}
   &.overflow-scroll { overflow-x: scroll; }
+  &.no-header { margin-top: 65px; }
   margin: auto;
   .header-section {
     display: table;
@@ -302,7 +303,13 @@ body {
   }
 
   .nested-link {
-    display: table;
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    margin: auto;
+    margin-left: 0%;
+    overflow: hidden;
+    text-overflow: ellipsis;
     background: #ccc;
     border: solid 1px;
     padding: 10px;
