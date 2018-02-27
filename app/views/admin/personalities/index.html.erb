@@ -1,0 +1,30 @@
+<div class="sub-menu">
+  <h3>manage personalities</h3>
+</div>
+<div class="container container-card overflow-scroll">
+  <div class="header-bar">
+    <%#= link_to 'New Competency', new_admin_personality_path, class: 'btn btn-info inline' %>&nbsp;
+    <%= link_to 'Back', root_path, class: 'btn btn-info inline' %>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Code</th>
+        <th scope="col">Has PDF?</th>
+        <th scope="col" colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @personalities.each do |personality| %>
+        <tr>
+          <td><%= personality.name %></td>
+          <td><%= personality.code %></td>
+          <td><%= personality.info.exists? ? "Yes" : "No" %></td>
+          <td><%= link_to 'Edit', edit_admin_personality_path(personality), class: 'btn btn-info btn-xs'  %></td>
+          <td><%#= link_to 'Destroy', admin_personality_path(personality), method: :delete, class: 'btn btn-info btn-xs' , data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

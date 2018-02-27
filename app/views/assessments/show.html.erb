@@ -1,13 +1,15 @@
 <div class="sub-menu">
   <h3>Whew! Finished!</h3>
 </div>
-<div class="container container-card">
+<div class="container container-card center-everything">
   <h2>Your Personality:</h2>
   <div class="avatar-holder">
     <h1><%= current_user.personality.name %>&nbsp;(<%= current_user.personality.code %>)</h1>
-    <p>this is a short description explaining what the above personality type means.</p>
+    <% if current_user.personality.info.exists? %>
+      <%= link_to "Learn more about your personality type", current_user.personality.info.url, class:'button btn-standard', style: "display: inline-block; margin-bottom: 60px;", target: "_blank" %><br/>
+    <% end %>
   </div>
-  <%= link_to 'Retake Assessment', restart_assessment_path, class: 'button btn-standard', data: { confirm: 'Are you sure? This will completely remove your existing assessment and you will not be able to use the site until you complete the new one!' } %>
+  <%= link_to 'Retake Assessment', restart_assessment_path, style: "display: inline-block; margin-bottom: 4px;", class: 'button btn-standard', data: { confirm: 'Are you sure? This will completely remove your existing assessment and you will not be able to use the site until you complete the new one!' } %>
   <p>-or-</p>
   <%= link_to 'Home', root_path, class: 'button btn-alternate' %>
 </div>

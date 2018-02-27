@@ -206,6 +206,9 @@ body {
   &.no-padding { padding: 0px; padding-bottom: 30px;}
   &.overflow-scroll { overflow-x: scroll; }
   &.no-header { margin-top: 65px; }
+  &.center-everything {
+    text-align: center;
+  }
   margin: auto;
   .header-section {
     display: table;

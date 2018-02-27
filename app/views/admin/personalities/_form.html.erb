@@ -1,0 +1,35 @@
+<%= form_for([:admin, personality]) do |f| %>
+  <% if personality.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(personality.errors.count, "error") %> prohibited this personality from being saved:</h2>
+
+      <ul>
+      <% personality.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+      <%= f.label :name, for: 'personality_name'%>
+      <%= f.text_field :name, class: 'form-control', :readonly => true %>
+  </div>
+  <div class="form-group">
+      <%= f.label :code, for: 'personality_code'%>
+      <%= f.text_field :code, class: 'form-control', :readonly => true %>
+  </div>
+  <div class="form-group">
+    <% if personality.info.exists? %>
+      <%= link_to "personality.info.original_filename", personality.info.url, class:'nested-link' %><br/>
+      <p>Upload a different Resume:</p>
+      <%= f.file_field :info %>
+    <% else %>
+      <%= f.file_field :info %>
+    <% end %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>

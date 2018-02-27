@@ -1,0 +1,10 @@
+<div class="sub-menu">
+  <h3>edit personality</h3>
+</div>
+<div class="container container-card no-overflow">
+
+  <%= render 'form', personality: @personality %>
+
+  <%= link_to 'Show', admin_personality_path(@personality) %> |
+  <%= link_to 'Back', admin_personalities_path %>
+</div>

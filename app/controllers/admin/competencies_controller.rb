@@ -29,7 +29,7 @@ module Admin
 
       respond_to do |format|
         if @competency.save
-          format.html { redirect_to admin_competency_path(@competency), notice: 'Competency was successfully created.' }
+          format.html { redirect_to admin_competencies_path, notice: 'Competency was successfully created.' }
           format.json { render :show, status: :created, location: @competency }
         else
           format.html { render :new }
@@ -43,7 +43,7 @@ module Admin
     def update
       respond_to do |format|
         if @competency.update(competency_params)
-          format.html { redirect_to admin_competency_path(@competency), notice: 'Competency was successfully updated.' }
+          format.html { redirect_to admin_competencies_path, notice: 'Competency was successfully updated.' }
           format.json { render :show, status: :ok, location: @competency }
         else
           format.html { render :edit }

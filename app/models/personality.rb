@@ -1,5 +1,7 @@
 class Personality < ApplicationRecord
   has_many :users
+  has_attached_file :info
+  do_not_validate_attachment_file_type :info
   def self.find_by_scores(assessment)
     personality_array = []
     Assessment::AVATAR_CATEGORIES.each do |category|

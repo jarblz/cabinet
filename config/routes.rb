@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :competencies
       resources :industries
       resources :job_postings, except: [:new]
+      resources :personalities, except: [:new, :show]
       resources :companies
     end
 
