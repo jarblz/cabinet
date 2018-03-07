@@ -79,12 +79,12 @@ class JobPostingsController < ApplicationController
     end
 
     def set_company
-      redirect_to root_path, alert: 'no company specified!' if !params[:slug]
+      redirect_to dashboard_root_path, alert: 'no company specified!' if !params[:slug]
       @company = Company.friendly.find(params[:slug])
     end
 
     def confirm_recruiter
-      redirect_to root_path, alert: 'you must be a recruiter to see this page!' if !current_user.recruiter?
+      redirect_to dashboard_root_path, alert: 'you must be a recruiter to see this page!' if !current_user.recruiter?
     end
 
     def job_posting_params

@@ -27,7 +27,12 @@ module ApplicationHelper
   end
 
   def quicklinks(user)
-    if !user || !user.active?
+    if !user
+      {
+        "Login": [new_user_session_path, "call-action right-most"],
+        "Sign Up": [new_user_registration_path, "call-action"]
+      }
+    elsif !user.active?
       {}
     else
       {

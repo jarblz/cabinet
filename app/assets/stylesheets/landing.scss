@@ -1,0 +1,316 @@
+$dark-blue:     #052A5C;
+$darkish-blue:  #093878;
+$blue:          #0D4594; //primary
+$lightish-blue: #275DA7;
+$light-blue:    #4774B3;
+$light-green:    #7BC93B;
+$lightest-green: #B7ED8B;
+$green:       #5EB319;
+$yellow:      #FEB710;
+$aqua: #00f3f3;
+.main {
+  margin-bottom: 0px !important;
+}
+.home-full-width {
+  width: 100%;
+  height: 500px;
+  h2 {
+    margin-left: 0%;
+    margin-bottom: 15px;
+  }
+  h3, h4 {
+    margin-left: 0%;
+    margin-bottom: 10px;
+  }
+
+  .btn-standard{
+    border: 2px solid white;
+    width: auto;
+    overflow: hidden;
+    max-width: 145px;
+    opacity: .7;
+    float: right;
+    margin-left: 20px;
+    &.center {
+      display: table;
+      margin: auto;
+      float: unset;
+      margin-top: 20px;
+    }
+    &.dual-together {
+      display: inline-block;
+      margin: auto;
+      margin-left: 10px;
+    }
+    &:hover {
+      background: $yellow;
+      color: white;
+      opacity: .9;
+    }
+  }
+  .btn-alternate{
+    background: white;
+    border: 2px solid white;
+    width: auto;
+    overflow: hidden;
+    max-width: 145px;
+    opacity: .9;
+    display: inline-block;
+    color: $light-blue;
+    opacity: .7;
+    &.center {
+      display: table;
+      margin: auto;
+      float: unset;
+      margin-top: 20px;
+    }
+    &.dual-together {
+      display: inline-block;
+      margin: auto;
+      margin-right: 10px;
+    }
+
+    &:hover {
+      background: $green;
+      border: solid 2px white;
+      color: white;
+      opacity: .9;
+    }
+  }
+  &.hero {
+    background-image: image-url("praise-girl.png");
+    background-size: cover;
+    position: relative;
+    text-align: left;
+    .overlay {
+      height: 100%;
+      background: linear-gradient(100deg, $light-blue, $blue );
+      background-size: 100% 100%;
+      z-index: 2;
+      opacity: 0.8;
+    }
+    .hero-content {
+      height: 100%;
+      margin-top: 150px;
+      padding: 0px 30px;
+      position: absolute;
+      top: 0px;
+      color: white;
+      opacity: .85;
+      font-family: "Aller std thin";
+      h1 {
+        font-size: 44px;
+        @media(max-width: 740px){
+          font-size: 33px;
+        }
+      }
+      .header-caption {
+        padding: 0px 10%;
+        text-align: center;
+        margin-top: 22px;
+      }
+      .hero-actions {
+        display: table;
+        margin: auto;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  &.section-one {
+    background: white;
+    padding-left: 3%;
+    height: auto;
+    color: $lightish-blue;
+    .circle-section-image{
+      &.man-woman {
+        width: 300px;
+        height: 300px;
+        @media(max-width: 970px){
+          height: 200px;
+          width: 200px;
+        }
+        @media(max-width: 767px){
+          height: 300px;
+          width: 300px;
+        }
+
+        border-radius: 50%;
+        background-image: image-url('man-woman-work-web.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+    }
+    .text-section{
+      padding-right: 8%;
+      padding-left: 4%;
+      margin-top: 45px;
+      @media(max-width: 970px){
+        margin-top: 0px;
+      }
+      text-align: left;
+    }
+  }
+  &.section-two {
+    height: auto;
+    background: $aqua;
+    .text-section {
+      padding-left: 10%;
+    }
+    .explanation-multiple {
+      margin-bottom: 20px;
+    }
+  }
+  &.section-three {
+    height: auto;
+    padding: 40px 0px;
+    color: $light-blue;
+
+    .conviction-card {
+      background: white;
+      padding: 20px 6%;
+      border-radius: 5px;
+      max-width: 350px;
+      display: table;
+      margin: auto;
+      margin-top: 30px;
+      &:hover {
+        -moz-box-shadow:    3px 3px 5px 3px #ccc;
+        -webkit-box-shadow: 3px 3px 5px 3px #ccc;
+        box-shadow:         3px 3px 5px 3px #ccc;
+      }
+      @media(max-width: 767px) {
+        max-width: unset;
+        width: 370px;
+      }
+      @media(max-width: 440px) {
+        max-width: unset;
+        width: 100%;
+      }
+
+
+      &.restricted {
+        &.right {
+          margin-left: 3%
+        }
+        &.left {
+          margin-right: 3%
+        }
+        @media(max-width: 767px) {
+          margin-right: auto !important;
+          margin-left: auto !important;
+        }
+      }
+    }
+    .icon-holder {
+      display: table;
+      margin: auto;
+      width: 75px;
+      height: 75px;
+      background: $lightish-blue;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      @media(max-width: 767px) {
+        width: 100px;
+        height: 100px;
+      }
+
+      i {
+        display: table;
+        margin: auto;
+        margin-top: 14px;
+        font-size: 36px;
+        color: white;
+        @media(max-width: 767px) {
+          margin-top: 25px;
+        }
+
+      }
+    }
+    .conviction-header{
+      color: $light-blue;
+      font-size: 19px;
+      display: table;
+      margin:auto;
+      text-align: center;
+    }
+    .conviction-text {
+      display: table;
+      margin:auto;
+      text-align: center;
+      color: $blue;
+    }
+  }
+  &.footer {
+    font-family: "Aller std thin";
+    background: $blue;
+    padding: 60px 20%;
+    height: auto;
+    color: #ccc;
+    font-size: 12px;
+    line-height: 1.8em;
+    .row {
+      margin-bottom: 10px;
+    }
+    h5 {
+      color: white
+    }
+    a {
+      color: #ccc;
+    }
+    .footer-divider {
+      width: 100%;
+      display: table;
+      margin: auto;
+      height: 1px;
+      border: solid white 1px;
+      margin-bottom: 10px;
+    }
+    img {
+      width: 40px;
+      margin-bottom: 20px;
+    }
+  }
+  .image-center {
+    display: table;
+    margin: auto;
+    img {
+      width: 80%;
+      display: table;
+      margin: auto;
+    }
+  }
+  .section-content{
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+}
+#primary_nav_wrap ul a {
+  color: white !important;
+  opacity: .9;
+  font-family: "Aller std thin";
+}
+#primary_nav_wrap {
+  transition: background .7s ease, font-family .3s ease;
+  opacity: .92;
+  // ul a {
+  //   &:hover {
+  //     border-bottom: solid 2px white;
+  //     padding-bottom: 8px;
+  //   }
+  // }
+  &.landing-scrolled {
+    background: white !important;
+    border-bottom: solid 1px $light-blue !important;
+    ul a {
+      color: black !important;
+      font-family: "Aller std reg";
+
+    }
+  }
+
+}
+.main {
+  margin-top: 0px !important;
+}

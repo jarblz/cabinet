@@ -6,23 +6,21 @@
     <li class="brand-mobile">
       <a href="/"><%= image_tag 'brand-icon.png' %></a>
     </li>
-    <li class="right-avatar dropper-parent">
-      <a href="#" class="dropper">
-        <div class="avatar-text dropdown-trigger">
-          <%= current_user.try(:name) %>
-        </div>
-        <div class="avatar-image dropdown-trigger">
-          <%= raw avatar_contents %>
-        </div>
-      </a>
-      <ul class="bottom-shadow">
-        <%= render 'layouts/profile_links' %>
-      </ul>
-    </li>
+    <% if current_user %>
+      <li class="right-avatar dropper-parent">
+        <a href="#" class="dropper">
+          <div class="avatar-text dropdown-trigger">
+            <%= current_user.try(:name) %>
+          </div>
+          <div class="avatar-image dropdown-trigger">
+            <%= raw avatar_contents %>
+          </div>
+        </a>
+        <ul class="bottom-shadow">
+          <%= render 'layouts/profile_links' %>
+        </ul>
+      </li>
+    <% end %>
     <%= render partial: 'layouts/quicklinks' unless current_user.try(:admin?) %>
-    <!-- <li><a href="#">Menu 4</a></li>
-    <li><a href="#">Menu 5</a></li>
-    <li><a href="#">Menu 6</a></li>
-    <li><a href="#">Contact Us</a></li> -->
   </ul>
 </nav>

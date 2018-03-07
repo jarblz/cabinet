@@ -32,17 +32,17 @@ class MessagesController < ApplicationController
       @receiver = User.find_by(slug: params[:receiver_id]) || User.find_by(id: params[:receiver_id])
       if !@receiver
         flash[:alert] = "Oops! I couldn't find that user!"
-        redirect_to(root_path) and return
+        redirect_to(dashboard_root_path) and return
       end
       @conversation = Conversation.between(current_user.id, @receiver.id)[0]
       @connection = Recommendation.find_by(id: params[:connection_id]) || @conversation.try(:connection)
       if !@connection
         flash[:alert] = "Oops! You must have a connection with this user to chat!"
-        redirect_to(root_path) and return
+        redirect_to(dashboard_root_path) and return
       end
     else
       @conversation = Conversation.find_by(id: params[:conversation_id])
-      redirect_to(root_path) and return unless @conversation && @conversation.participates?(current_user)
+      redirect_to(dashboard_root_path) and return unless @conversation && @conversation.participates?(current_user)
     end
   end
 end

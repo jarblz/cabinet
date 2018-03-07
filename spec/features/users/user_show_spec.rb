@@ -31,7 +31,7 @@
 #     me = FactoryBot.create(:user)
 #     other = FactoryBot.create(:user, email: 'other@example.com')
 #     login_as(me, :scope => :user)
-#     Capybara.current_session.driver.header 'Referer', root_path
+#     Capybara.current_session.driver.header 'Referer', dashboard_root_path
 #     visit user_path(other)
 #     expect(page).to have_content 'Access denied.'
 #   end

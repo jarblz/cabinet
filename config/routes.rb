@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     end
 
   # non-admin #########################
-    root to: 'dashboard#home'
+    root to: 'home#index'
+    get "home", to: 'dashboard#home', as: 'dashboard_root'
 
     devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }
     get "incomplete_user", to: 'dashboard#incomplete_user', as: 'incomplete_user'

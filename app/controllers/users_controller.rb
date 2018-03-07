@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to root_path, notice: 'Your information has been updated!' }
+        format.html { redirect_to dashboard_root_path, notice: 'Your information has been updated!' }
         # format.json { render :, status: :ok, location: @user }
       else
         format.html { render :core_info }

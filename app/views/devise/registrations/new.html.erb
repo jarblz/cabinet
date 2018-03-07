@@ -24,7 +24,10 @@
       <% end %>
     </div>
   </div>
-
+  <div class="form-group recruiter-only">
+    <%= f.label "Has your company registered yet?", class:"label-required"%>
+    <a href="#" data-toggle="modal" data-target="#dropLineModal">Let us help you set it up</a>
+  </div>
   <div class="form-group">
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -46,3 +49,14 @@
   <%= render "devise/shared/links" %>
 
 </div>
+
+<%= render "modals/contact/drop_line" %>
+<script type="text/javascript">
+  $(".switch-field").children("input").click(function(){
+    if($(this).val()=="recruiter"){
+      $('.recruiter-only').fadeIn();
+    } else {
+      $('.recruiter-only').fadeOut();
+    }
+  })
+</script>

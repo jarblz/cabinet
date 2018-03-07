@@ -318,3 +318,21 @@ body {
     padding: 10px;
   }
 }
+
+#dropLineModal {
+  img {
+    width: 150px;
+    display: table;
+    margin: auto;
+    margin-bottom: 20px
+  }
+  .modal-body {
+    padding: 20px 20%;
+    .body-content {
+      display: table;
+      margin: auto;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+
+<% content_for :stylesheets do %>
+
+  #primary_nav_wrap {
+    display: block;
+    background: transparent;
+    border-bottom: none;
+  }
+
+<% end %>
+<%= stylesheet_link_tag "landing" %>
+<%= render template: "layouts/application" %>
+<%= javascript_include_tag "landing" %>

@@ -9,9 +9,11 @@
     </div>
   </a>
   <ul class='left-menu bottom-shadow'>
-    <% quicklinks(current_user).each do |link_name, attributes| %>
-      <li class='sub'> <%= link_to link_name, attributes[0] %></li>
-      <div class="divider"></div>
+    <% quicklinks(current_user).each_with_index do |attributes,index| %>
+      <li class='sub'> <%= link_to attributes[0], attributes[1][0] %></li>
+      <% if quicklinks(current_user).length-1 != index %>
+        <div class="divider"></div>
+      <% end %>
     <% end %>
   </ul>
 </li>

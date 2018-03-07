@@ -7,6 +7,8 @@ Rails.application.config.assets.paths << Rails.root.join("app", "assets", "fonts
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
 Rails.application.config.assets.precompile += %w( packages/select-validator.js )
 Rails.application.config.assets.precompile += %w( unboxt.js )
+Rails.application.config.assets.precompile += %w( landing.scss )
+Rails.application.config.assets.precompile += %w( landing.js )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
