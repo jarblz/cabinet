@@ -307,6 +307,14 @@ $aqua: #00f3f3;
     border-color: white;
   }
 }
+#primary_nav_wrap ul.left-menu a {
+  color: black !important;
+}
+
+#primary_nav_wrap ul a.dropper {
+  border: none !important;
+}
+
 #primary_nav_wrap {
   transition: background .7s ease, font-family .3s ease;
   opacity: .92;
