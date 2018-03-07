@@ -122,6 +122,11 @@ $aqua: #00f3f3;
     padding-left: 3%;
     height: auto;
     color: $lightish-blue;
+    @media(max-width: 540px){
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+
     .circle-section-image{
       &.man-woman {
         width: 300px;
@@ -154,11 +159,18 @@ $aqua: #00f3f3;
   &.section-two {
     height: auto;
     background: $aqua;
+    @media(max-width: 540px){
+      padding-left: 5%;
+      padding-right: 5%;
+    }
     .text-section {
       padding-left: 10%;
     }
     .explanation-multiple {
       margin-bottom: 20px;
+    }
+    .image-section{
+      margin-top: 25px;
     }
   }
   &.section-three {
