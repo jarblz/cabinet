@@ -188,6 +188,7 @@ $aqua: #00f3f3;
       margin-top: 30px;
       border: solid white 2px;
       transition: border-color .7s ease;
+      min-height: 226px;
       &:hover {
         border-color: $light-blue;
       }

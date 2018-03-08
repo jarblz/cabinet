@@ -8,7 +8,7 @@ class Admin::ApplicationController < ApplicationController
   before_action :authenticate_admin
 
   def authenticate_admin
-    redirect_to dashboard_root_path, alert: 'you must be an admin to view this section!' if !current_user.admin?
+    redirect_to root_path, alert: 'you must be an admin to view this section!' if !current_user.admin?
   end
 
   # Override this value to specify the number of elements to display at a time

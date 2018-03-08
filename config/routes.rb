@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     end
 
   # non-admin #########################
-    root to: 'home#index'
+    # root to: 'home#index'
+    root to: 'dashboard#home'
     get "home", to: 'dashboard#home', as: 'dashboard_root'
 
     devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }

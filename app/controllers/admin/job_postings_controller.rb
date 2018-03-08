@@ -72,7 +72,7 @@ module Admin
       end
 
       def set_company
-        redirect_to dashboard_root_path, alert: 'no company specified!' if !params[:name]
+        redirect_to root_path, alert: 'no company specified!' if !params[:name]
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
