@@ -2,6 +2,26 @@
   .home-logo {
     display: table;
     margin: auto;
+    img {
+      width: 100%;
+      display: table;
+      margin: auto;
+      background: linear-gradient(137deg, #0D4594, white);
+      background-size: 140% 140%;
+      padding: 40px 10%;
+      border-radius: 15px;
+      margin-bottom: 30px;
+    }
+  }
+  .title-holder {
+    width: 90%;
+    display: table;
+    margin: auto;
+  }
+  .blog-content {
+    width: 95%;
+    display: table;
+    margin: auto;
   }
   h1, h2, h3, h4, h5, h6 {
     color: #333;
@@ -9,9 +29,15 @@
     margin: auto;
     margin-left: 0%;
     margin-bottom: 10px;
+    font-family: aller light reg;
   }
   p, li {
     font-size: 15px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+
   }
 
 }
