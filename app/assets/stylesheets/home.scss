@@ -23,13 +23,19 @@
     display: table;
     margin: auto;
   }
+  .values {
+    background: #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 0px 10px;
+  }
   h1, h2, h3, h4, h5, h6 {
     color: #333;
     display: table;
     margin: auto;
     margin-left: 0%;
     margin-bottom: 10px;
-    font-family: "aller light reg";
+    font-family: "aller std thin";
   }
   p, li {
     font-size: 15px;
