@@ -9,7 +9,9 @@ class Company < ApplicationRecord
   has_many :job_postings
   has_many :recommendations, :dependent => :delete_all
 
-  has_attached_file :logo, styles: { large: "300x300#", medium: "200x200#", thumb: "120x120#" }, default_url: "/images/:style/missing.png"
+  has_attached_file :logo, styles: { large: "300x300#", medium: "200x200#", thumb: "120x120#" }, default_url: "/images/:style/missing.png",
+  :convert_options => {:large => "-gravity center -extent 300x300", medium: "-gravity center -extent 200x200", thumb: "-gravity center -extent 120x120" }
+
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
   validates_attachment_presence :logo
   validates_presence_of :name
