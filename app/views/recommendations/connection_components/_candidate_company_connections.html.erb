@@ -11,7 +11,6 @@
     <div class="middle-info">
       <h3 data-toggle="modal" data-target="#infoModal" class="info-modal" data-populate-modal-with="<%=company_modal_content_path(connection.company.slug)%>">
         <%= connection.company.name %>
-        <%# TODO: add a cool modal here that will show the user what matched and what didn't %>
         <div class="score-circle" data-toggle="tooltip" data-placement="top" title="Company Fit Score">
           <span><%= percentize connection.score %></span>
         </div>

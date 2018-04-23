@@ -20,7 +20,7 @@
   </div>
   <div class="form-group">
     <% if personality.info.exists? %>
-      <%= link_to "personality.info.original_filename", personality.info.url, class:'nested-link' %><br/>
+      <%= link_to personality.info_file_name, personality.info.url, class:'nested-link' %><br/>
       <p>Upload a different Resume:</p>
       <%= f.file_field :info %>
     <% else %>

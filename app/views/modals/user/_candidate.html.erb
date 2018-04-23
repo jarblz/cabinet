@@ -72,7 +72,14 @@
 <div class="row show-row full">
   <div class="col-sm-12">
     <div class='section-title'>Personality Type: <%=user.personality.name%></div>
-    <div class='section-content'>this is wehre the personality type information will go</div>
+    <% if user.personality.info.exists? %>
+      <br>
+      <br>
+      <%= link_to "Learn More", user.personality.info.url, class:'button btn-standard', target: '_blank' %><br/>
+    <% else %>
+      <div class='section-content'>this is where the personality type information will go</div>
+    <% end %>
+
   </div>
 
 </div>

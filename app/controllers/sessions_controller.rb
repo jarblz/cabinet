@@ -11,7 +11,7 @@ class SessionsController < Devise::SessionsController
     # support returning empty response on GET request
     respond_to do |format|
       format.all { head :no_content }
-      format.any(*navigational_formats) { redirect_to 'http://www.mycabinet.org' }
+      format.any(*navigational_formats) { redirect_to 'https://getunboxt.com' }
     end
   end
 
